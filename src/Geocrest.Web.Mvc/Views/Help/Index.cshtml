@@ -1,0 +1,22 @@
+@using System.Collections.ObjectModel
+@using Geocrest.Web.Mvc.Documentation;
+@model IEnumerable<System.Web.Http.Description.ApiDescription>
+
+@{
+    // Group APIs by controller
+    ILookup<string, System.Web.Http.Description.ApiDescription> apiGroups =
+        Model.OrderBy(x => x.ActionDescriptor.ControllerDescriptor.ControllerName)
+        .ToLookup(api => api.ActionDescriptor.ControllerDescriptor.ControllerName);
+    string css = "Geocrest.Web.Mvc.Documentation.HelpPage.css";
+}
+@Html.CssLink(css)
+<div class="container">
+    @foreach (var group in apiGroups)
+    {
+        <section class="row">
+            <div class="col-md-12">
+                @Html.DisplayFor(m => group, "ApiGroup")
+            </div>
+        </section>
+    }
+</div>

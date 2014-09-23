@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{559F20F7-2A7F-4912-8FD7-D7D373CE1F9B}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Geocrest.Model</RootNamespace>
+    <AssemblyName>Geocrest.Model</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Bin\Debug\Geocrest.Model.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Bin\Release\Geocrest.Model.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\packages\Newtonsoft.Json.6.0.4\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=5.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\Common\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\Common\XmlNamespaceInfo.cs">
+      <Link>Properties\XmlNamespaceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\DrawingInfo.cs">
+      <Link>ArcGIS\DrawingInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Error.cs">
+      <Link>ArcGIS\Error.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Geometry\esriGeometryType.cs">
+      <Link>ArcGIS\Geometry\esriGeometryType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Geometry\Geometry.cs">
+      <Link>ArcGIS\Geometry\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Geometry\SpatialReference.cs">
+      <Link>ArcGIS\Geometry\SpatialReference.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Geometry\WKID.cs">
+      <Link>ArcGIS\Geometry\WKID.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\MapImage.cs">
+      <Link>ArcGIS\MapImage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Schema\CodedValue.cs">
+      <Link>ArcGIS\Schema\CodedValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Schema\Domain.cs">
+      <Link>ArcGIS\Schema\Domain.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Schema\Field.cs">
+      <Link>ArcGIS\Schema\Field.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Schema\Subtype.cs">
+      <Link>ArcGIS\Schema\Subtype.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\AddressCandidate.cs">
+      <Link>ArcGIS\Tasks\AddressCandidate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\AddressCandidateCollection.cs">
+      <Link>ArcGIS\Tasks\AddressCandidateCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\AddressMatchCollection.cs">
+      <Link>ArcGIS\Tasks\AddressMatchCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\Feature.cs">
+      <Link>ArcGIS\Tasks\Feature.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\FeatureSet.cs">
+      <Link>ArcGIS\Tasks\FeatureSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\IdentifyResult.cs">
+      <Link>ArcGIS\Tasks\IdentifyResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\IdentifyResultCollection.cs">
+      <Link>ArcGIS\Tasks\IdentifyResultCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\Record.cs">
+      <Link>ArcGIS\Tasks\Record.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\Tasks\RecordSet.cs">
+      <Link>ArcGIS\Tasks\RecordSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\Basemap.cs">
+      <Link>ArcGIS\WebMap\Basemap.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\BasemapLayer.cs">
+      <Link>ArcGIS\WebMap\BasemapLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\ExportOptions.cs">
+      <Link>ArcGIS\WebMap\ExportOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\ExportWebMap.cs">
+      <Link>ArcGIS\WebMap\ExportWebMap.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\FeatureCollection.cs">
+      <Link>ArcGIS\WebMap\FeatureCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\FeatureLayer.cs">
+      <Link>ArcGIS\WebMap\FeatureLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\GraphicsLayer.cs">
+      <Link>ArcGIS\WebMap\GraphicsLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\LayerDefinition.cs">
+      <Link>ArcGIS\WebMap\LayerDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\LayoutOptions.cs">
+      <Link>ArcGIS\WebMap\LayoutOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\MapOptions.cs">
+      <Link>ArcGIS\WebMap\MapOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\MapServiceLayer.cs">
+      <Link>ArcGIS\WebMap\MapServiceLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ArcGIS\WebMap\OperationalLayer.cs">
+      <Link>ArcGIS\WebMap\OperationalLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\Attributes.cs">
+      <Link>Attributes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\FeatureClass.cs">
+      <Link>FeatureClass.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\IPointFeatureClass.cs">
+      <Link>IPointFeatureClass.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ObjectClass.cs">
+      <Link>ObjectClass.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\OptionalPropertiesContractResolver.cs">
+      <Link>OptionalPropertiesContractResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\PointFeatureClass.cs">
+      <Link>PointFeatureClass.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\Resource.cs">
+      <Link>Resource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.0\Geocrest.Model\ResourceCollection.cs">
+      <Link>ResourceCollection.cs</Link>
+    </Compile>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="IRestHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

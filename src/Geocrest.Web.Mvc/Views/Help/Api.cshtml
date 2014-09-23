@@ -1,0 +1,46 @@
+@using Geocrest.Web.Mvc.Documentation
+@model Geocrest.Web.Mvc.Documentation.HelpPageApiModel
+
+@{
+    var description = Model.ApiDescription;
+    ViewBag.Title = ("Documentation " + (!string.IsNullOrEmpty(ViewBag.Version) ?
+        "(v" + ViewBag.Version + ") - " : " - ") + (description.RelativePath.Contains("?") ?
+        description.RelativePath.Substring(0, description.RelativePath.IndexOf("?")).ToLower() :
+        description.RelativePath.ToLower()));
+    string css = "Geocrest.Web.Mvc.Documentation.HelpPage.css";
+}
+@Html.CssLink(css)
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                @{
+                    if (!string.IsNullOrEmpty(Model.HomePageUrl))
+                    {
+                        <a class="pop" href="@Model.HomePageUrl">Help Page Home</a>
+                    }
+                    else if (!string.IsNullOrEmpty(ViewBag.Area.ToLower()))
+                    {
+                        @Html.ActionLink("Help Page Home", "api", "help", new
+                        {
+                            area = "",
+                            id = ViewBag.Area.ToLower(),
+                            apiId = ""
+                        }, new { @class = "pop" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Help Page Home", "index", "help", new
+                        {
+                            area = "",
+                            api = ""
+                        })
+                        <a class="pop" href="@Url.Content("~/help")">Help Page Home</a>
+                    }
+                }
+            </p>
+        </div>
+    </div>
+</div>
+@Html.DisplayFor(m => Model)

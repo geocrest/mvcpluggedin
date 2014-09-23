@@ -1,0 +1,52 @@
+@using System.Collections.ObjectModel
+@using System.Web.Http.Description
+@using System.Threading
+@model Collection<System.Web.Http.Description.ApiParameterDescription>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed help-page-table">
+        <thead>
+            <tr><th>Name</th><th>Description</th><th>Additional information</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var parameter in Model)
+            {
+                string parameterDocumentation = parameter.Documentation != null ?
+                    parameter.Documentation :
+                    "No documentation available.";
+
+                // Don't show CancellationToken because it's a special parameter
+                if (!typeof(CancellationToken).IsAssignableFrom(parameter.ParameterDescriptor.ParameterType))
+                {
+                    <tr>
+                        <td class="parameter-name"><code>@parameter.Name</code></td>
+                        <td class="parameter-documentation"><p>@MvcHtmlString.Create(parameterDocumentation)</p></td>
+                        <td class="parameter-source">
+                            <p>
+                                <strong>@(parameter.ParameterDescriptor.IsOptional ? "Optional" : "Required")</strong>.
+                                @switch (parameter.Source)
+                                {
+                                    case ApiParameterSource.FromBody:
+                                        @:Define this parameter in the request <strong>body</strong>.
+                                break;
+                                    case ApiParameterSource.FromUri:
+                                    @:Define this parameter in the request <strong>URI</strong>@(parameter.ParameterDescriptor
+                                .IsOptional ? " using the query string" : "").
+                                break;
+                                    case ApiParameterSource.Unknown:
+                                    default:
+                                    @:No additional information.
+                                break;
+                                }
+                                @if (parameter.ParameterDescriptor.IsOptional)
+                                {
+                                    <em>The default is '@parameter.ParameterDescriptor.DefaultValue'.</em>
+                                }
+                            </p>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

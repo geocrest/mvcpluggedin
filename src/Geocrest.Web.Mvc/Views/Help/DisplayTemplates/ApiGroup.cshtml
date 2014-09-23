@@ -1,0 +1,56 @@
+@using Geocrest.Web.Mvc.Documentation
+@model IGrouping<string, System.Web.Http.Description.ApiDescription>
+
+<h3 id="@Model.Key">@Model.Key</h3>
+<div class="table-responsive">
+    <table class="table table-condensed table-bordered help-page-table">
+        <thead>
+            <tr><th>API</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var api in Model)
+            {
+                <tr>
+                    <td class="api-name">
+                        @{
+                var label = string.Format("{0} {1}", api.HttpMethod.Method, (api.RelativePath.Contains("?") ?
+                        api.RelativePath.Substring(0, api.RelativePath.IndexOf("?")) :
+                        api.RelativePath));
+                if (api.Route.Defaults.ContainsKey("area"))
+                {
+                    <a class="help" href="@Url.Action("api", "help", new
+                                 {
+                                    id =  api.Route.Defaults["area"].ToString().ToLower(),
+                                    apiId = api.GetFriendlyId(),
+                                    area = ""
+                                 })">
+                        @label
+                    </a>
+                }
+                else
+                {
+                    <a class="help" href="@Url.Action("index", "help", new
+                                {
+                                   apiId = api.GetFriendlyId(),
+                                   area = ""
+                                })">
+                        @label
+                    </a>
+                }
+                        }
+                    </td>
+                    <td class="api-documentation">
+                        @if (api.Documentation != null)
+                        {
+                            <p>@MvcHtmlString.Create(api.Documentation)</p>
+                        }
+                        else
+                        {
+                            <p>No documentation available.</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

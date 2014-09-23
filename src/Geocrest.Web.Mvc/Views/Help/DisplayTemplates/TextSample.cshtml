@@ -1,0 +1,12 @@
+@model Geocrest.Web.Mvc.Documentation.TextSample
+<pre class="wrapped">
+@if (Model.MediaTypes != null && Model.MediaTypes.Any<System.Net.Http.Headers.MediaTypeHeaderValue>(x =>
+    x.MediaType.ToLower().Contains("json")))
+{
+    @Html.Raw(Model.Text);
+}
+else
+{
+    @Html.Raw(HttpUtility.HtmlEncode(@Model.Text).Replace("\\r\\n", "</br>"))   
+}
+</pre>

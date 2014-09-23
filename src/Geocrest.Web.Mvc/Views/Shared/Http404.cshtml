@@ -1,0 +1,37 @@
+﻿@model Geocrest.Web.Mvc.NotFoundViewModel
+@{
+    ViewBag.Title = "An error has occurred...";
+}
+<style type="text/css">     
+    .flickr {
+        position: absolute;
+        right: 5px;
+        bottom: 2px;
+        line-height: 16px;
+    }
+    .flickr a {
+        font-size: 10px;
+        background: none;
+        vertical-align: middle;
+        color: white;
+        text-decoration:none;
+        font-family: 'Open Sans',Arial,sans-serif;
+    }
+</style>
+<div class="container" >
+    <div class="row text-center">
+        <h2>
+            <code>404</code></h2>
+        <div class="notfoundcontainer clearmargin rounded">
+            <img src="@Url.Content(string.Format("~/error/{0}", "contentfile/404.jpg"))"
+                 class="notfound rounded img-thumbnail" />
+            <div class='flickr'>
+                <a href='http://www.flickr.com/photos/factoryjoe/7785039260'>
+                    <img alt='flickr' src="@Url.Content(string.Format("~/error/{0}", "contentfile/flickr16.png"))"/>
+                    factoryjoe/7785039260</a>
+            </div>
+        </div>
+        <h4>
+            Please check the address and try again.</h4>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+@model Geocrest.Web.Mvc.Documentation.HelpPageApiModel
+
+@{
+    var description = Model.ApiDescription;
+    bool hasParameters = description.ParameterDescriptions.Count > 0;
+    bool hasRequestSamples = Model.SampleRequests.Count > 0;
+    bool hasResponseSamples = Model.SampleResponses.Count > 0;
+    bool hasLiveSamples = Model.HtmlSamples.Count > 0;
+}
+<div class="container">
+    <section class="row">
+        <div class="col-md-12">
+            <h3>
+                <code>
+                    @description.HttpMethod.Method @(description.RelativePath.Contains("?") ?
+                    description.RelativePath.Substring(0, description.RelativePath.IndexOf("?")).ToLower() :
+                    description.RelativePath.ToLower())
+                </code>
+            </h3>
+        </div>
+        <div class="col-md-12">
+            <div class="well">
+                @if (description.Documentation != null)
+                {
+                    @MvcHtmlString.Create(description.Documentation)
+                }
+                else
+                {
+                    @:No documentation available.
+                }
+            </div>
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-md-12">
+            @if (hasLiveSamples)
+            {
+                <h3>Live Samples</h3>
+                foreach (var sample in Model.HtmlSamples)
+                {
+                    @Html.DisplayFor(s => sample, "HtmlSample")
+                }
+            }
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-md-12">
+            @if (hasParameters || hasRequestSamples)
+            {
+                <h3>Request Information</h3>
+                if (hasParameters)
+                {
+                    <h4>Parameters</h4>
+                    @Html.DisplayFor(apiModel => apiModel.ApiDescription.ParameterDescriptions, "Parameters")
+                }
+                if (hasRequestSamples)
+                {
+                    <h4>Request formats</h4>
+                    @Html.DisplayFor(apiModel => apiModel.SampleRequests, "Samples", new { isResponse = false })
+                }
+            }
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-md-12">
+            @if (hasResponseSamples)
+            {
+                <h3 id="responseInformation">Response Information</h3>
+                if (!String.IsNullOrEmpty(Model.ResponseDocumentation))
+                {
+                    <div class="well">
+                        <p>@MvcHtmlString.Create(Model.ResponseDocumentation)</p>
+                    </div>
+                }
+                <h4>Response body formats</h4>
+                Dictionary<string, object> samples = Model.SampleResponses.GroupBy(pair => pair.Value).ToDictionary(
+                    pair => String.Join(", ", pair.Select(m => m.Key.ToString()).ToArray()),
+                    pair => pair.Key);
+                var mediaTypes = samples.Keys;
+                foreach (var type in mediaTypes)
+                {
+                    <a href='@string.Format("#{0}",type.Replace(", ","_").Replace("/","_").Replace("+", ""))' 
+                       class="btn btn-info btn-small scroll">@type</a>
+                }
+                @Html.DisplayFor(apiModel => apiModel.SampleResponses, "Samples", new { isResponse = true })
+            }
+        </div>
+    </section>
+</div>

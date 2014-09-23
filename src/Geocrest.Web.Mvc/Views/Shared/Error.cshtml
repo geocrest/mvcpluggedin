@@ -1,0 +1,39 @@
+﻿@using Geocrest.Web.Mvc;
+@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "An error has occurred...";
+    // Setup the display information only if certain conditions are met
+    // A non-null Model means that the request came from an MVC page as opposed to a WebApi request
+    // When a WebApi request throws an error the BaseApplication's Application_Error event will populate
+    // the display information instead of the following code.
+    if (Model != null)
+    {
+        // Display detailed error messages
+        if (Roles.Enabled && Roles.RoleExists(BaseApplication.AdminRole) && User.IsInRole(BaseApplication.AdminRole) &&
+            BaseApplication.DebugVersions.Contains(BaseApplication.CurrentEnvironment))
+        {
+            ViewBag.Messages = "<strong>Message:</strong> " + Model.Exception.Message + "<br />" +
+                (Model.Exception.InnerException != null ? "<strong>Inner Exception:</strong> " +
+                Model.Exception.InnerException.Message : "") + "<br /><strong>Stack Trace:</strong> " +
+                Model.Exception.StackTrace;
+            ViewBag.ErrorCode = Model.Exception is HttpException ?
+                (Model.Exception as HttpException).GetHttpCode().ToString() + " " : "500 ";
+        }
+        else
+        {
+            ViewBag.Messages = @"Unfortunately, something went wrong during your request. The issue has been logged and
+we will fix it as soon as possible.";
+            ViewBag.ErrorCode = "";
+        }
+    }
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="error">An error <code>@ViewBag.ErrorCode</code> has occurred during your request.</h2>
+            <p class="well">
+                @Html.Raw(ViewBag.Messages)
+            </p>
+        </div>
+    </div>
+</div>

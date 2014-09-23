@@ -1,0 +1,10 @@
+@model Geocrest.Web.Mvc.Documentation.LinkSample
+@using Geocrest.Web.Mvc;
+@foreach(var kvp in Model.Urls)
+{
+    <a class="btn btn-primary" href="@kvp.Key">@kvp.Value</a>
+}
+@foreach (var kvp in Model.Routes)
+{
+    <a class="btn btn-primary" href="@Url.HttpRouteUrl(kvp.Key)">@kvp.Value</a>
+}

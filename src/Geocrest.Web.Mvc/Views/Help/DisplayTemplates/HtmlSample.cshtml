@@ -1,0 +1,11 @@
+﻿@model Geocrest.Web.Mvc.Documentation.HtmlSample
+@Model.Styles
+@if (!Model.IsPartialView)
+{
+    @Html.Raw(Model.Html);
+}
+else
+{
+    Html.RenderPartial(Model.Html);
+}
+@Html.ScriptBundle(Model.Scripts)
