@@ -276,6 +276,7 @@
     <Compile Include="Syndication\RelatedLink.cs" />
     <Compile Include="Syndication\SelfLink.cs" />
     <Compile Include="Syndication\SyndicationExtensions.cs" />
+    <Compile Include="ThemableRazorViewEngine.cs" />
     <Compile Include="UrlHelperExtensions.cs" />
     <Compile Include="..\Common\XmlNamespaceInfo.cs">
       <Link>Properties\XmlNamespaceInfo.cs</Link>
