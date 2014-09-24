@@ -61,6 +61,20 @@ namespace Geocrest.Web.Mvc
         #region Static
         #region Properties
         /// <summary>
+        /// Gets or sets the application title.
+        /// </summary>
+        /// <value>
+        /// The application title.
+        /// </value>
+        public static string ApplicationTitle { get; set; }
+        /// <summary>
+        /// Gets or sets the application description.
+        /// </summary>
+        /// <value>
+        /// The application description.
+        /// </value>
+        public static string ApplicationDescription { get; set; }
+        /// <summary>
         /// Gets the collection of response formats, keyed by query string argument value, that are valid as query string arguments.
         /// </summary>
         /// <value>
@@ -264,6 +278,9 @@ log an error has been made but no error was given."));
         /// <param name="routes">The global route collection.</param>
         protected virtual void RegisterRoutes(RouteCollection routes)
         {
+            routes.IgnoreRoute("{resource}.css/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.js/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.jpg/{*pathInfo}");
             routes.IgnoreRoute("content/*");
             routes.IgnoreRoute("scripts/*");
             routes.IgnoreRoute("views/*");
@@ -361,7 +378,8 @@ log an error has been made but no error was given."));
                     bool includeDetail = GlobalConfiguration.Configuration.ShouldIncludeErrorDetail(Request);
                     Response.StatusCode = (exception is HttpException) ? (exception as HttpException).GetHttpCode() : 500;
                     XmlSerializer xml = new XmlSerializer(typeof(HttpError));
-                    xml.Serialize(Response.Output, includeDetail ? new HttpError(exception, includeDetail) :
+                    xml.Serialize(Response.Output, includeDetail ||
+                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) :
                         new HttpError(exception.Message));
                     return;
                 }
@@ -373,8 +391,9 @@ log an error has been made but no error was given."));
 
                     bool includeDetail = GlobalConfiguration.Configuration.ShouldIncludeErrorDetail(Request);
                     Response.StatusCode = (exception is HttpException) ? (exception as HttpException).GetHttpCode() : 500;
-                    Response.Write(JsonConvert.SerializeObject(includeDetail ?
-                        new HttpError(exception, includeDetail) : new HttpError(exception.Message)));
+                    Response.Write(JsonConvert.SerializeObject(includeDetail ||
+                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) : 
+                        new HttpError(exception.Message)));
                     return;
                 }
 
@@ -493,7 +512,7 @@ log an error has been made but no error was given."));
 
             // Only use the razor view engine
             System.Web.Mvc.ViewEngines.Engines.Clear();
-            System.Web.Mvc.ViewEngines.Engines.Add(new RazorViewEngine());
+            System.Web.Mvc.ViewEngines.Engines.Add(new ThemableRazorViewEngine());
 
             // Resolve assemblies that fail to load
             AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve;
