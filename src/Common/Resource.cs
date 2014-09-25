@@ -1,4 +1,4 @@
-﻿namespace Geocrest.Model
+﻿namespace Geocrest
 {
     using System;
     using System.Collections;
@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
+    using Geocrest.Model;
     /// <summary>
     /// Represents the top-level base class for all model entities.
     /// </summary>    
