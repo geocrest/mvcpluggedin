@@ -42,6 +42,9 @@
     <Reference Include="Elmah">
       <HintPath>..\..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.Data.Edm.5.5.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -83,6 +86,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
@@ -101,6 +105,7 @@
       <HintPath>..\..\packages\System.Spatial.5.5.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -151,6 +156,14 @@
     <Reference Include="WebGrease">
       <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.WebData.2.0.30506.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AreaViewEngine.cs" />
@@ -165,6 +178,8 @@
     <Compile Include="Configuration\TokenConfigurationElementCollection.cs" />
     <Compile Include="Controllers\AcceptHeaderVersionedControllerSelector.cs" />
     <Compile Include="Controllers\AcceptHeaderVersionedControllerSelectorBase.cs" />
+    <Compile Include="Controllers\AccountAdminController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminOnlyAttribute.cs" />
     <Compile Include="Controllers\AreaHttpControllerSelector.cs" />
     <Compile Include="Controllers\AuthorizeAttribute.cs" />
@@ -172,7 +187,9 @@
     <Compile Include="Controllers\ControllerIdentification.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HttpControllerTypeCache.cs" />
     <Compile Include="Controllers\IVersionedHttpControllerSelector.cs" />
@@ -239,6 +256,14 @@
     <Compile Include="IModuleRegistration.cs" />
     <Compile Include="KernelCreatedEventArgs.cs" />
     <Compile Include="Logging\ElmahMailModule.cs" />
+    <Compile Include="Models\Account\ChangePassword.cs" />
+    <Compile Include="Models\Account\Login.cs" />
+    <Compile Include="Models\Account\Register.cs" />
+    <Compile Include="Models\Account\UserProfile.cs" />
+    <Compile Include="Models\Account\BaseProfile.cs" />
+    <Compile Include="Models\Feedback\Feedback.cs" />
+    <Compile Include="Models\Feedback\FeedbackSubject.cs" />
+    <Compile Include="Models\PagedListOfT.cs" />
     <Compile Include="ModuleRegistration.cs" />
     <Compile Include="NotFoundViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -445,6 +470,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Geocrest.Data.Contracts\Geocrest.Data.Contracts.csproj">
+      <Project>{68f2970d-2de2-4a77-aa27-2b08d0fc236d}</Project>
+      <Name>Geocrest.Data.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Geocrest.Web.Infrastructure\Geocrest.Web.Infrastructure.csproj">
       <Project>{d1a814cd-a86e-43da-b5f5-29a34aa8bd57}</Project>
       <Name>Geocrest.Web.Infrastructure</Name>
@@ -471,7 +500,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
