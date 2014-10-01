@@ -14,7 +14,7 @@
     <copyright>Geocrest Mapping, LLC 2014</copyright>
     <tags>EntityFramework CodeFirst generic repository</tags>
     <dependencies>
-      <dependency id="Geocrest.Web.Infrastructure" version="1.0.0" />
+      <dependency id="Geocrest.Web.Infrastructure" version="1.0.0-alpha" />
       <dependency id="EntityFramework" version="5.0.0" />
     </dependencies>
     <frameworkAssemblies>

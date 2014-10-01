@@ -13,13 +13,12 @@
 		<summary>$description$</summary>
 		<copyright>Geocrest Mapping, LLC 2014</copyright>
 		<tags>ASP.NET MVC WebAPI Ninject EntityFramework</tags>
-		<dependencies>
-            <dependency id="" version="" />
+		<dependencies>            
 			<dependency id="elmah" version="1.2.2" />
 			<dependency id="Ninject" version="[3.0.1.10]" />
 			<dependency id="Ninject.Extensions.Conventions" version="[3.0.0.11]" />
 			<dependency id="Ninject.Extensions.Factory" version="[3.0.1.0]" />
-            <dependency id="Ninject.Extensions.Wcf" version="[3.0.0.5]" />
+      <dependency id="Ninject.Extensions.Wcf" version="[3.0.0.5]" />
 			<dependency id="WebActivatorEx" version="2.0.4" />
 			<dependency id="RazorGenerator.Mvc" version="2.1.1" />
 			<dependency id="Microsoft.Data.OData" version="[5.5.0]" />
@@ -32,9 +31,9 @@
 			<dependency id="Microsoft.AspNet.Mvc" version="[4.0.30506.0]" />
 			<dependency id="Microsoft.AspNet.WebApi.OData" version="[4.0.30506]" />
 			<dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.2" />
-			<dependency id="Geocrest.Web.Infrastructure" version="1.0.0" />
-            <dependency id="Microsoft.Data.Edm" version="[5.5.0]" />
-            <dependency id="System.Spatial" version="[5.5.0]" />
+			<dependency id="Geocrest.Web.Infrastructure" version="1.0.0-alpha" />
+      <dependency id="Microsoft.Data.Edm" version="[5.5.0]" />
+      <dependency id="System.Spatial" version="[5.5.0]" />
 		</dependencies>
 		<frameworkAssemblies>
 			<frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
