@@ -33,11 +33,11 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the enterprise model framework libraries.
         /// </remarks>
-        internal const string ModelProductVersion = "1.0.0";
+        internal const string ModelProductVersion = "1.0.0-alpha";
         /// <summary>
         /// Specifies the product version for Silverlight enterprise model.
         /// </summary>
-        internal const string ModelSilverlightProductVersion = "1.0.0 for Silverlight";
+        internal const string ModelSilverlightProductVersion = "1.0.0-alpha for Silverlight";
 
         /// <summary>
         /// Specifies the assembly version for use when the .NET runtime loads an assembly. Use a
@@ -55,18 +55,18 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalFileVersion = "1.0.5358.29535";
+        internal const string GlobalFileVersion = "1.0.5387.16636";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalProductVersion = "1.0.0";
+        internal const string GlobalProductVersion = "1.0.0-alpha";
         /// <summary>
         /// Specifies the product version for Silverlight
         /// </summary>
-        internal const string GlobalSilverlightProductVersion = "1.0.0 for Silverlight";
+        internal const string GlobalSilverlightProductVersion = "1.0.0-alpha for Silverlight";
         /// <summary>
         /// Use this for all assemblies throughout the solution.
         /// </summary>
