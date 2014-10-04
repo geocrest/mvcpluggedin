@@ -85,9 +85,9 @@
       <Project>{d1a814cd-a86e-43da-b5f5-29a34aa8bd57}</Project>
       <Name>Geocrest.Web.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\4.0\Geocrest.Model.Representations\Geocrest.Model.Representations.csproj">
-      <Project>{fb20cf55-7635-49c1-9842-3e861c99a687}</Project>
-      <Name>Geocrest.Model.Representations %28src\Models\4.0\Geocrest.Model.Representations%29</Name>
+    <ProjectReference Include="..\Models\4.0\Geocrest.Model\Geocrest.Model.csproj">
+      <Project>{7c9d2faa-e652-4269-96dd-4c121e8dc92d}</Project>
+      <Name>Geocrest.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
