@@ -45,6 +45,11 @@
         /// Represents a mobile service used to access feature class data.
         /// </summary>
         [EnumMember]
-        MobileServer
+        MobileServer,
+        /// <summary>
+        /// Represents an image server for viewing and processing imagery and raster data.
+        /// </summary>
+        [EnumMember]
+        ImageServer
     }
 }
