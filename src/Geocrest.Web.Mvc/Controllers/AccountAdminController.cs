@@ -4,7 +4,7 @@ namespace Geocrest.Web.Mvc.Admin.Controllers
     using Geocrest.Data.Contracts;
     using Geocrest.Web.Infrastructure;
     using Geocrest.Web.Mvc.Controllers;
-    using Geocrest.Web.Mvc.Models.Account;
+    using Geocrest.Web.Mvc.Models;
     using System;
     using System.Linq;
     using System.Web.Mvc;

@@ -3,8 +3,7 @@
     using Geocrest.Data.Contracts;
     using Geocrest.Web.Infrastructure;
     using Geocrest.Web.Infrastructure.Mail;
-    using Geocrest.Web.Mvc.Models.Account;
-    using Geocrest.Web.Mvc.Models.Feedback;
+    using Geocrest.Web.Mvc.Models;
     using Geocrest.Web.Mvc.Resources;
     using System;
     using System.Linq;

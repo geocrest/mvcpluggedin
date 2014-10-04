@@ -31,7 +31,7 @@ namespace Geocrest.Web.Mvc.Views.Account
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/Index.cshtml")]
-    public partial class Index : System.Web.Mvc.WebViewPage<Geocrest.Web.Mvc.Models.Account.BaseProfile>
+    public partial class Index : System.Web.Mvc.WebViewPage<Geocrest.Web.Mvc.Models.BaseProfile>
     {
         public Index()
         {

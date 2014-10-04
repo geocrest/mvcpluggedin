@@ -1,4 +1,4 @@
-﻿namespace Geocrest.Web.Mvc.Models.Feedback
+﻿namespace Geocrest.Web.Mvc.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

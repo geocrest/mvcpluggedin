@@ -31,7 +31,7 @@ namespace Geocrest.Web.Mvc.Views.Account
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/Register.cshtml")]
-    public partial class Register : System.Web.Mvc.WebViewPage<Geocrest.Web.Mvc.Models.Account.Register>
+    public partial class Register : System.Web.Mvc.WebViewPage<Geocrest.Web.Mvc.Models.Register>
     {
         public Register()
         {

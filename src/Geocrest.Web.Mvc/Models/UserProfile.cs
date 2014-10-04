@@ -1,4 +1,4 @@
-﻿namespace Geocrest.Web.Mvc.Models.Account
+﻿namespace Geocrest.Web.Mvc.Models
 {
     using System.ComponentModel.DataAnnotations;
 

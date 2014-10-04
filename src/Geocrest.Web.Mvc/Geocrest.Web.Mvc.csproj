@@ -261,13 +261,13 @@
     <Compile Include="IModuleRegistration.cs" />
     <Compile Include="KernelCreatedEventArgs.cs" />
     <Compile Include="Logging\ElmahMailModule.cs" />
-    <Compile Include="Models\Account\ChangePassword.cs" />
-    <Compile Include="Models\Account\Login.cs" />
-    <Compile Include="Models\Account\Register.cs" />
-    <Compile Include="Models\Account\UserProfile.cs" />
-    <Compile Include="Models\Account\BaseProfile.cs" />
-    <Compile Include="Models\Feedback\Feedback.cs" />
-    <Compile Include="Models\Feedback\FeedbackSubject.cs" />
+    <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\BaseProfile.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\FeedbackSubject.cs" />
     <Compile Include="Models\PagedListOfT.cs" />
     <Compile Include="ModuleRegistration.cs" />
     <Compile Include="NotFoundViewModel.cs" />
@@ -337,6 +337,31 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Register.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Feedback\Create.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Create.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Feedback\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Feedback\List.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Feedback\Testimonials.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Testimonials.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Feedback\_ContactForm.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ContactForm.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Help\Api.generated.cs">
       <AutoGen>True</AutoGen>
@@ -443,6 +468,26 @@
     <None Include="Views\Account\Register.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Register.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Feedback\Create.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Create.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Feedback\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Feedback\List.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>List.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Feedback\Testimonials.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Testimonials.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Feedback\_ContactForm.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ContactForm.generated.cs</LastGenOutput>
     </None>
     <None Include="Views\Help\Api.cshtml">
       <CustomToolNamespace>Geocrest.Web.Mvc.EmbeddedViews</CustomToolNamespace>

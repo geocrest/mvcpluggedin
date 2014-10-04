@@ -11,7 +11,7 @@ namespace Geocrest.Web.Mvc
     using Geocrest.Web.Mvc.DependencyResolution;
     using Geocrest.Web.Mvc.Documentation;
     using Geocrest.Web.Mvc.Formatting;
-    using Geocrest.Web.Mvc.Models.Account;
+    using Geocrest.Web.Mvc.Models;
     using Newtonsoft.Json;
     using Ninject;
     using Ninject.Extensions.Conventions;

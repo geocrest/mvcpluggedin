@@ -31,7 +31,7 @@ namespace Geocrest.Web.Mvc.Views.Account
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/Login.cshtml")]
-    public partial class Login : System.Web.Mvc.WebViewPage<Geocrest.Web.Mvc.Models.Account.Login>
+    public partial class Login : System.Web.Mvc.WebViewPage<Geocrest.Web.Mvc.Models.Login>
     {
         public Login()
         {

@@ -1,7 +1,7 @@
 ﻿
 namespace Geocrest.Web.Mvc.Controllers
 {
-    using Geocrest.Web.Mvc.Models.Account;
+    using Geocrest.Web.Mvc.Models;
     using System;
     using System.Collections.Generic;
     using System.Configuration;
