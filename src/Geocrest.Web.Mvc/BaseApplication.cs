@@ -634,6 +634,10 @@ log an error has been made but no error was given."));
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.AddQueryStringMapping(BaseApplication.FormatParameter, "xml", "application/xml");
             GlobalConfiguration.Configuration.Formatters.Add(new PlainTextFormatter());
             GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Default;
+
+            // Ensure ASP.NET Simple Membership is initialized only once per app start
+            if (IsSimpleMembershipProviderConfigured())
+                System.Threading.LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
         }
 
         /// <summary>

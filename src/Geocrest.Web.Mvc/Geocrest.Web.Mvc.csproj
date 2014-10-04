@@ -237,7 +237,7 @@
     <Compile Include="DoesNotStartWithConstraint.cs" />
     <Compile Include="EmbeddedResourceViewEngine.cs" />
     <Compile Include="Environment.cs" />
-    <Compile Include="ErrorViewModel.cs" />
+    <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Formatting\AtomPubCategoryMediaTypeFormatter.cs" />
     <Compile Include="Formatting\CorQueryableAttribute.cs" />
     <Compile Include="Formatting\EnrichingHandler.cs" />
@@ -249,6 +249,11 @@
     <Compile Include="Formatting\PlainTextFormatter.cs" />
     <Compile Include="Formatting\SyndicationMediaFormatter.cs" />
     <Compile Include="Formatting\XmlReferenceLoopFormatter.cs" />
+    <Compile Include="Forms.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Forms.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
     <Compile Include="HttpRequestMessageExtensions.cs" />
@@ -307,6 +312,31 @@
     </Compile>
     <Compile Include="..\Common\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Views\Account\ChangePassword.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePassword.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ChangePasswordSuccess.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePasswordSuccess.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\Login.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\Register.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Register.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Help\Api.generated.cs">
       <AutoGen>True</AutoGen>
@@ -386,10 +416,34 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Forms.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Forms.generated.cs</LastGenOutput>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="Geocrest.Web.Mvc.nuspec" />
+    <None Include="Views\Account\ChangePassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePassword.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Account\ChangePasswordSuccess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePasswordSuccess.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Account\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Account\Login.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Login.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Views\Account\Register.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Register.generated.cs</LastGenOutput>
+    </None>
     <None Include="Views\Help\Api.cshtml">
       <CustomToolNamespace>Geocrest.Web.Mvc.EmbeddedViews</CustomToolNamespace>
       <Generator>RazorGenerator</Generator>

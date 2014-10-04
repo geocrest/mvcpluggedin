@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Geocrest.Web.Mvc.EmbeddedViews
+namespace Geocrest.Web.Mvc.Views.Account
 {
     using System;
     using System.Collections.Generic;
@@ -30,27 +30,44 @@ namespace Geocrest.Web.Mvc.EmbeddedViews
     using Geocrest.Web.Mvc;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Help/DisplayTemplates/ImageSample.cshtml")]
-    public partial class ImageSample_ : System.Web.Mvc.WebViewPage<Geocrest.Web.Mvc.Documentation.ImageSample>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/ChangePasswordSuccess.cshtml")]
+    public partial class ChangePasswordSuccess : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public ImageSample_()
+        public ChangePasswordSuccess()
         {
         }
         public override void Execute()
         {
-WriteLiteral("<img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 57), Tuple.Create("\"", 73)
             
-            #line 3 "..\..\Views\Help\DisplayTemplates\ImageSample.cshtml"
-, Tuple.Create(Tuple.Create("", 63), Tuple.Create<System.Object, System.Int32>(Model.Src
+            #line 1 "..\..\Views\Account\ChangePasswordSuccess.cshtml"
+  
+    ViewBag.Title = BaseApplication.ApplicationTitle + " | Change Password";
+
             
             #line default
             #line hidden
-, 63), false)
-);
+WriteLiteral("\r\n<section");
 
-WriteLiteral(" />");
+WriteLiteral(" class=\"page\"");
+
+WriteLiteral(">\r\n    <div");
+
+WriteLiteral(" class=\"container\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"row text-center\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"col-sm-6 col-sm-offset-3\"");
+
+WriteLiteral(">\r\n                <div");
+
+WriteLiteral(" class=\"title\"");
+
+WriteLiteral(">\r\n                    <h2>Your password has been changed.</h2>\r\n                " +
+"</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>");
 
         }
     }

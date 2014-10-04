@@ -4,6 +4,7 @@ namespace Geocrest.Web.Mvc.Controllers
     using Geocrest.Web.Mvc.Models.Account;
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -15,19 +16,61 @@ namespace Geocrest.Web.Mvc.Controllers
     public class AccountController : BaseController
     {
         private bool simpleMembership = BaseApplication.IsSimpleMembershipProviderConfigured();
-        //
-        // GET: /Account/Login
+        /// <summary>
+        /// Returns the main page for account activities. By default, this page allows editing of account information.
+        /// </summary>
+        /// <returns></returns>
+        public virtual ActionResult Index()
+        {
+            BaseProfile profile = BaseApplication.Profile;
+            return View(profile);
+        }
+        /// <summary>
+        /// Updates the current user's account information.
+        /// </summary>
+        /// <param name="model">The new information about the user including FirstName, LastName, and Email.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(FormCollection model)
+        {
+            if (ModelState.IsValid)
+            {
+                var profile = BaseApplication.Profile;
+                profile.FirstName = model["FirstName"];
+                profile.LastName = model["LastName"];
+                profile.Email = model["Email"];
+                profile.Save();
+                return RedirectToAction("index");
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Returns the login page.
+        /// </summary>
+        /// <param name="returnUrl">The return URL to redirect after logging in.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public virtual ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+        /// <summary>
+        /// Returns a partial view for a login form. No embedded view is provided.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public virtual ActionResult LoginForm()
         {
             return PartialView(new Login());
         }
+        /// <summary>
+        /// Logs in with the provided username/password combination.
+        /// </summary>
+        /// <param name="model">The login information.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -35,9 +78,13 @@ namespace Geocrest.Web.Mvc.Controllers
         {
             return Login(model, string.Empty);
         }
-        //
-        // POST: /Account/Login
 
+        /// <summary>
+        /// Logs in with the provided username/password combination.
+        /// </summary>
+        /// <param name="model">The login information.</param>
+        /// <param name="returnUrl">The return URL to redirect after loggin in.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -46,8 +93,10 @@ namespace Geocrest.Web.Mvc.Controllers
             return LoginUser(model, returnUrl);
         }
 
-        //
-        // GET: /Account/LogOff
+        /// <summary>
+        /// Logs off the current user.
+        /// </summary>
+        /// <returns></returns>
         public virtual ActionResult LogOff()
         {
             if (simpleMembership)
@@ -57,18 +106,22 @@ namespace Geocrest.Web.Mvc.Controllers
             return RedirectToAction("index", "home");
         }
 
-        //
-        // GET: /Account/Register
 
+        /// <summary>
+        /// Returns the account registration page.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public virtual ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
-
+        /// <summary>
+        /// Registers the user with the application and logs them in.
+        /// </summary>
+        /// <param name="model">The account information.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -77,9 +130,29 @@ namespace Geocrest.Web.Mvc.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Email=model.Email });
-                if (!User.Identity.IsAuthenticated)
-                    WebSecurity.Login(model.UserName, model.Password);
+                if (simpleMembership)
+                {
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { 
+                        Email = model.Email,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Application = ConfigurationManager.AppSettings["applicationName"]
+                    });
+                    if (!User.Identity.IsAuthenticated)
+                        WebSecurity.Login(model.UserName, model.Password);
+                }
+                else
+                {
+                    try
+                    {
+                        Membership.CreateUser(model.UserName, model.Password, model.Email);
+                    }
+                    catch (MembershipCreateUserException ex)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(ex.StatusCode));
+                        return View(model);
+                    }
+                }
                 return RedirectToAction("Index", "Home", new { area=""});              
             }
 
@@ -87,17 +160,21 @@ namespace Geocrest.Web.Mvc.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ChangePassword
-
+        /// <summary>
+        /// Returns a view for changing a user's password.
+        /// </summary>
+        /// <returns></returns>
         public virtual ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ChangePassword
 
+        /// <summary>
+        /// Changes the password of the current user.
+        /// </summary>
+        /// <param name="model">The new password information.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePassword model)
@@ -132,9 +209,10 @@ namespace Geocrest.Web.Mvc.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ChangePasswordSuccess
-
+        /// <summary>
+        /// Returns a view indicating aa successful password change.
+        /// </summary>
+        /// <returns></returns>
         public virtual ActionResult ChangePasswordSuccess()
         {
             return View();

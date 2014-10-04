@@ -1,0 +1,43 @@
+﻿@* Generator: MvcHelper *@
+@using System.Web.Mvc;
+@using System.Web.Mvc.Html;
+@using System.Linq.Expressions;
+@using System.Linq;
+@using System.Reflection;
+@functions
+{       
+    public static HelperResult TextBox<TModel, TItem>(HtmlHelper<TModel> html, Expression<Func<TModel, TItem>> expr, object htmlAttributes = null)
+    {
+        return Editor(html.LabelFor(expr, new { @class = "col-sm-4 control-label" }), html.TextBoxFor(expr, htmlAttributes),
+            html.ValidationMessageFor(expr), 3);
+    }
+    public static string TokenHeaderValue()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;
+    }
+}
+@helper Editor(MvcHtmlString label, MvcHtmlString editor, MvcHtmlString validation, int bootstrapVersion)
+{
+    if (bootstrapVersion == 3)
+    { 
+    <div class="form-group">
+        @label
+        <div class="col-sm-8">
+            @editor
+            @validation
+        </div>
+    </div>   
+    }
+    else
+    {
+    <div class="control-group">
+        @label
+        <div class="controls">
+            @editor
+            @validation
+        </div>
+    </div>
+    }    
+}
