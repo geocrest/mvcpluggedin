@@ -12,20 +12,21 @@
     <description>$description$</description>
     <summary>$description$</summary>
     <copyright>Geocrest Mapping, LLC 2014</copyright>
-    <tags>EntityFramework CodeFirst generic repository</tags>
+    <tags>ArcGIS REST Catalog generic repository</tags>
     <dependencies>
+      <dependency id="Geocrest.Model" version="1.0.0-alpha2" />
       <dependency id="Geocrest.Web.Infrastructure" version="1.0.0-alpha2" />
-      <dependency id="EntityFramework" version="5.0.0" />
+      <dependency id="Ninject" version="[3.0.1.10]" />
+      <dependency id="Newtonsoft.Json" version="6.0.0"/>
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
       <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework=".NETFramework4.0" />
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="Context.cs.pp" target="content\Models" />
-    <file src="Repository.cs.pp" target="content\Models" />
-    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.dll" target="lib\net40\"/>
-    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.xml" target="lib\net40\"/>
+    <file src="..\Geocrest.Data.Contracts.Gis\bin\release\Geocrest.Data.Contracts.Gis.dll" target="lib\net40\"/>
+    <file src="..\Geocrest.Data.Contracts.Gis\bin\release\Geocrest.Data.Contracts.Gis.xml" target="lib\net40\"/>
   </files>
 </package>
