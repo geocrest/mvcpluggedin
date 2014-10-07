@@ -1,0 +1,36 @@
+﻿@model Geocrest.Web.Mvc.Models.Feedback
+@Html.ValidationSummary(true)
+@Html.AntiForgeryToken()
+
+<div class="form-group">
+    @Html.LabelFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Name, new { placeholder = "Full Name", @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name)</div>
+<div class="form-group">
+    @Html.LabelFor(x => x.Email)
+    @Html.TextBoxFor(x => x.Email, new { placeholder = "Email Address", @class = "form-control", type="email" })
+    @Html.ValidationMessageFor(x => x.Email)
+</div>
+<div class="form-group">
+    @Html.LabelFor(x =>x.FeedbackSubjectId)
+    @Html.DropDownListFor(model => model.FeedbackSubjectId, ((IEnumerable<Geocrest.Web.Mvc.Models.FeedbackSubject>)ViewBag.FeedbackSubjects)
+            .Select(x => new System.Web.Mvc.SelectListItem
+            {
+                Text = x.Subject,
+                Value = x.Id.ToString()
+            }),"Choose a subject...", new { @class = "form-control" }
+        )
+@Html.ValidationMessageFor(model => model.FeedbackSubjectId)
+</div>
+<div class="form-group">
+    @Html.LabelFor(x => x.Comment)
+    @Html.TextAreaFor(x => x.Comment, new { placeholder = "Your Message", @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Comment)</div>
+<div class="form-group">
+    <button class="btn btn-lg submit btn-block" type="submit" id="submitFeedback"
+            data-loading-text="
+        <i class='fa fa-spinner fa-spin'></i>&nbsp;Submitting..."
+        >Submit
+    </button>
+</div>
+

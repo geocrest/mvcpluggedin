@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Geocrest.Web.Mvc.Models.Feedback>
+
+@foreach (var item in Model)
+{
+    <blockquote id="@string.Format("feedback-{0}", @item.Id)" class="pull-left">
+        <strong>@item.FeedbackSubject.Subject</strong> - @item.Comment
+        <small><strong>@item.Name</strong> - <a href="mailto:#">@item.Email</a></small><br />
+        <small><strong>Published: </strong>@item.PublishDate</small>
+        @using (Ajax.BeginForm("delete", "feedback", new { area = "" }, new AjaxOptions
+        {
+            HttpMethod = "DELETE",
+            Confirm = "Delete comment? Are you sure",
+            OnSuccess = "onDelete(data, '#feedback-' + data.id, '#ajaxresult')",
+            OnFailure = "onFailure(xhr,status,error,'#ajaxresult')",
+            OnBegin = "onBegin(xhr, '#ajaxresult')",
+            OnComplete = "onComplete"
+        }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("Id", @item.Id)
+            <button type="submit" class="btn btn-danger pull-right">Delete comment</button>
+        }
+    </blockquote>
+}

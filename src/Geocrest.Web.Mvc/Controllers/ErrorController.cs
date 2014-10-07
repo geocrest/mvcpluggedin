@@ -1,11 +1,10 @@
 ﻿namespace Geocrest.Web.Mvc.Controllers
 {
+    using Geocrest.Web.Infrastructure;
+    using Geocrest.Web.Mvc.Models;
     using System;
-    using System.Net;
     using System.Web;
     using System.Web.Mvc;
-    using Geocrest.Web.Infrastructure;
-    using Geocrest.Web.Mvc.Resources;
     /// <summary>
     /// Allows handling of application errors
     /// </summary>

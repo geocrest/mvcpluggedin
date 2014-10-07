@@ -1,0 +1,25 @@
+﻿@model Geocrest.Web.Mvc.Models.Feedback
+
+@using (Ajax.BeginForm("create", "feedback", new { area = "" }, new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = "resetForm(data)",
+            OnFailure = "onFailure(xhr,status,error,'#ajaxresult','#submitFeedback')",
+            OnBegin = "onBegin(xhr, '#ajaxresult','#submitFeedback')",
+            OnComplete = "onComplete"
+        }, new { @class = "contact-form well", id = "contactForm" }))
+{
+    @Html.Partial("_contactform")
+}
+<script type="text/javascript">
+    function resetForm(data) {
+        var form = $('#feedbackForm');
+        if (form.length > 0) {
+            $(form).load('@Url.Action("create", "feedback", new { area = "" })', function () {
+                $("#contactForm").each(function () { $.data($(this)[0], 'validator', false); });
+                $.validator.unobtrusive.parse("#contactForm");
+            });
+        }
+        onSuccess(data, '#feedbacklist', '#ajaxresult', '', '#submitFeedback');
+    }
+</script>
