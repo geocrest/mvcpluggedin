@@ -656,21 +656,33 @@ log an error has been made but no error was given."));
 
             // Initialize the assemblies
             GetAssemblies();
-            BaseApplication._kernel = new StandardKernel(new INinjectModule[] { new WebApiNinjectionModule() });
+
+            // Create the kernel and set resolvers for MVC and WebAPI
+            BaseApplication._kernel = new StandardKernel();
             NinjectDependencyResolver res = new NinjectDependencyResolver(BaseApplication.Kernel);
             GlobalConfiguration.Configuration.DependencyResolver = res;
 
+            // Register interfaces bound to classes
             BaseApplication.Kernel.Bind(scanner =>
                 scanner.From(BaseApplication.GetAssemblies())
                 .SelectAllClasses()
                 .WithAttribute<NinjectionAttribute>()
                 .BindAllInterfaces());
-            BaseApplication.Kernel.Load(BaseApplication.GetAssemblies());
-            var assemblies = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                             from type in assembly.GetTypes()
-                             where type.IsSubclassOf(typeof(BaseApplication))
-                             select assembly;
-            BaseApplication.Kernel.Load(assemblies);
+
+            // Register any assemblies containing either a BaseApplication or a NinjectModule
+            // Assemblies containing a BaseApplication should only come from what's loaded (e.g. BaseApplication would never come from the plugin folder)
+            var loadedAssemblies = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                                   from type in assembly.GetTypes()
+                                   where type.IsSubclassOf(typeof(BaseApplication)) ||
+                                   (type.IsSubclassOf(typeof(NinjectModule)) && assembly.FullName.Contains("Geocrest"))
+                                   select assembly;
+            var dynamicAssemblies = from assembly in BaseApplication.GetAssemblies()
+                                    from type in assembly.GetTypes()
+                                    where type.IsSubclassOf(typeof(NinjectModule)) && assembly.FullName.Contains("Geocrest")
+                                    select assembly;
+
+            var distinct = loadedAssemblies.Concat(dynamicAssemblies).Distinct();
+            BaseApplication.Kernel.Load(distinct);
 
             // raise the kernel creation event
             this.OnKernelCreated(new KernelCreatedEventArgs(BaseApplication.Kernel));
