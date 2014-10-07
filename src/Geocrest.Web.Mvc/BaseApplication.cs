@@ -2,26 +2,8 @@
 namespace Geocrest.Web.Mvc
 {
     #region Usings
-    using System;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.IO;
-    using System.Linq;
-    using System.Net.Http.Formatting;
-    using System.Reflection;
-    using System.Web;
-    using System.Web.Http;
-    using System.Web.Http.Hosting;
-    using System.Web.Mvc;
-    using System.Web.Optimization;
-    using System.Web.Routing;
-    using System.Xml.Serialization;
     using Elmah;
-    using Newtonsoft.Json;
-    using Ninject;
-    using Ninject.Extensions.Conventions;
-    using Ninject.Modules;
-    using Ninject.Web.Common;
+    using Geocrest.Data.Contracts;
     using Geocrest.Web.Infrastructure;
     using Geocrest.Web.Infrastructure.DependencyResolution;
     using Geocrest.Web.Mvc.Configuration;
@@ -29,6 +11,28 @@ namespace Geocrest.Web.Mvc
     using Geocrest.Web.Mvc.DependencyResolution;
     using Geocrest.Web.Mvc.Documentation;
     using Geocrest.Web.Mvc.Formatting;
+    using Geocrest.Web.Mvc.Models;
+    using Newtonsoft.Json;
+    using Ninject;
+    using Ninject.Extensions.Conventions;
+    using Ninject.Modules;
+    using Ninject.Web.Common;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data.Entity;
+    using System.IO;
+    using System.Linq;
+    using System.Net.Http.Formatting;
+    using System.Reflection;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.Http;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+    using System.Xml.Serialization;
+    using WebMatrix.WebData;
     #endregion
 
     /// <summary>
@@ -47,7 +51,11 @@ namespace Geocrest.Web.Mvc
         private static IKernel _kernel;
         private static List<IModuleRegistration> _allareas;
         private static List<Assembly> _areaassemblies;
-        private static string adminRole = "Administrators";        
+        private static string adminRole = "Administrators";
+        private static SimpleMembershipInitializer<DbContext> _initializer;
+        private static object _initializerLock = new object();
+        private static bool _isInitialized;
+        private static bool? simpleMembership;
         private static Dictionary<string, string> validAPIResponseFormats = new Dictionary<string, string>
         { 
             {"xml","application/xml"},
@@ -141,9 +149,83 @@ namespace Geocrest.Web.Mvc
             get { return BaseApplication._kernel; }
         }
 
+        /// <summary>
+        /// Gets the currently logged-in user profile.
+        /// </summary>
+        public static BaseProfile Profile
+        {
+            get
+            {
+                if (IsSimpleMembershipProviderConfigured())
+                {
+                    IRepository repo = BaseApplication.Kernel.Get<IRepository>();
+                    return BaseProfile.CreateProfile(repo, HttpContext.Current.User.Identity.Name);
+                }
+                else
+                {
+                    return BaseProfile.CreateProfile(HttpContext.Current.User.Identity.Name);
+                }
+            }
+        }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Determines whether the simple membership provider is configured for the current application.
+        /// </summary>
+        /// <param name="configurationfile">The full path to the configuration file.</param>
+        /// <returns>
+        ///   <c>true</c> if the application is using simple membership; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsSimpleMembershipProviderConfigured(string configurationfile)
+        {
+            if (BaseApplication.simpleMembership.HasValue) return BaseApplication.simpleMembership.Value;
+            bool enabled;
+            // check the appsettings value first
+            Boolean.TryParse(!string.IsNullOrEmpty(ConfigurationManager.AppSettings[WebSecurity.EnableSimpleMembershipKey]) ?
+                ConfigurationManager.AppSettings[WebSecurity.EnableSimpleMembershipKey] : "false", out enabled);
+            if (!enabled)
+            {
+                BaseApplication.simpleMembership = false;
+                return BaseApplication.simpleMembership.Value;
+            }
+
+            // next get the configuration and check for the provider     
+            System.Configuration.Configuration configuration = null;
+            if (configurationfile.ToLower().EndsWith("web.config"))
+                configuration = WebConfigurationManager.OpenWebConfiguration(configurationfile);
+            else
+                configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (configuration != null)
+            {
+                MembershipSection membershipSection = configuration.GetSection("system.web/membership") as MembershipSection;
+                if (membershipSection != null)
+                {
+                    string defaultprovider = membershipSection.DefaultProvider;
+                    foreach (ProviderSettings provider in membershipSection.Providers)
+                    {
+                        if (provider.Name == defaultprovider && provider.Type.Contains("WebMatrix.WebData.SimpleMembershipProvider"))
+                        {
+                            BaseApplication.simpleMembership = true;
+                            return BaseApplication.simpleMembership.Value;
+                        }
+                    }
+                }
+            }
+            BaseApplication.simpleMembership = false;
+            return BaseApplication.simpleMembership.Value;
+        }
+        /// <summary>
+        /// Determines whether the simple membership provider is configured for the current application.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if the application is using simple membership; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsSimpleMembershipProviderConfigured()
+        {
+            return IsSimpleMembershipProviderConfigured("/web.config");
+        }
         /// <summary>
         /// Gets all areas found within the configured injection folder.
         /// </summary>
@@ -552,6 +634,10 @@ log an error has been made but no error was given."));
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.AddQueryStringMapping(BaseApplication.FormatParameter, "xml", "application/xml");
             GlobalConfiguration.Configuration.Formatters.Add(new PlainTextFormatter());
             GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Default;
+
+            // Ensure ASP.NET Simple Membership is initialized only once per app start
+            if (IsSimpleMembershipProviderConfigured())
+                System.Threading.LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
         }
 
         /// <summary>
@@ -570,21 +656,33 @@ log an error has been made but no error was given."));
 
             // Initialize the assemblies
             GetAssemblies();
-            BaseApplication._kernel = new StandardKernel(new INinjectModule[] { new WebApiNinjectionModule() });
+
+            // Create the kernel and set resolvers for MVC and WebAPI
+            BaseApplication._kernel = new StandardKernel();
             NinjectDependencyResolver res = new NinjectDependencyResolver(BaseApplication.Kernel);
             GlobalConfiguration.Configuration.DependencyResolver = res;
 
+            // Register interfaces bound to classes
             BaseApplication.Kernel.Bind(scanner =>
                 scanner.From(BaseApplication.GetAssemblies())
                 .SelectAllClasses()
                 .WithAttribute<NinjectionAttribute>()
                 .BindAllInterfaces());
-            BaseApplication.Kernel.Load(BaseApplication.GetAssemblies());
-            var assemblies = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                             from type in assembly.GetTypes()
-                             where type.IsSubclassOf(typeof(BaseApplication))
-                             select assembly;
-            BaseApplication.Kernel.Load(assemblies);
+
+            // Register any assemblies containing either a BaseApplication or a NinjectModule
+            // Assemblies containing a BaseApplication should only come from what's loaded (e.g. BaseApplication would never come from the plugin folder)
+            var loadedAssemblies = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                                   from type in assembly.GetTypes()
+                                   where type.IsSubclassOf(typeof(BaseApplication)) ||
+                                   (type.IsSubclassOf(typeof(NinjectModule)) && assembly.FullName.Contains("Geocrest"))
+                                   select assembly;
+            var dynamicAssemblies = from assembly in BaseApplication.GetAssemblies()
+                                    from type in assembly.GetTypes()
+                                    where type.IsSubclassOf(typeof(NinjectModule)) && assembly.FullName.Contains("Geocrest")
+                                    select assembly;
+
+            var distinct = loadedAssemblies.Concat(dynamicAssemblies).Distinct();
+            BaseApplication.Kernel.Load(distinct);
 
             // raise the kernel creation event
             this.OnKernelCreated(new KernelCreatedEventArgs(BaseApplication.Kernel));
@@ -599,5 +697,29 @@ log an error has been made but no error was given."));
         public event EventHandler<KernelCreatedEventArgs> KernelCreated;
         #endregion
         #endregion
+
+
+        private class SimpleMembershipInitializer<T> where T : DbContext
+        {
+            public SimpleMembershipInitializer()
+            {
+                System.Data.Entity.Database.SetInitializer<T>(null);
+
+                try
+                {
+                    using (var ctx = BaseApplication.Kernel.Get<T>())
+                    {
+                        ctx.Database.CreateIfNotExists();
+                        WebSecurity.InitializeDatabaseConnection(ctx.Database.Connection.ConnectionString,
+                            "System.Data.SqlClient", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Throw.InvalidOperation("The ASP.NET Simple Membership database could not be initialized. " + ex.Message);
+                }
+            }
+        }
     }
 }

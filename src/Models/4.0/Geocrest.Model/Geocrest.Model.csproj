@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\Common\Resource.cs">
+      <Link>Resource.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\Common\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
@@ -138,7 +141,6 @@
     <Compile Include="FeatureClass.cs" />
     <Compile Include="ObjectClass.cs" />
     <Compile Include="PointFeatureClass.cs" />
-    <Compile Include="Resource.cs" />
     <Compile Include="ResourceCollection.cs" />
     <Compile Include="GenericEventArgs.cs" />
     <Compile Include="HydrateCompletedEventArgs.cs" />
@@ -162,7 +164,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

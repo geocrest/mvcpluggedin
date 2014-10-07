@@ -123,6 +123,12 @@
   <data name="DeleteSuccess" xml:space="preserve">
     <value>You have successfully removed the {0}.</value>
   </data>
+  <data name="FeedbackDeleteSuccess" xml:space="preserve">
+    <value>Comment deleted.</value>
+  </data>
+  <data name="FeedbackPostSuccess" xml:space="preserve">
+    <value>Thank you for your feedback.</value>
+  </data>
   <data name="PostFailure" xml:space="preserve">
     <value>Something went wrong while adding the {0}: {1}</value>
   </data>
