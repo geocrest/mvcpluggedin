@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\Common\Resource.cs">
+      <Link>Resource.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\Common\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
@@ -326,9 +329,6 @@
     </Compile>
     <Compile Include="..\Geocrest.Model\PointFeatureClass.cs">
       <Link>PointFeatureClass.cs</Link>
-    </Compile>
-    <Compile Include="..\Geocrest.Model\Resource.cs">
-      <Link>Resource.cs</Link>
     </Compile>
     <Compile Include="..\Geocrest.Model\ResourceCollection.cs">
       <Link>ResourceCollection.cs</Link>

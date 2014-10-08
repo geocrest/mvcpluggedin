@@ -141,6 +141,9 @@
   <data name="PotentialDanger" xml:space="preserve">
     <value>A potentially dangerous Request.Path value was detected from the client</value>
   </data>
+  <data name="ProductionErrorMessage" xml:space="preserve">
+    <value>Unfortunately, something went wrong during your request. The issue has been logged and we will fix it as soon as possible.</value>
+  </data>
   <data name="RequiresIVersionedHttpControllerSelector" xml:space="preserve">
     <value>The VersionedApiExplorer class requires the default implementation of IHttpControllerSelector to be an IVersionedHttpControllerSelector</value>
   </data>

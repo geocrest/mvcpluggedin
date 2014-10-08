@@ -163,7 +163,21 @@
         /// <returns>An instance of <typeparamref name="T"/></returns>
         public virtual T Find<T>(string id) where T : class
         {
-            return this.Context.Set<T>().Find(id);
+            // try to parse as GUID and int since this method serves many sub-classes
+            Guid parsedGuid;
+            int parsedInt;
+            if (Guid.TryParse(id, out parsedGuid))
+            {
+                return this.Find<T>(parsedGuid);
+            }
+            else if (int.TryParse(id, out parsedInt))
+            {
+                return this.Find<T>(parsedInt);
+            }
+            else
+            {
+                return this.Context.Set<T>().Find(id);
+            }
         }
 
         /// <summary>
