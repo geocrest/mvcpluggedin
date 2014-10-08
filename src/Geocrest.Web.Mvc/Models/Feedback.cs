@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents feedback from a user.
     /// </summary>
-    public class Feedback : Resource
+    public class Feedback
     {
         /// <summary>
         /// Gets or sets the id.

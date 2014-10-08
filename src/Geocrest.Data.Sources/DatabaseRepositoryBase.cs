@@ -32,13 +32,6 @@
 
         #region Properties
         /// <summary>
-        /// Gets the name of the application for which this repository will retrieve items.
-        /// </summary>
-        /// <value>
-        /// The name of the application.
-        /// </value>
-        public abstract string ApplicationName { get; protected set; }
-        /// <summary>
         /// Gets or sets the database context.
         /// </summary>
         /// <value>
@@ -85,9 +78,9 @@
         /// </summary>
         /// <typeparam name="T">The type of entity to retrieve.</typeparam>
         /// <returns>An instance of <see cref="T:System.Linq.IQueryable`1"/></returns>
-        public virtual IQueryable<T> All<T>() where T : Resource
+        public virtual IQueryable<T> All<T>() where T : class
         {
-            return this.Context.Set<T>().Where(x => x.Application == this.ApplicationName); 
+            return this.Context.Set<T>(); 
         }
 
         /// <summary>
@@ -99,9 +92,9 @@
         /// Returns an instance of <see cref="T:System.Linq.IQueryable`1"/>.
         /// </returns>
         public virtual IQueryable<T> AllIncluding<T>(params Expression<Func<T, object>>[] includeProperties)
-            where T : Resource
+            where T : class
         {
-            IQueryable<T> query = this.Context.Set<T>().Where(x => x.Application == this.ApplicationName); ;
+            IQueryable<T> query = this.Context.Set<T>();
             foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
@@ -114,7 +107,7 @@
         /// </summary>
         /// <typeparam name="T">The type of entity to delete.</typeparam>
         /// <param name="id">The id.</param>
-        public virtual void Delete<T>(int id) where T : Resource
+        public virtual void Delete<T>(int id) where T : class
         {
             var entity = this.Find<T>(id);
             this.Context.Set<T>().Remove(entity);
@@ -125,7 +118,7 @@
         /// </summary>
         /// <typeparam name="T">The type of entity to delete.</typeparam>
         /// <param name="id">The id.</param>
-        public virtual void Delete<T>(string id) where T : Resource
+        public virtual void Delete<T>(string id) where T : class
         {
             var entity = this.Find<T>(id);
             this.Context.Set<T>().Remove(entity);
@@ -136,7 +129,7 @@
         /// </summary>
         /// <typeparam name="T">The type of entity to delete.</typeparam>
         /// <param name="id">The id.</param>
-        public virtual void Delete<T>(Guid id) where T : Resource
+        public virtual void Delete<T>(Guid id) where T : class
         {
             var entity = this.Find<T>(id);
             this.Context.Set<T>().Remove(entity);
@@ -157,7 +150,7 @@
         /// <typeparam name="T">The type of entity to retrieve.</typeparam>
         /// <param name="id">The id as an integer.</param>
         /// <returns>An instance of <typeparamref name="T"/></returns>
-        public virtual T Find<T>(int id) where T : Resource
+        public virtual T Find<T>(int id) where T : class
         {
             return this.Context.Set<T>().Find(id);
         }
@@ -168,9 +161,23 @@
         /// <typeparam name="T">The type of entity to retrieve.</typeparam>
         /// <param name="id">The id as a string.</param>
         /// <returns>An instance of <typeparamref name="T"/></returns>
-        public virtual T Find<T>(string id) where T : Resource
+        public virtual T Find<T>(string id) where T : class
         {
-            return this.Context.Set<T>().Find(id);
+            // try to parse as GUID and int since this method serves many sub-classes
+            Guid parsedGuid;
+            int parsedInt;
+            if (Guid.TryParse(id, out parsedGuid))
+            {
+                return this.Find<T>(parsedGuid);
+            }
+            else if (int.TryParse(id, out parsedInt))
+            {
+                return this.Find<T>(parsedInt);
+            }
+            else
+            {
+                return this.Context.Set<T>().Find(id);
+            }
         }
 
         /// <summary>
@@ -179,7 +186,7 @@
         /// <typeparam name="T">The type of entity to retrieve.</typeparam>
         /// <param name="id">The id as a guid.</param>
         /// <returns>An instance of <typeparamref name="T"/></returns>
-        public virtual T Find<T>(Guid id) where T : Resource
+        public virtual T Find<T>(Guid id) where T : class
         {
             return this.Context.Set<T>().Find(id);
         }
@@ -192,9 +199,9 @@
         /// <returns>
         /// Returns an instance of <see cref="T:System.Linq.IQueryable`1"/>.
         /// </returns>
-        public virtual IQueryable<T> FindBy<T>(Expression<Func<T, bool>> predicate) where T : Resource
+        public virtual IQueryable<T> FindBy<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            IQueryable<T> query = this.Context.Set<T>().Where(predicate).Where(x => x.Application == this.ApplicationName);
+            IQueryable<T> query = this.Context.Set<T>().Where(predicate);
             return query;
         }
 
@@ -205,7 +212,7 @@
         /// <returns>
         /// A comma-delimited string of database fields that correspond to the properties of the class.
         /// </returns>
-        public string GetSqlFields<T>() where T : Resource
+        public string GetSqlFields<T>() where T : class
         {
             string sql = "* ";
             Type type = typeof(T);
@@ -244,7 +251,7 @@
         /// A comma-delimited string of database fields enclosed in the supplied SQL aggregate function. For example:
         /// <c>max([Field1]) as Field1, max([Field2]) as Field2</c>.
         /// </returns>
-        public string GetSqlFields<T>(string sqlAggregateFunctionName) where T : Resource
+        public string GetSqlFields<T>(string sqlAggregateFunctionName) where T : class
         {
             sqlAggregateFunctionName = string.IsNullOrEmpty(sqlAggregateFunctionName) ? "max" : sqlAggregateFunctionName;
             string sql = "* ";
@@ -279,9 +286,8 @@
         /// </summary>
         /// <typeparam name="T">The type of entity to insert.</typeparam>
         /// <param name="entity">The entity.</param>
-        public virtual void Insert<T>(T entity) where T : Resource
+        public virtual void Insert<T>(T entity) where T : class
         {
-            if (entity != null && string.IsNullOrEmpty(entity.Application)) entity.Application = this.ApplicationName;
             this.Context.Set<T>().Add(entity);
         }
 
@@ -290,9 +296,8 @@
         /// </summary>
         /// <typeparam name="T">The type of entity to update.</typeparam>
         /// <param name="entity">The entity.</param>
-        public virtual void Update<T>(T entity) where T : Resource
+        public virtual void Update<T>(T entity) where T : class
         {
-            if (entity != null && string.IsNullOrEmpty(entity.Application)) entity.Application = this.ApplicationName;
             this.Context.Entry(entity).State = System.Data.EntityState.Modified;
         }
 
@@ -312,9 +317,9 @@
         /// <returns>
         /// Returns an instance of <see cref="T:System.Linq.IQueryable`1"/>
         /// </returns>
-        public IQueryable<T> SqlQuery<T>(string sql) where T : Resource
+        public IQueryable<T> SqlQuery<T>(string sql) where T : class
         {
-            return this.Context.Set<T>().SqlQuery(sql).Where(x => x.Application == this.ApplicationName).AsQueryable<T>();
+            return this.Context.Set<T>().SqlQuery(sql).AsQueryable<T>();
         }
         #endregion
     }

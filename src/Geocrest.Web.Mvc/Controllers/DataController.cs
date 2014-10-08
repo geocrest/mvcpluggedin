@@ -7,7 +7,7 @@
     /// <summary>
     /// Provides a controller with an <see cref="T:Geocrest.Data.Contracts.IRepository"/> property.
     /// </summary>
-    public abstract class DataController<T> : BaseController where T : Resource
+    public abstract class DataController<T> : BaseController where T : class
     {
         /// <summary>
         /// Gets the repository used to retrieve database entries.

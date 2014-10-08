@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents the subject matter of feedback.
     /// </summary>
-    public class FeedbackSubject : Resource
+    public class FeedbackSubject
     {
         /// <summary>
         /// Gets or sets the id.

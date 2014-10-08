@@ -17,14 +17,7 @@
 #if REPRESENTATIONS
         : IHalResource
 #endif
-    {
-        /// <summary>
-        /// Gets or sets the name of the application when multiple applications use the same database.
-        /// </summary>
-        /// <value>
-        /// The unique name of the application.
-        /// </value>
-        public string Application { get; set; }
+    {        
 #if REPRESENTATIONS
         /// <summary>
         /// Gets or sets the links associated with this entity.

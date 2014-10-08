@@ -46,7 +46,6 @@
             {
                 p.FirstName = p["FirstName"] as string;
                 p.LastName = p["LastName"] as string;
-                p.Application = p["Application"] as string;
                 p.Email = user.Email;
             }
 
@@ -110,7 +109,6 @@
                 {
                     up.FirstName = this.FirstName;
                     up.LastName = this.LastName;
-                    up.Application = this.Application;
                     up.Email = this.Email;
                     this.repository.Update<UserProfile>(up);
                     this.repository.Save();

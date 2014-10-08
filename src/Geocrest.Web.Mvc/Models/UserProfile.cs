@@ -6,7 +6,7 @@
     /// Provides a representation of a user's profile that can be stored in a data source. This
     /// class is intended for use with the <see cref="T:WebMatrix.WebData.SimpleMembershipProvider"/> class.
     /// </summary>
-    public class UserProfile : Resource
+    public class UserProfile
     {
         /// <summary>
         /// Gets or sets the user id.
