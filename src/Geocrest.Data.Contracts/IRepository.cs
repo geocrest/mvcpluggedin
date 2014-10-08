@@ -1,7 +1,7 @@
 ﻿namespace Geocrest.Data.Contracts
 {
     using System;
-    using System.Data.Objects;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
     using System.Linq.Expressions;
 

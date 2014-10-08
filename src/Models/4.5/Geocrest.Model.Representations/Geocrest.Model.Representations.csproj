@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1B0D53C8-88CC-4193-936F-0345E8D5BE55}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Geocrest.Model.Representations</RootNamespace>
+    <AssemblyName>Geocrest.Model.Representations</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET45,REPRESENTATIONS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET45,REPRESENTATIONS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Common\Resource.cs">
+      <Link>Resource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\XmlNamespaceInfo.cs">
+      <Link>Properties\XmlNamespaceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\ArcGISServiceInfo.cs">
+      <Link>ArcGIS\ArcGISServiceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\DocumentInfo.cs">
+      <Link>ArcGIS\DocumentInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\DrawingInfo.cs">
+      <Link>ArcGIS\DrawingInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Error.cs">
+      <Link>ArcGIS\Error.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Geometry\esriGeometryType.cs">
+      <Link>ArcGIS\Geometry\esriGeometryType.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Geometry\Geometry.cs">
+      <Link>ArcGIS\Geometry\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Geometry\GeometryCollection.cs">
+      <Link>ArcGIS\Geometry\GeometryCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Geometry\SpatialReference.cs">
+      <Link>ArcGIS\Geometry\SpatialReference.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Geometry\WKID.cs">
+      <Link>ArcGIS\Geometry\WKID.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\LayerTable.cs">
+      <Link>ArcGIS\LayerTable.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\LayerTableBase.cs">
+      <Link>ArcGIS\LayerTableBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\LayerTableInfo.cs">
+      <Link>ArcGIS\LayerTableInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\LOD.cs">
+      <Link>ArcGIS\LOD.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\MapImage.cs">
+      <Link>ArcGIS\MapImage.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\MobileLayer.cs">
+      <Link>ArcGIS\MobileLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Schema\CodedValue.cs">
+      <Link>ArcGIS\Schema\CodedValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Schema\Domain.cs">
+      <Link>ArcGIS\Schema\Domain.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Schema\Field.cs">
+      <Link>ArcGIS\Schema\Field.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Schema\Relationship.cs">
+      <Link>ArcGIS\Schema\Relationship.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Schema\Subtype.cs">
+      <Link>ArcGIS\Schema\Subtype.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\serviceType.cs">
+      <Link>ArcGIS\serviceType.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\AddressCandidate.cs">
+      <Link>ArcGIS\Tasks\AddressCandidate.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\AddressCandidateCollection.cs">
+      <Link>ArcGIS\Tasks\AddressCandidateCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\AddressMatchCollection.cs">
+      <Link>ArcGIS\Tasks\AddressMatchCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\esriDataType.cs">
+      <Link>ArcGIS\Tasks\esriDataType.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\esriDirection.cs">
+      <Link>ArcGIS\Tasks\esriDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\esriExecutionType.cs">
+      <Link>ArcGIS\Tasks\esriExecutionType.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\esriJobStatus.cs">
+      <Link>ArcGIS\Tasks\esriJobStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\esriParameterType.cs">
+      <Link>ArcGIS\Tasks\esriParameterType.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\esriSpatialRelationship.cs">
+      <Link>ArcGIS\Tasks\esriSpatialRelationship.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\esriUnits.cs">
+      <Link>ArcGIS\Tasks\esriUnits.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\ExecuteCompletedEventArgs.cs">
+      <Link>ArcGIS\Tasks\ExecuteCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\Feature.cs">
+      <Link>ArcGIS\Tasks\Feature.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\FeatureSet.cs">
+      <Link>ArcGIS\Tasks\FeatureSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\FeatureSetArrayEventArgs.cs">
+      <Link>ArcGIS\Tasks\FeatureSetArrayEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\FeatureSetQuery.cs">
+      <Link>ArcGIS\Tasks\FeatureSetQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GetResultImageEventArgs.cs">
+      <Link>ArcGIS\Tasks\GetResultImageEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPBoolean.cs">
+      <Link>ArcGIS\Tasks\GPBoolean.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPDataFile.cs">
+      <Link>ArcGIS\Tasks\GPDataFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPDate.cs">
+      <Link>ArcGIS\Tasks\GPDate.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPDouble.cs">
+      <Link>ArcGIS\Tasks\GPDouble.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPFeatureRecordSetLayer.cs">
+      <Link>ArcGIS\Tasks\GPFeatureRecordSetLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPLinearUnit.cs">
+      <Link>ArcGIS\Tasks\GPLinearUnit.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPLong.cs">
+      <Link>ArcGIS\Tasks\GPLong.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPMapValue.cs">
+      <Link>ArcGIS\Tasks\GPMapValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPMessage.cs">
+      <Link>ArcGIS\Tasks\GPMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPMultiValue.cs">
+      <Link>ArcGIS\Tasks\GPMultiValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPParameter.cs">
+      <Link>ArcGIS\Tasks\GPParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPParameterEventArgs.cs">
+      <Link>ArcGIS\Tasks\GPParameterEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPParameterInfo.cs">
+      <Link>ArcGIS\Tasks\GPParameterInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPRasterData.cs">
+      <Link>ArcGIS\Tasks\GPRasterData.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPRecordSet.cs">
+      <Link>ArcGIS\Tasks\GPRecordSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPResult.cs">
+      <Link>ArcGIS\Tasks\GPResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPResultSet.cs">
+      <Link>ArcGIS\Tasks\GPResultSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\GPString.cs">
+      <Link>ArcGIS\Tasks\GPString.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\identifyLayersOption.cs">
+      <Link>ArcGIS\Tasks\identifyLayersOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\IdentifyResult.cs">
+      <Link>ArcGIS\Tasks\IdentifyResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\IdentifyResultCollection.cs">
+      <Link>ArcGIS\Tasks\IdentifyResultCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\ImageDisplayParameters.cs">
+      <Link>ArcGIS\Tasks\ImageDisplayParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\JobCompletedEventArgs.cs">
+      <Link>ArcGIS\Tasks\JobCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\JobInfo.cs">
+      <Link>ArcGIS\Tasks\JobInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\LocatorProperties.cs">
+      <Link>ArcGIS\Tasks\LocatorProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\ParcelPrintParameters.cs">
+      <Link>ArcGIS\Tasks\ParcelPrintParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\PrintLayers.cs">
+      <Link>ArcGIS\Tasks\PrintLayers.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\Record.cs">
+      <Link>ArcGIS\Tasks\Record.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\RecordSet.cs">
+      <Link>ArcGIS\Tasks\RecordSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\ReverseGeocodedAddress.cs">
+      <Link>ArcGIS\Tasks\ReverseGeocodedAddress.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\Tasks\TaskFailedEventArgs.cs">
+      <Link>ArcGIS\Tasks\TaskFailedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\TileInfo.cs">
+      <Link>ArcGIS\TileInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\Basemap.cs">
+      <Link>ArcGIS\WebMap\Basemap.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\BasemapLayer.cs">
+      <Link>ArcGIS\WebMap\BasemapLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\ExportOptions.cs">
+      <Link>ArcGIS\WebMap\ExportOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\ExportWebMap.cs">
+      <Link>ArcGIS\WebMap\ExportWebMap.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\FeatureCollection.cs">
+      <Link>ArcGIS\WebMap\FeatureCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\FeatureLayer.cs">
+      <Link>ArcGIS\WebMap\FeatureLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\GraphicsLayer.cs">
+      <Link>ArcGIS\WebMap\GraphicsLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\LayerDefinition.cs">
+      <Link>ArcGIS\WebMap\LayerDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\LayoutOptions.cs">
+      <Link>ArcGIS\WebMap\LayoutOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\MapOptions.cs">
+      <Link>ArcGIS\WebMap\MapOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\MapServiceLayer.cs">
+      <Link>ArcGIS\WebMap\MapServiceLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ArcGIS\WebMap\OperationalLayer.cs">
+      <Link>ArcGIS\WebMap\OperationalLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\Attributes.cs">
+      <Link>Attributes.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\FeatureClass.cs">
+      <Link>FeatureClass.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\GenericEventArgs.cs">
+      <Link>GenericEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\HydrateCompletedEventArgs.cs">
+      <Link>HydrateCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\HydrateCompletedEventArgsOfTModel.cs">
+      <Link>HydrateCompletedEventArgsOfTModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\IPointFeatureClass.cs">
+      <Link>IPointFeatureClass.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\IRestHelper.cs">
+      <Link>IRestHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\IWebHelper.cs">
+      <Link>IWebHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ObjectClass.cs">
+      <Link>ObjectClass.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\OptionalPropertiesContractResolver.cs">
+      <Link>OptionalPropertiesContractResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\PointFeatureClass.cs">
+      <Link>PointFeatureClass.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\ResourceCollection.cs">
+      <Link>ResourceCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\RestHelper.cs">
+      <Link>RestHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\WrappedAsyncCompletedEventArgs.cs">
+      <Link>WrappedAsyncCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\WrappedDownloadStringCompletedEventArgs.cs">
+      <Link>WrappedDownloadStringCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\WrappedUploadStringCompletedEventArgs.cs">
+      <Link>WrappedUploadStringCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\WrappedUploadValuesCompletedEventArgs.cs">
+      <Link>WrappedUploadValuesCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Geocrest.Model\WrappedWebClient.cs">
+      <Link>WrappedWebClient.cs</Link>
+    </Compile>
+    <Compile Include="CollectionLink.cs" />
+    <Compile Include="EditLink.cs" />
+    <Compile Include="FirstLink.cs" />
+    <Compile Include="IHalResource.cs" />
+    <Compile Include="IHalResourceCollection.cs" />
+    <Compile Include="LastLink.cs" />
+    <Compile Include="Link.cs" />
+    <Compile Include="NextLink.cs" />
+    <Compile Include="PreviousLink.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelatedLink.cs" />
+    <Compile Include="SelfLink.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

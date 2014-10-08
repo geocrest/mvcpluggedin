@@ -21,9 +21,11 @@ namespace Geocrest.Web.Mvc.DependencyResolution
 {
     using System.Web.Http.Dependencies;
     using Ninject;
+    using System;
     /// <summary>
     /// Dependency resolver implementation for ninject.
     /// </summary>
+    [Obsolete("Install Ninject.Web.WebApi and Ninject.Web.WebApi.WebHost NuGet packages version >= 3.2.2, and allow Ninject to manage the resolver. Do not attempt to set GlobalConfiguration.Configuration.DependencyResolver.")]
     public class NinjectDependencyResolver : NinjectScope, IDependencyResolver
     {
 

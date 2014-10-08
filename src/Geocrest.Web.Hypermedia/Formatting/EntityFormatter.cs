@@ -21,8 +21,11 @@ namespace Geocrest.Web.Hypermedia.Formatting
     using System.Text;
     using System.Web.Http;
     using System.Web.Http.Hosting;
-    using System.Web.Http.OData.Query;
     using System.Web.Http.Routing;
+    using System.Web.OData;
+    using System.Web.OData.Extensions;
+    using System.Web.OData.Query;
+
     /// <summary>
     /// Provides formatting for specific Geocrest.Model entities by removing circular references
     /// and adding Hypertext Application Language formatting (when requested).
@@ -169,7 +172,12 @@ namespace Geocrest.Web.Hypermedia.Formatting
                         foreach (var entity in resource)
                             EnrichEntity((dynamic)entity, urlHelper);
                         var newValue = Resource.FromValues((IEnumerable)resource);
-                        var next = response.RequestMessage.GetNextPageLink();
+                        //
+                        // WebApi2 Upgrade:
+                        // http://msdn.microsoft.com/en-us/library/system.net.http.odatahttprequestmessageextensions.getnextpagelink(v=vs.118).aspx
+                        var next = (response.RequestMessage.ODataProperties() as HttpRequestMessageProperties).NextLink;
+                        //var next = response.RequestMessage.GetNextPageLink();
+                        //
                         if (next != null)
                             newValue.AddLink(new NextLink(next.AbsoluteUri.ToString()));
                         newValue.AddLink(new SelfLink(response.RequestMessage.RequestUri.AbsoluteUri));
@@ -251,10 +259,14 @@ namespace Geocrest.Web.Hypermedia.Formatting
                     foreach (var entity in resource)
                         EnrichEntity((IHalResource)entity, urlHelper);
                     var newValue = Resource.FromValues((IEnumerable)resource);
-                    var filter = (QueryFilterProvider)GlobalConfiguration.Configuration.Services.
-                        GetFilterProviders().FirstOrDefault(x => x is QueryFilterProvider &&
-                            ((QueryFilterProvider)x).QueryFilter is QueryableAttribute);
-                    var pagesize = filter != null ? ((QueryableAttribute)filter.QueryFilter).PageSize : 10;
+                    //
+                    // WebApi2 Upgrade:
+                    // http://msdn.microsoft.com/en-us/library/system.web.http.queryableattribute(v=vs.118).aspx
+                    //var filter = (QueryFilterProvider)GlobalConfiguration.Configuration.Services.
+                    //    GetFilterProviders().FirstOrDefault(x => x is QueryFilterProvider &&
+                    //        ((QueryFilterProvider)x).QueryFilter is QueryableAttribute);
+                    //var pagesize = filter != null ? ((QueryableAttribute)filter.QueryFilter).PageSize : 10;
+                    //
                     var next = this.GetNextPageLink(baseUrl.ToLower(), 100);
                     if (next != null)
                         newValue.AddLink(new NextLink(next.AbsoluteUri.ToString().ToLower()));

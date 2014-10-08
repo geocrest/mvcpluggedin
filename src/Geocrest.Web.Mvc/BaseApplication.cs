@@ -28,6 +28,7 @@ namespace Geocrest.Web.Mvc
     using System.Web;
     using System.Web.Configuration;
     using System.Web.Http;
+    using System.Web.Http.Hosting;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
@@ -559,8 +560,13 @@ log an error has been made but no error was given."));
                 try
                 {
                     module.RegisterArea(context);
-                    module.RegisterHttpRoutes(GlobalConfiguration.Configuration);
-                    module.RegisterSamples(GlobalConfiguration.Configuration);
+                    // 
+                    // WebApi2 Upgrade:
+                    GlobalConfiguration.Configure(module.RegisterHttpRoutes);
+                    GlobalConfiguration.Configure(module.RegisterSamples);
+                    //module.RegisterHttpRoutes(GlobalConfiguration.Configuration);
+                    //module.RegisterSamples(GlobalConfiguration.Configuration);
+                    //
                 }
                 catch (Exception ex)
                 {
@@ -657,8 +663,11 @@ log an error has been made but no error was given."));
             // Initialize the assemblies
             GetAssemblies();
             BaseApplication._kernel = new StandardKernel(new INinjectModule[] { new WebApiNinjectionModule() });
-            NinjectDependencyResolver res = new NinjectDependencyResolver(BaseApplication.Kernel);
-            GlobalConfiguration.Configuration.DependencyResolver = res;
+            //
+            // WebApi2 Upgrade: (let Ninject set API resolver)
+            //NinjectDependencyResolver res = new NinjectDependencyResolver(BaseApplication.Kernel);
+            //GlobalConfiguration.Configuration.DependencyResolver = res;
+            //
 
             BaseApplication.Kernel.Bind(scanner =>
                 scanner.From(BaseApplication.GetAssemblies())

@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Runtime.Serialization;
-#if NET40 || SILVERLIGHT
+#if NET45 || SILVERLIGHT
     using Microsoft.CSharp.RuntimeBinder;
 #endif
     using Newtonsoft.Json;
@@ -22,7 +22,7 @@
         /// The maximum items in object graph. This is set to 1,000,000.
         /// </summary>
         private const int MAX_ITEMS_IN_OBJECT_GRAPH = 1000000;
-#if NET40 || SILVERLIGHT
+#if NET45 || SILVERLIGHT
         /// <summary>
         /// Determines whether the specified entity is a proxy.
         /// </summary>
@@ -124,7 +124,7 @@
             if (resource == null) throw new ArgumentNullException("resource");
             return JsonConvert.SerializeObject(resource, settings);
         }
-#if NET40 || SILVERLIGHT
+#if NET45 || SILVERLIGHT
         /// <summary>
         /// Converts a dynamic proxy representing an entity to the actual entity.
         /// </summary>

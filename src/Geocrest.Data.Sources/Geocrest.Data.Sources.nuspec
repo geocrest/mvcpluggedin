@@ -15,17 +15,17 @@
     <tags>EntityFramework CodeFirst generic repository</tags>
     <dependencies>
       <dependency id="Geocrest.Web.Infrastructure" version="1.0.0-alpha2" />
-      <dependency id="EntityFramework" version="5.0.0" />
+      <dependency id="EntityFramework" version="6.1.1" />
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
-      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5" />
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework=".NETFramework4.5" />
     </frameworkAssemblies>
   </metadata>
   <files>
     <file src="Context.cs.pp" target="content\Models" />
     <file src="Repository.cs.pp" target="content\Models" />
-    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.dll" target="lib\net40\"/>
-    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.xml" target="lib\net40\"/>
+    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.dll" target="lib\net45\"/>
+    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.xml" target="lib\net45\"/>
   </files>
 </package>

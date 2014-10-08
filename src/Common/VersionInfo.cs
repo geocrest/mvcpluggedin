@@ -55,7 +55,7 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalFileVersion = "1.0.5392.18890";
+        internal const string GlobalFileVersion = "1.0.5394.21586";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>

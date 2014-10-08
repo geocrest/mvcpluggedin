@@ -15,18 +15,18 @@
         <tags>web infrastructure</tags>
         <dependencies>
             <dependency id="Microsoft.Net.Http" version="2.2.13" />
-            <dependency id="Microsoft.AspNet.WebApi.Client" version="[4.0.30506.0]" />
-            <dependency id="Microsoft.AspNet.WebApi.Core" version="[4.0.30506.0]" />
-            <dependency id="Ninject" version="[3.0.1.10]" />
+            <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.2" />
+            <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.2" />
             <dependency id="Newtonsoft.Json" />
+            <dependency id="Ninject" version="[3.2.2.0]" />
         </dependencies>
         <frameworkAssemblies>
-            <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
-            <frameworkAssembly assemblyName="System.Configuration" targetFramework=".NETFramework4.0" />
-            <frameworkAssembly assemblyName="System.Drawing" targetFramework=".NETFramework4.0" />
-            <frameworkAssembly assemblyName="System.ServiceModel" targetFramework=".NETFramework4.0" />
-            <frameworkAssembly assemblyName="System.ServiceModel.Web" targetFramework=".NETFramework4.0" />
-            <frameworkAssembly assemblyName="System.Web.ApplicationServices" targetFramework=".NETFramework4.0" />
+            <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5" />
+            <frameworkAssembly assemblyName="System.Configuration" targetFramework=".NETFramework4.5" />
+            <frameworkAssembly assemblyName="System.Drawing" targetFramework=".NETFramework4.5" />
+            <frameworkAssembly assemblyName="System.ServiceModel" targetFramework=".NETFramework4.5" />
+            <frameworkAssembly assemblyName="System.ServiceModel.Web" targetFramework=".NETFramework4.5" />
+            <frameworkAssembly assemblyName="System.Web.ApplicationServices" targetFramework=".NETFramework4.5" />
         </frameworkAssemblies>
     </metadata>
 </package>

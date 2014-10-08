@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Objects;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
@@ -298,7 +298,7 @@
         /// <param name="entity">The entity.</param>
         public virtual void Update<T>(T entity) where T : class
         {
-            this.Context.Entry(entity).State = System.Data.EntityState.Modified;
+            this.Context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }
 
         /// <summary>
