@@ -11,7 +11,7 @@ namespace Geocrest.Web.Mvc.Configuration
     public class BaseConfiguration : ConfigurationSection
     {
         #region Fields
-        private const string SectionPath = "gisi";
+        private const string DefaultPluginSection = "mvcpluggedin"; //"gisi";
         private const string InjectionElement = "injection";
         private const string HypermediaElement = "hyperMedia";
         private const string TokensElement = "tokens";
@@ -71,7 +71,8 @@ namespace Geocrest.Web.Mvc.Configuration
         /// </returns>
         public static BaseConfiguration GetInstance(bool fromCallingAssembly)
         {
-            var config = ConfigurationManager.GetSection(SectionPath) as BaseConfiguration;
+            string pluginSectionName = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings.Get("PluginSectionName")) ? DefaultPluginSection : ConfigurationManager.AppSettings.Get("PluginSectionName");
+            var config = ConfigurationManager.GetSection(pluginSectionName) as BaseConfiguration;
             if (!fromCallingAssembly) return config;
             if (config != null)
             {
@@ -84,7 +85,7 @@ namespace Geocrest.Web.Mvc.Configuration
                 var moduleconfig = WebConfigurationManager.OpenWebConfiguration(configpath);                
                 if (moduleconfig != null)
                 {
-                    return moduleconfig.GetSection(SectionPath) as BaseConfiguration;
+                    return moduleconfig.GetSection(pluginSectionName) as BaseConfiguration;
                 }
             }
             return config;
