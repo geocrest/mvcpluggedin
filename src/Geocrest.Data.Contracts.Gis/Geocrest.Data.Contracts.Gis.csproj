@@ -79,9 +79,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\4.5\Geocrest.Model.Representations\Geocrest.Model.Representations.csproj">
-      <Project>{1b0d53c8-88cc-4193-936f-0345e8d5be55}</Project>
-      <Name>Geocrest.Model.Representations</Name>
+    <ProjectReference Include="..\Models\4.5\Geocrest.Model\Geocrest.Model.csproj">
+      <Project>{2d2f8f71-d510-40e1-9f52-bbe2c2390fa6}</Project>
+      <Name>Geocrest.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
