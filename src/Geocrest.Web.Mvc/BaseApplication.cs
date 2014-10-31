@@ -104,7 +104,7 @@ namespace Geocrest.Web.Mvc
         /// The admin role.
         /// </value>
         public static string AdminRole { get { return adminRole; } }
-        
+
         /// <summary>
         /// Provides the environments that should be considered debugging environments.
         /// Requires a "DebugVersions" AppSetting in the web.config
@@ -256,7 +256,7 @@ namespace Geocrest.Web.Mvc
                 {
                     ErrorSignal.FromCurrentContext().Raise(exception);
                 }
-                else 
+                else
                 {
                     ErrorSignal.FromCurrentContext().Raise(new System.ApplicationException(@"A request to 
 log an error has been made but no error was given."));
@@ -474,7 +474,7 @@ log an error has been made but no error was given."));
                     bool includeDetail = GlobalConfiguration.Configuration.ShouldIncludeErrorDetail(Request);
                     Response.StatusCode = (exception is HttpException) ? (exception as HttpException).GetHttpCode() : 500;
                     Response.Write(JsonConvert.SerializeObject(includeDetail ||
-                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) : 
+                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) :
                         new HttpError(exception.Message)));
                     return;
                 }
@@ -669,20 +669,19 @@ log an error has been made but no error was given."));
                 .WithAttribute<NinjectionAttribute>()
                 .BindAllInterfaces());
 
-            // Register any assemblies containing either a BaseApplication or a NinjectModule
-            // Assemblies containing a BaseApplication should only come from what's loaded (e.g. BaseApplication would never come from the plugin folder)
-            var loadedAssemblies = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                                   from type in assembly.GetTypes()
-                                   where type.IsSubclassOf(typeof(BaseApplication)) ||
-                                   (type.IsSubclassOf(typeof(NinjectModule)) && assembly.FullName.Contains("Geocrest"))
-                                   select assembly;
-            var dynamicAssemblies = from assembly in BaseApplication.GetAssemblies()
-                                    from type in assembly.GetTypes()
-                                    where type.IsSubclassOf(typeof(NinjectModule)) && assembly.FullName.Contains("Geocrest")
-                                    select assembly;
+            // Register any modules that inherit from BaseNinjectModule or NinjectModule
+            var loaded = BaseApplication._kernel.GetModules();
+            var loadedTypes = AppDomain.CurrentDomain.GetAssemblies().Concat(BaseApplication.GetAssemblies())
+                .SelectMany(x => x.GetTypes()
+                .Where(t =>
+                    (t.IsSubclassOf(typeof(NinjectModule)) ||
+                    t.IsSubclassOf(typeof(BaseNinjectModule))) &&
+                    !t.IsAbstract && t.GetConstructor(Type.EmptyTypes) != null &&
+                    !BaseApplication._kernel.HasModule(t.FullName)));
 
-            var distinct = loadedAssemblies.Concat(dynamicAssemblies).Distinct();
-            BaseApplication.Kernel.Load(distinct);
+            List<INinjectModule> modules = new List<INinjectModule>();
+            loadedTypes.Distinct().ForEach(x  => modules.AddIfNotNull((INinjectModule)Activator.CreateInstance(x)));
+            BaseApplication.Kernel.Load(modules);
 
             // raise the kernel creation event
             this.OnKernelCreated(new KernelCreatedEventArgs(BaseApplication.Kernel));
