@@ -104,7 +104,7 @@ namespace Geocrest.Web.Mvc
         /// The admin role.
         /// </value>
         public static string AdminRole { get { return adminRole; } }
-        
+
         /// <summary>
         /// Provides the environments that should be considered debugging environments.
         /// Requires a "DebugVersions" AppSetting in the web.config
@@ -256,7 +256,7 @@ namespace Geocrest.Web.Mvc
                 {
                     ErrorSignal.FromCurrentContext().Raise(exception);
                 }
-                else 
+                else
                 {
                     ErrorSignal.FromCurrentContext().Raise(new System.ApplicationException(@"A request to 
 log an error has been made but no error was given."));
@@ -474,7 +474,7 @@ log an error has been made but no error was given."));
                     bool includeDetail = GlobalConfiguration.Configuration.ShouldIncludeErrorDetail(Request);
                     Response.StatusCode = (exception is HttpException) ? (exception as HttpException).GetHttpCode() : 500;
                     Response.Write(JsonConvert.SerializeObject(includeDetail ||
-                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) : 
+                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) :
                         new HttpError(exception.Message)));
                     return;
                 }
@@ -656,21 +656,32 @@ log an error has been made but no error was given."));
 
             // Initialize the assemblies
             GetAssemblies();
-            BaseApplication._kernel = new StandardKernel(new INinjectModule[] { new WebApiNinjectionModule() });
+
+            // Create the kernel and set resolvers for MVC and WebAPI
+            BaseApplication._kernel = new StandardKernel();
             NinjectDependencyResolver res = new NinjectDependencyResolver(BaseApplication.Kernel);
             GlobalConfiguration.Configuration.DependencyResolver = res;
 
+            // Register interfaces bound to classes
             BaseApplication.Kernel.Bind(scanner =>
                 scanner.From(BaseApplication.GetAssemblies())
                 .SelectAllClasses()
                 .WithAttribute<NinjectionAttribute>()
                 .BindAllInterfaces());
-            BaseApplication.Kernel.Load(BaseApplication.GetAssemblies());
-            var assemblies = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                             from type in assembly.GetTypes()
-                             where type.IsSubclassOf(typeof(BaseApplication))
-                             select assembly;
-            BaseApplication.Kernel.Load(assemblies);
+
+            // Register any modules that inherit from BaseNinjectModule or NinjectModule
+            var loaded = BaseApplication._kernel.GetModules();
+            var loadedTypes = AppDomain.CurrentDomain.GetAssemblies().Concat(BaseApplication.GetAssemblies())
+                .SelectMany(x => x.GetTypes()
+                .Where(t =>
+                    (t.IsSubclassOf(typeof(NinjectModule)) ||
+                    t.IsSubclassOf(typeof(BaseNinjectModule))) &&
+                    !t.IsAbstract && t.GetConstructor(Type.EmptyTypes) != null &&
+                    !BaseApplication._kernel.HasModule(t.FullName)));
+
+            List<INinjectModule> modules = new List<INinjectModule>();
+            loadedTypes.Distinct().ForEach(x  => modules.AddIfNotNull((INinjectModule)Activator.CreateInstance(x)));
+            BaseApplication.Kernel.Load(modules);
 
             // raise the kernel creation event
             this.OnKernelCreated(new KernelCreatedEventArgs(BaseApplication.Kernel));
