@@ -39,7 +39,7 @@ namespace Geocrest.Web.Mvc.Controllers
         /// <returns>
         /// The help page for the specified API controller or all controllers if none specified.
         /// </returns>
-        public ActionResult Index(string apiId, string homepage = "", string version = "")
+        public virtual ActionResult Index(string apiId, string homepage = "", string version = "")
         {
             ViewBag.Area = string.Empty;
             ViewBag.Version = !string.IsNullOrEmpty(version) ? new Version(version).ToString() : "";
@@ -64,7 +64,7 @@ namespace Geocrest.Web.Mvc.Controllers
         /// The help page for the specified area's API controller.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">id</exception>
-        public ActionResult Api(string id, string apiId, bool partial = false, string homepage = "", string version = "")
+        public virtual ActionResult Api(string id, string apiId, bool partial = false, string homepage = "", string version = "")
         {
             Throw.IfArgumentNullOrEmpty(id, "id");
             ViewBag.Area = id;
