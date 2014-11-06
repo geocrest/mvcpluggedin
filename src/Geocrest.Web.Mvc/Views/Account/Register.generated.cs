@@ -41,7 +41,7 @@ namespace Geocrest.Web.Mvc.Views.Account
             
             #line 2 "..\..\Views\Account\Register.cshtml"
   
-    ViewBag.Title = BaseApplication.ApplicationTitle + " | Register";
+    ViewBag.Title = "Register";
 
             
             #line default

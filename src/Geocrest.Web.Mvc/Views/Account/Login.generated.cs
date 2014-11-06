@@ -41,7 +41,7 @@ namespace Geocrest.Web.Mvc.Views.Account
             
             #line 2 "..\..\Views\Account\Login.cshtml"
   
-    ViewBag.Title = BaseApplication.ApplicationTitle + " | Log in";
+    ViewBag.Title = "Log in";
 
             
             #line default
