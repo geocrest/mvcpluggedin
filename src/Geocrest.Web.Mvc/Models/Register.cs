@@ -48,6 +48,7 @@ namespace Geocrest.Web.Mvc.Models
         /// <value>
         /// The password.
         /// </value>
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
