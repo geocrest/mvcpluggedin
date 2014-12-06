@@ -49,6 +49,8 @@
 	<files>
     <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.dll" target="lib\net40\"/>
     <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.xml" target="lib\net40\"/>
+    <file src="bin\release\Geocrest.Web.Mvc.dll" target="lib\net40\"/>
+    <file src="bin\release\Geocrest.Web.Mvc.xml" target="lib\net40\"/>
 		<file src="..\..\packages\Ninject.Web.Common.3.0.0.7\lib\net40-full\Ninject.Web.Common.dll" target="lib\net40\Ninject.Web.Common.dll" />
 		<file src="..\..\packages\Ninject.Web.Common.3.0.0.7\lib\net40-full\Ninject.Web.Common.xml" target="lib\net40\Ninject.Web.Common.xml" />
 		<file src="..\..\packages\Ninject.MVC3.3.0.0.6\lib\net40-full\Ninject.Web.Mvc.dll" target="lib\net40\Ninject.Web.Mvc.dll" />
