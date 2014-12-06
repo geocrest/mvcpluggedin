@@ -95,21 +95,7 @@ namespace Geocrest.Web.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public virtual ActionResult LoginForm(Login model)
         {
-            return Login(model, string.Empty);
-        }
-
-        /// <summary>
-        /// Logs in with the provided username/password combination.
-        /// </summary>
-        /// <param name="model">The login information.</param>
-        /// <param name="returnUrl">The return URL to redirect after loggin in.</param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public virtual ActionResult Login(Login model, string returnUrl)
-        {
-            return LoginUser(model, returnUrl);
+            return LoginUser(model);
         }
 
         /// <summary>
@@ -154,8 +140,7 @@ namespace Geocrest.Web.Mvc.Controllers
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { 
                         Email = model.Email,
                         FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        Application = ConfigurationManager.AppSettings["applicationName"]
+                        LastName = model.LastName
                     });
                     if (!User.Identity.IsAuthenticated)
                         WebSecurity.Login(model.UserName, model.Password);
@@ -236,7 +221,7 @@ namespace Geocrest.Web.Mvc.Controllers
         {
             return View();
         }
-        private ActionResult LoginUser(Login model, string returnUrl)
+        private ActionResult LoginUser(Login model)
         {            
             bool partial = Request.IsAjaxRequest();           
             if (ModelState.IsValid)
@@ -247,8 +232,8 @@ namespace Geocrest.Web.Mvc.Controllers
                     {
                         if (partial)                        
                             return Json(new { success = true });                        
-                        else if (Url.IsLocalUrl(returnUrl))                        
-                            return Redirect(returnUrl);                        
+                        else if (Url.IsLocalUrl(model.ReturnUrl))                        
+                            return Redirect(model.ReturnUrl);                        
                         else                        
                             return RedirectToAction("index", "home");                        
                     }
@@ -276,8 +261,8 @@ namespace Geocrest.Web.Mvc.Controllers
                         FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                         if (partial)
                             return Json(new { success = true });
-                        else if (Url.IsLocalUrl(returnUrl))
-                            return Redirect(returnUrl);
+                        else if (Url.IsLocalUrl(model.ReturnUrl))
+                            return Redirect(model.ReturnUrl);
                         else
                             return RedirectToAction("index", "home");
                     }
