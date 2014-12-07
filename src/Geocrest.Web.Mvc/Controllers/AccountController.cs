@@ -15,7 +15,7 @@ namespace Geocrest.Web.Mvc.Controllers
     [Geocrest.Web.Mvc.Controllers.Authorize]
     public class AccountController : BaseController
     {
-        private bool simpleMembership = BaseApplication.IsSimpleMembershipProviderConfigured();
+        private bool simpleMembership = BaseApplication.IsSimpleMembershipProviderConfigured();        
         /// <summary>
         /// Returns the main page for account activities. By default, this page allows editing of account information.
         /// </summary>
@@ -32,18 +32,37 @@ namespace Geocrest.Web.Mvc.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(FormCollection model)
+        public virtual ActionResult Update(FormCollection model)
         {
             if (ModelState.IsValid)
             {
-                var profile = BaseApplication.Profile;
-                profile.FirstName = model["FirstName"];
-                profile.LastName = model["LastName"];
-                profile.Email = model["Email"];
-                profile.Save();
-                return RedirectToAction("index");
+                try
+                {
+                    var profile = BaseApplication.Profile;
+                    profile.FirstName = model["FirstName"];
+                    profile.LastName = model["LastName"];
+                    profile.Email = model["Email"];
+                    profile.Save();
+                    return Json(new
+                    {
+                        success = true,
+                        message = string.Format(Geocrest.Web.Mvc.Resources.FormMessages.PutSuccess, "account")
+                    });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = string.Format(Geocrest.Web.Mvc.Resources.FormMessages.PutFailure, "account", ex.Message)
+                    });
+                }
             }
-            return View(model);
+            return Json(new
+            {
+                success = false,
+                message = string.Join("; ", ModelState.Values.SelectMany(x => x.Errors.Select(e => e.ErrorMessage)))
+            });
         }
 
         /// <summary>
@@ -74,23 +93,9 @@ namespace Geocrest.Web.Mvc.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult LoginForm(Login model)
+        public virtual ActionResult LoginForm(Login model)
         {
-            return Login(model, string.Empty);
-        }
-
-        /// <summary>
-        /// Logs in with the provided username/password combination.
-        /// </summary>
-        /// <param name="model">The login information.</param>
-        /// <param name="returnUrl">The return URL to redirect after loggin in.</param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(Login model, string returnUrl)
-        {
-            return LoginUser(model, returnUrl);
+            return LoginUser(model);
         }
 
         /// <summary>
@@ -125,7 +130,7 @@ namespace Geocrest.Web.Mvc.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Register model)
+        public virtual ActionResult Register(Register model)
         {
             if (ModelState.IsValid)
             {
@@ -135,8 +140,7 @@ namespace Geocrest.Web.Mvc.Controllers
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { 
                         Email = model.Email,
                         FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        Application = ConfigurationManager.AppSettings["applicationName"]
+                        LastName = model.LastName
                     });
                     if (!User.Identity.IsAuthenticated)
                         WebSecurity.Login(model.UserName, model.Password);
@@ -177,7 +181,7 @@ namespace Geocrest.Web.Mvc.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(ChangePassword model)
+        public virtual ActionResult ChangePassword(ChangePassword model)
         {
             if (ModelState.IsValid)
             {
@@ -217,7 +221,7 @@ namespace Geocrest.Web.Mvc.Controllers
         {
             return View();
         }
-        private ActionResult LoginUser(Login model, string returnUrl)
+        private ActionResult LoginUser(Login model)
         {            
             bool partial = Request.IsAjaxRequest();           
             if (ModelState.IsValid)
@@ -228,8 +232,8 @@ namespace Geocrest.Web.Mvc.Controllers
                     {
                         if (partial)                        
                             return Json(new { success = true });                        
-                        else if (Url.IsLocalUrl(returnUrl))                        
-                            return Redirect(returnUrl);                        
+                        else if (Url.IsLocalUrl(model.ReturnUrl))                        
+                            return Redirect(model.ReturnUrl);                        
                         else                        
                             return RedirectToAction("index", "home");                        
                     }
@@ -257,8 +261,8 @@ namespace Geocrest.Web.Mvc.Controllers
                         FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                         if (partial)
                             return Json(new { success = true });
-                        else if (Url.IsLocalUrl(returnUrl))
-                            return Redirect(returnUrl);
+                        else if (Url.IsLocalUrl(model.ReturnUrl))
+                            return Redirect(model.ReturnUrl);
                         else
                             return RedirectToAction("index", "home");
                     }

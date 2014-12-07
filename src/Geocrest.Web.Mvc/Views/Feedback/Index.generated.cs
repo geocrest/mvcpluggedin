@@ -41,7 +41,7 @@ namespace Geocrest.Web.Mvc.Views.Feedback
             
             #line 1 "..\..\Views\Feedback\Index.cshtml"
   
-    ViewBag.Title = BaseApplication.ApplicationTitle + " | Feedback";
+    ViewBag.Title = "Feedback";
 
             
             #line default

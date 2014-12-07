@@ -91,27 +91,26 @@
                     this.repository.Save();
 
                     emailResult result;
-                    var admins = Roles.GetUsersInRole(BaseApplication.AdminRole);
-                    foreach (var admin in admins)
+                    var admins = Roles.GetUsersInRole(BaseApplication.AdminRole).Select(x =>
                     {
                         BaseProfile profile;
-                        if (Membership.Provider is SimpleMembershipProvider)
+                        if (BaseApplication.IsSimpleMembershipProviderConfigured())
                         {
-                            profile = BaseProfile.CreateProfile(this.repository, admin);
+                            profile = BaseProfile.CreateProfile(this.repository, x);
                         }
                         else
                         {
-                            profile = BaseProfile.CreateProfile(admin);
+                            profile = BaseProfile.CreateProfile(x);
                         }
-                        if (profile != null)
-                        {
-                            var subject = this.repository.Find<FeedbackSubject>(model.FeedbackSubjectId).Subject;
-                            mailer.Send(profile.Email, string.Format("{0} feedback submitted", profile.Application),
-                            string.Format(@"<h3>A new comment with the category <em>{0}</em> has been posted</h3>
+                        return profile != null ? profile.Email : string.Empty;
+                    }).Where(x => !string.IsNullOrEmpty(x));
+
+                    var subject = this.repository.Find<FeedbackSubject>(model.FeedbackSubjectId).Subject;
+                    mailer.Send(string.Join(",", admins), "Feedback submitted",
+                    string.Format(@"<h3>A new comment with the category <em>{0}</em> has been posted</h3>
 <strong>Submitted by</strong>: {1}<br /><strong>Reply to</strong>: {2}<p>{3}</p>", subject,
-                            model.Name, model.Email, model.Comment), out result);
-                        }
-                    }
+                    model.Name, model.Email, model.Comment), out result);
+
                 }
                 catch (Exception ex)
                 {

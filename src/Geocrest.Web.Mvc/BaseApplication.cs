@@ -407,7 +407,7 @@ log an error has been made but no error was given."));
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
-        protected void Application_BeginRequest(object sender, EventArgs e)
+        protected virtual void Application_BeginRequest(object sender, EventArgs e)
         {
             HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
             HttpContext.Current.Response.Cache.SetNoStore();
