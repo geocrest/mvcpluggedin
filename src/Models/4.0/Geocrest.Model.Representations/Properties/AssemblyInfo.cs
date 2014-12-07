@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Geocrest.Model.Extensions")]
+[assembly: AssemblyTitle("Geocrest.Model.Representations")]
 [assembly: AssemblyDescription("Provides a Hypermedia Application Language implementation of the data model.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany(Geocrest.VersionInfo.CompanyName)]

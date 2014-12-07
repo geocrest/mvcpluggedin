@@ -1,4 +1,4 @@
-﻿namespace Geocrest.Model
+﻿namespace Geocrest
 {
     using System;
     using System.Collections;
@@ -6,6 +6,9 @@
     using System.Linq;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
+#if REPRESENTATIONS
+    using Geocrest.Model;
+#endif
     /// <summary>
     /// Represents the top-level base class for all model entities.
     /// </summary>    
@@ -14,7 +17,7 @@
 #if REPRESENTATIONS
         : IHalResource
 #endif
-    {
+    {        
 #if REPRESENTATIONS
         /// <summary>
         /// Gets or sets the links associated with this entity.

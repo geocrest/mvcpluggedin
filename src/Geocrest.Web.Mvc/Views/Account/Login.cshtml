@@ -1,0 +1,39 @@
+﻿@model Geocrest.Web.Mvc.Models.Login
+@{
+    ViewBag.Title = "Log in";
+}
+<section class="page">
+    <div class="container">
+        <div class="row text-center login">
+            <div class="col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 title">
+                <h2>Login to your account</h2>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                @using (Html.BeginForm("login", "account", new { ReturnUrl = @Url.Action("index", "home", new { area = "" }), area = "" },
+                FormMethod.Post, new { @class = "well" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username", id = "user" })
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", id = "pw" })
+                    </div>
+                    <div class="checkbox">
+                        <label for="remember">
+                            <input data-val="true" data-val-required="The Remember me? field is required."
+                                   id="remember" name="RememberMe" type="checkbox" value="true" />
+                            Remember Me?
+                        </label>
+                    </div>
+                    <input class="btn btn-primary btn-block" type="submit" value="Sign In" />
+                    
+                    @Html.ValidationSummary(true, "Log in was unsuccessful.")
+                    
+                }
+            </div>
+        </div>
+    </div>
+</section>

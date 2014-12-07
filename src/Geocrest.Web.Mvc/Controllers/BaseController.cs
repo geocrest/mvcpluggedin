@@ -1,5 +1,9 @@
 ﻿namespace Geocrest.Web.Mvc.Controllers
 {
+    using Geocrest.Web.Infrastructure;
+    using Geocrest.Web.Mvc.Models;
+    using Newtonsoft.Json;
+    using Ninject;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Diagnostics;
@@ -10,9 +14,6 @@
     using System.Web.Helpers;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Newtonsoft.Json;
-    using Ninject;
-    using Geocrest.Web.Infrastructure;
 
     /// <summary>
     /// Provides some common properties to be output to the rendered view.

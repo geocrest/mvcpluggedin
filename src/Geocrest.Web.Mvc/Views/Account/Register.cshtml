@@ -1,0 +1,33 @@
+﻿@model Geocrest.Web.Mvc.Models.Register
+@{
+    ViewBag.Title = "Register";
+}
+<section class="page">
+    <div class="container">
+        <div class="row text-center register">
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 title">
+                <h2>Create a new account</h2>
+                <div class="alert alert-warning">
+                    Passwords must be at least 8 characters long.
+                </div>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                @using (Html.BeginForm("register", "account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal text-left well" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Forms.TextBox(Html, x => x.UserName, new { @class = "form-control" })
+                    @Forms.TextBox(Html, x => x.FirstName, new { @class = "form-control" })
+                    @Forms.TextBox(Html, x => x.LastName, new { @class = "form-control" })
+                    @Forms.TextBox(Html, x => x.Email, new { @class = "form-control" })
+                    @Forms.TextBox(Html, x => x.Password, new { @class = "form-control", type = "password" })
+                    @Forms.TextBox(Html, x => x.ConfirmPassword, new { @class = "form-control", type = "password" })
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

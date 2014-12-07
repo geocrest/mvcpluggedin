@@ -1,4 +1,4 @@
-﻿namespace Geocrest.Web.Mvc
+﻿namespace Geocrest.Web.Mvc.Models
 {
     using System;
     using System.Collections.Generic;
@@ -9,6 +9,7 @@
     using System.Web.Http.Hosting;
     using System.Web.Security;
     using Geocrest.Web.Infrastructure;
+    using Geocrest.Web.Mvc.Resources;
     /// <summary>
     /// View model for sending exceptions from client to server. Based on the JavaScript Error object.
     /// </summary>
@@ -45,10 +46,7 @@
                 List<string> details = new List<string>();
                 if (exception.InnerException != null) details.Add(exception.InnerException.GetExceptionMessages());
                 this.stackTrace = includeDetail ? exception.StackTrace : "";
-                this.message = includeDetail ? exception.Message :
-                    @"Unfortunately, something went wrong during your request. The issue has been logged and 
-we will fix it as soon as possible.";
-
+                this.message = includeDetail ? exception.Message : ExceptionStrings.ProductionErrorMessage;
                 this.details = includeDetail ? details.ToArray() : new string[] { };
                 this.code = exception is HttpException ?
                     (exception as HttpException).GetHttpCode() :

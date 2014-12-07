@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Feedback";
+}
+<section class="page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-page">
+                    <h3 class="title-description">Here's what people had to say...</h3>
+                </div>
+                <div id="feedbacklist">
+                    @{Html.RenderAction("list", "feedback", new { area = "" });}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

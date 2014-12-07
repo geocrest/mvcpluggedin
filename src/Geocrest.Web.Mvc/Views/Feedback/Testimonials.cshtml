@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Geocrest.Web.Mvc.Models.Feedback>
+@{
+    var i = 0;    
+}
+@foreach (var item in Model)
+{
+    <div class="testimonial item @(i == 0 ? "active" : "")">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="comment">@item.Comment</div>
+            <div class="author"><strong>@item.Name</strong></div>
+        </div>
+    </div>
+    i++;
+}

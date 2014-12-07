@@ -1,20 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
-		<id>$id$</id>
+		<id>Geocrest.Web.Mvc</id>
 		<version>0.0.0</version>
-		<title>$title$</title>
-		<authors>$author$</authors>
-		<owners>$author$</owners>
+		<title>Geocrest.Web.Mvc</title>
+		<authors>Geocrest Mapping, LLC</authors>
+		<owners>Geocrest Mapping, LLC</owners>
         <projectUrl>https://github.com/geocrest/mvcpluggedin</projectUrl>
         <iconUrl>http://www.geocrest.co/content/themes/geocrest/img/icon.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>$description$</description>
-		<summary>$description$</summary>
+		<description>Web framework that extends ASP.NET MVC with a plug-in architecture and default implementations of commonly used features.</description>
+		<summary>Web framework that extends ASP.NET MVC with a plug-in architecture and default implementations of commonly used features.</summary>
 		<copyright>Geocrest Mapping, LLC 2014</copyright>
 		<tags>ASP.NET MVC WebAPI Ninject EntityFramework</tags>
-		<dependencies>            
+		<dependencies>
+      <dependency id="Newtonsoft.Json" version="6.0.0"/>
 			<dependency id="elmah" version="1.2.2" />
+      <dependency id="EntityFramework" version="6.1.1" />
 			<dependency id="Ninject" version="[3.0.1.10]" />
 			<dependency id="Ninject.Extensions.Conventions" version="[3.0.0.11]" />
 			<dependency id="Ninject.Extensions.Factory" version="[3.0.1.0]" />
@@ -31,7 +33,7 @@
 			<dependency id="Microsoft.AspNet.Mvc" version="[4.0.30506.0]" />
 			<dependency id="Microsoft.AspNet.WebApi.OData" version="[4.0.30506]" />
 			<dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.2" />
-			<dependency id="Geocrest.Web.Infrastructure" version="1.0.0-alpha" />
+			<dependency id="Geocrest.Web.Infrastructure" version="1.0.0" />
       <dependency id="Microsoft.Data.Edm" version="[5.5.0]" />
       <dependency id="System.Spatial" version="[5.5.0]" />
 		</dependencies>
@@ -45,6 +47,10 @@
 		</frameworkAssemblies>
 	</metadata>
 	<files>
+    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.dll" target="lib\net40\"/>
+    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.xml" target="lib\net40\"/>
+    <file src="bin\release\Geocrest.Web.Mvc.dll" target="lib\net40\"/>
+    <file src="bin\release\Geocrest.Web.Mvc.xml" target="lib\net40\"/>
 		<file src="..\..\packages\Ninject.Web.Common.3.0.0.7\lib\net40-full\Ninject.Web.Common.dll" target="lib\net40\Ninject.Web.Common.dll" />
 		<file src="..\..\packages\Ninject.Web.Common.3.0.0.7\lib\net40-full\Ninject.Web.Common.xml" target="lib\net40\Ninject.Web.Common.xml" />
 		<file src="..\..\packages\Ninject.MVC3.3.0.0.6\lib\net40-full\Ninject.Web.Mvc.dll" target="lib\net40\Ninject.Web.Mvc.dll" />

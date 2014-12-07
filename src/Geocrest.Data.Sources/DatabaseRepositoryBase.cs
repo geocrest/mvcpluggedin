@@ -1,15 +1,15 @@
 ﻿namespace Geocrest.Data.Sources
 {
+    using Geocrest.Data.Contracts;
+    using Geocrest.Web.Infrastructure;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Objects;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Geocrest.Data.Contracts;
-    using Geocrest.Web.Infrastructure;
 
     /// <summary>
     /// Provides a base class for all repositories that retrieve entity information directly from a database.
@@ -27,7 +27,12 @@
         {
             Throw.IfArgumentNull(context, "context");
             this.Context = context;
+            this.options = (context as IObjectContextAdapter).ObjectContext.ContextOptions;
         }
+        #endregion
+
+        #region Fields
+        private ObjectContextOptions options;
         #endregion
 
         #region Properties
@@ -46,13 +51,31 @@
         {
             get { return (this.Context as IDbSchema).Schema; }
         }
+        /// <summary>
+        /// Gets or sets a Boolean value that determines whether related objects are
+        /// loaded automatically when a navigation property is accessed.
+        /// </summary>
+        /// <value>
+        /// A System.Boolean value that is true when lazy loading is enabled; otherwise false.
+        /// </value>
+        public bool LazyLoadingEnabled
+        {
+            get { return this.options.LazyLoadingEnabled; }
+            set { this.options.LazyLoadingEnabled = value; }
+        }
 
         /// <summary>
-        /// Gets the options associated with the underlying context.
+        /// Gets or sets a Boolean value that determines whether proxy instances are
+        /// created for custom data classes that are persistence ignorant.
         /// </summary>
-        public ObjectContextOptions Options
+        /// <value>
+        /// A System.Boolean value that is true when proxies are created; otherwise false.
+        /// The default value is true.
+        /// </value>
+        public bool ProxyCreationEnabled
         {
-            get { return (this.Context as IObjectContextAdapter).ObjectContext.ContextOptions; }
+            get { return this.options.ProxyCreationEnabled; }
+            set { this.options.ProxyCreationEnabled = value; }
         }
         #endregion
 
@@ -163,7 +186,21 @@
         /// <returns>An instance of <typeparamref name="T"/></returns>
         public virtual T Find<T>(string id) where T : class
         {
-            return this.Context.Set<T>().Find(id);
+            // try to parse as GUID and int since this method serves many sub-classes
+            Guid parsedGuid;
+            int parsedInt;
+            if (Guid.TryParse(id, out parsedGuid))
+            {
+                return this.Find<T>(parsedGuid);
+            }
+            else if (int.TryParse(id, out parsedInt))
+            {
+                return this.Find<T>(parsedInt);
+            }
+            else
+            {
+                return this.Context.Set<T>().Find(id);
+            }
         }
 
         /// <summary>
@@ -284,7 +321,7 @@
         /// <param name="entity">The entity.</param>
         public virtual void Update<T>(T entity) where T : class
         {
-            this.Context.Entry(entity).State = System.Data.EntityState.Modified;
+            this.Context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }
 
         /// <summary>

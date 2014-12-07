@@ -6,6 +6,7 @@ namespace Geocrest.Web.Infrastructure.Mail
     using System.Net.Configuration;
     using System.Net.Mail;
     using System.Web.Configuration;
+    using System.Web.Security;
 
     /// <summary>
     /// Sends mail notifications
@@ -143,7 +144,7 @@ namespace Geocrest.Web.Infrastructure.Mail
         /// <summary>
         /// Sends mail to the specified user.
         /// </summary>
-        /// <param name="to">The address to which the mail should be sent.</param>
+        /// <param name="to">The address to which the mail should be sent. Can also be a comma-separated list of addresses.</param>
         /// <param name="subject">The subject of the email.</param>
         /// <param name="body">The body of the email.</param>
         /// <param name="result">The result of the operation.</param>
@@ -151,15 +152,18 @@ namespace Geocrest.Web.Infrastructure.Mail
         public bool Send(string to, string subject, string body, out emailResult result)
         {
             if (this.Client == null) Throw.InvalidOperation("Mail client is not initialized. Make sure there are mail settings defined in the web.config.");
-            var toAddress = new MailAddress(to);
-            using (var message = new MailMessage(this.FromAddress, toAddress)
+            Throw.IfArgumentNullOrEmpty(to, "to");
+            using (var message = new MailMessage()
             {
+                From = this.FromAddress,
                 Subject = subject,
                 Body = body,
                 IsBodyHtml = true
             })
+            {
                 try
                 {
+                    message.To.Add(to);
                     this.Client.Send(message);
                     result = emailResult.Success;
                     return true;
@@ -174,6 +178,7 @@ namespace Geocrest.Web.Infrastructure.Mail
                     result = emailResult.Failure;
                     return false;
                 }
+            }
         }
     }
 }
