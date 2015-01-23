@@ -48,11 +48,10 @@ table {
 
 /* LAYOUT STYLES */
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Open Sans', Helvetica, Arial, serif;
   font-size: 1em;
   line-height: 1.5;
-  color: #6d6d6d;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  color: #6d6d6d;  
   background: #e7e7e7 url(../images/body-bg.png) 0 0 repeat;
 }
 
@@ -69,7 +68,7 @@ header {
 }
 
 header h1 {
-  font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 48px; font-weight: 900;
   line-height: 1.2;
   color: #303030;
@@ -83,19 +82,8 @@ header h2 {
   color: #aaa;
   letter-spacing: -1px;
 }
-
-#container {
-  min-height: 595px;
-  background: transparent url(../images/highlight-bg.jpg) 50% 0 no-repeat;
-}
-
-.inner {
-  width: 620px;
-  margin: 0 auto;
-}
-
-#container .inner img {
-  max-width: 100%;
+header.jumbotron {
+  background: url(../images/congruent_outline.png);
 }
 
 #downloads {
