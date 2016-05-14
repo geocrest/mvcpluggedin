@@ -1,7 +1,6 @@
 ﻿namespace Geocrest.Data.Contracts
 {
     using System;
-    using System.Data.Entity.Core.Objects;
     using System.Linq;
     using System.Linq.Expressions;
 
@@ -12,9 +11,23 @@
     {
         #region Properties
         /// <summary>
-        /// Gets the options associated with the underlying context.
+        /// Gets or sets a Boolean value that determines whether related objects are
+        /// loaded automatically when a navigation property is accessed.
         /// </summary>
-        ObjectContextOptions Options { get; }       
+        /// <value>
+        /// A System.Boolean value that is true when lazy loading is enabled; otherwise false.
+        /// </value>
+        bool LazyLoadingEnabled { get; set; }
+       
+        /// <summary>
+        /// Gets or sets a Boolean value that determines whether proxy instances are
+        /// created for custom data classes that are persistence ignorant.
+        /// </summary>
+        /// <value>
+        /// A System.Boolean value that is true when proxies are created; otherwise false.
+        /// The default value is true.
+        /// </value>
+        bool ProxyCreationEnabled { get; set; }
 
         /// <summary>
         /// Gets the schema associated with this repository.

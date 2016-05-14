@@ -37,5 +37,12 @@ namespace Geocrest.Web.Mvc.Models
         /// </value>
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+        /// <summary>
+        /// Gets or sets the return URL.
+        /// </summary>
+        /// <value>
+        /// The return URL.
+        /// </value>
+        public string ReturnUrl { get; set; }
     }
 }

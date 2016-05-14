@@ -41,7 +41,7 @@ namespace Geocrest.Web.Mvc.Views.Account
             
             #line 1 "..\..\Views\Account\ChangePasswordSuccess.cshtml"
   
-    ViewBag.Title = BaseApplication.ApplicationTitle + " | Change Password";
+    ViewBag.Title = "Change Password";
 
             
             #line default

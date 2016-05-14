@@ -27,11 +27,11 @@ namespace Geocrest.Web.Mvc.Admin.Controllers
             Throw.IfArgumentNull(repository, "repository");
             this.repository = repository;
         }
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {            
             return View();
         }
-        public ActionResult Roles()
+        public virtual ActionResult Roles()
         {
             var roles = ((SimpleRoleProvider)System.Web.Security.Roles.Provider).GetAllRoles();
             return View(roles);
@@ -39,7 +39,7 @@ namespace Geocrest.Web.Mvc.Admin.Controllers
         
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteRole(string role)
+        public virtual ActionResult DeleteRole(string role)
         {
             var roles = (SimpleRoleProvider)System.Web.Security.Roles.Provider;
             if (roles.RoleExists(role))
@@ -49,19 +49,19 @@ namespace Geocrest.Web.Mvc.Admin.Controllers
             var newroles = ((SimpleRoleProvider)System.Web.Security.Roles.Provider).GetAllRoles();
             return PartialView("roleslist", newroles);
         }
-        public ActionResult List()
+        public virtual ActionResult List()
         {
             ViewBag.Roles = ((SimpleRoleProvider)System.Web.Security.Roles.Provider).GetAllRoles();
             var users = this.repository.All<UserProfile>();
             return PartialView(users);
         }
-        public ActionResult CreateRole()
+        public virtual ActionResult CreateRole()
         {
             return PartialView("_createoredit");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRole(string role)
+        public virtual ActionResult CreateRole(string role)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace Geocrest.Web.Mvc.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddUserToRole(string username, string role)
+        public virtual ActionResult AddUserToRole(string username, string role)
         {
             var roles = (SimpleRoleProvider)System.Web.Security.Roles.Provider;
             var membership = (SimpleMembershipProvider)Membership.Provider;
@@ -112,7 +112,7 @@ namespace Geocrest.Web.Mvc.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoveUserFromRole(string username, string role)
+        public virtual ActionResult RemoveUserFromRole(string username, string role)
         {
             var roles = (SimpleRoleProvider)System.Web.Security.Roles.Provider;
             var membership = (SimpleMembershipProvider)Membership.Provider;
@@ -132,7 +132,7 @@ namespace Geocrest.Web.Mvc.Admin.Controllers
         }
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteUser(string username)
+        public virtual ActionResult DeleteUser(string username)
         {
             // Attempt to register the user
             if(WebSecurity.UserExists(username) && User.Identity.Name != username)

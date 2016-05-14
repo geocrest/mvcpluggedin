@@ -41,7 +41,7 @@ namespace Geocrest.Web.Mvc.Views.Account
             
             #line 2 "..\..\Views\Account\Index.cshtml"
   
-    ViewBag.Title = BaseApplication.ApplicationTitle + " | My account";
+    ViewBag.Title = "My account";
 
             
             #line default
@@ -99,14 +99,14 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 15 "..\..\Views\Account\Index.cshtml"
-               Write(Forms.TextBox(Html, x => x.UserName, new { @class = "form-control", disabled="disabled" }));
+               Write(Forms.TextBox(Html, x => x.UserName, new { @class = "form-control", disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
             #line 15 "..\..\Views\Account\Index.cshtml"
-                                                                                                               
+                                                                                                                 
                     
             
             #line default

@@ -408,7 +408,7 @@ log an error has been made but no error was given."));
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
-        protected void Application_BeginRequest(object sender, EventArgs e)
+        protected virtual void Application_BeginRequest(object sender, EventArgs e)
         {
             HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
             HttpContext.Current.Response.Cache.SetNoStore();
@@ -669,17 +669,26 @@ log an error has been made but no error was given."));
             //GlobalConfiguration.Configuration.DependencyResolver = res;
             //
 
+            // Register interfaces bound to classes
             BaseApplication.Kernel.Bind(scanner =>
                 scanner.From(BaseApplication.GetAssemblies())
                 .SelectAllClasses()
                 .WithAttribute<NinjectionAttribute>()
                 .BindAllInterfaces());
-            BaseApplication.Kernel.Load(BaseApplication.GetAssemblies());
-            var assemblies = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                             from type in assembly.GetTypes()
-                             where type.IsSubclassOf(typeof(BaseApplication))
-                             select assembly;
-            BaseApplication.Kernel.Load(assemblies);
+
+            // Register any modules that inherit from BaseNinjectModule or NinjectModule
+            var loaded = BaseApplication._kernel.GetModules();
+            var loadedTypes = AppDomain.CurrentDomain.GetAssemblies().Concat(BaseApplication.GetAssemblies())
+                .SelectMany(x => x.GetTypes()
+                .Where(t =>
+                    (t.IsSubclassOf(typeof(NinjectModule)) ||
+                    t.IsSubclassOf(typeof(BaseNinjectModule))) &&
+                    !t.IsAbstract && t.GetConstructor(Type.EmptyTypes) != null &&
+                    !BaseApplication._kernel.HasModule(t.FullName)));
+
+            List<INinjectModule> modules = new List<INinjectModule>();
+            loadedTypes.Distinct().ForEach(x  => modules.AddIfNotNull((INinjectModule)Activator.CreateInstance(x)));
+            BaseApplication.Kernel.Load(modules);
 
             // raise the kernel creation event
             this.OnKernelCreated(new KernelCreatedEventArgs(BaseApplication.Kernel));

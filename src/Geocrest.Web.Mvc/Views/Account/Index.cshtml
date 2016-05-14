@@ -1,6 +1,6 @@
 ﻿@model Geocrest.Web.Mvc.Models.BaseProfile
 @{
-    ViewBag.Title = BaseApplication.ApplicationTitle + " | My account";
+    ViewBag.Title = "My account";
 }
 <section class="page">
     <div class="container">
@@ -12,7 +12,7 @@
                 @using (Html.BeginForm("update", "account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal text-left well" }))
                 {
                     @Html.AntiForgeryToken()
-                    @Forms.TextBox(Html, x => x.UserName, new { @class = "form-control", disabled="disabled" })
+                    @Forms.TextBox(Html, x => x.UserName, new { @class = "form-control", disabled = "disabled" })
                     @Forms.TextBox(Html, x => x.FirstName, new { @class = "form-control" })
                     @Forms.TextBox(Html, x => x.LastName, new { @class = "form-control" })
                     @Forms.TextBox(Html, x => x.Email, new { @class = "form-control" })

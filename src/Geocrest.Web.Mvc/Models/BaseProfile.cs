@@ -84,17 +84,7 @@
             get { return this["Email"] as string; }
             set { this["Email"] = value; }
         }
-        /// <summary>
-        /// Gets or sets the application.
-        /// </summary>
-        /// <value>
-        /// The application.
-        /// </value>
-        public string Application
-        {
-            get { return this["Application"] as string; }
-            set { this["Application"] = value; }
-        }
+        
         /// <summary>
         /// Updates the profile data source with changed profile property values.
         /// </summary>

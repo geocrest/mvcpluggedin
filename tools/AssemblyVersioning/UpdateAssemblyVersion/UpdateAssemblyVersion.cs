@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using Microsoft.TeamFoundation.Client;
-using Microsoft.TeamFoundation.VersionControl.Client;
 
 namespace UpdateAssemblyVersion
 {
@@ -70,8 +68,7 @@ namespace UpdateAssemblyVersion
 
                 Version vVersion = new Version(iMajor, iMinor, iBuild, iRevision);
                 sFileContents = sFileContents.Replace("GlobalFileVersion = \"" + vTemp.ToString() + "\"", "GlobalFileVersion = \"" + vVersion.ToString() + "\"");
-
-                CheckOutFromTFS(sFileName);
+                                
                 using (var fs = new FileStream(sFileName, FileMode.Truncate))
                 {
                     using (var sw = new StreamWriter(fs))
@@ -89,25 +86,7 @@ namespace UpdateAssemblyVersion
                 Console.ReadLine();
             }
         }
-        private const string tfsServer = @"http://dit-tfs-p:8080/tfs/DefaultCollection";
-
-        static void CheckOutFromTFS(string fileName)
-        {
-            using (TfsTeamProjectCollection pc = 
-                TfsTeamProjectCollectionFactory.GetTeamProjectCollection(new Uri(tfsServer)))
-            {
-                if (pc != null)
-                {
-                    WorkspaceInfo workspaceInfo = Workstation.Current.GetLocalWorkspaceInfo(fileName);
-                    if (null != workspaceInfo)
-                    {                        
-                        Workspace workspace = workspaceInfo.GetWorkspace(pc);
-                        workspace.PendEdit(fileName);
-                    }
-                }
-            }
-            FileInfo fi = new FileInfo(fileName);
-        }
+        
         static int GetBuild()
         {
             //var now = DateTime.Now;           
