@@ -11,12 +11,11 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>$description$</description>
         <summary>$description$</summary>
-        <copyright>Geocrest Mapping, LLC 2014</copyright>
+        <copyright>Geocrest Mapping, LLC 2014-2016</copyright>
         <tags>web infrastructure</tags>
         <dependencies>
-            <dependency id="Microsoft.Net.Http" version="2.2.13" />
-            <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.2" />
-            <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.2" />
+            <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
+            <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
             <dependency id="Newtonsoft.Json" />
             <dependency id="Ninject" version="[3.2.2.0]" />
         </dependencies>
@@ -24,6 +23,7 @@
             <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5" />
             <frameworkAssembly assemblyName="System.Configuration" targetFramework=".NETFramework4.5" />
             <frameworkAssembly assemblyName="System.Drawing" targetFramework=".NETFramework4.5" />
+            <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.5" />
             <frameworkAssembly assemblyName="System.ServiceModel" targetFramework=".NETFramework4.5" />
             <frameworkAssembly assemblyName="System.ServiceModel.Web" targetFramework=".NETFramework4.5" />
             <frameworkAssembly assemblyName="System.Web.ApplicationServices" targetFramework=".NETFramework4.5" />

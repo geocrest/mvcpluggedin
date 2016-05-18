@@ -12,11 +12,11 @@
     <description>$description$</description>
 	<summary>$description$</summary>
     <releaseNotes>This package includes support for .NET 4.5 and Silverlight 5.</releaseNotes>
-    <copyright>Geocrest Mapping, LLC 2014</copyright>
+    <copyright>Geocrest Mapping, LLC 2014-2016</copyright>
     <tags>cor gis data model resthelper</tags>
 	<dependencies>
 		<group>
-			<dependency id="NewtonSoft.Json" version="6.0.5"/>
+			<dependency id="NewtonSoft.Json" version="8.0.3"/>
 		</group>
 	</dependencies>
 	<frameworkAssemblies>
