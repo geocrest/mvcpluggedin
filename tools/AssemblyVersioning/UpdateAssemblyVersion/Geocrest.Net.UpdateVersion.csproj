@@ -58,6 +58,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>$(TargetPath) -r -b -f "$(SolutionDir)src/Common/VersionInfo.cs"</PostBuildEvent>
+    <PostBuildEvent>$(TargetPath) -r -b -M -f "$(SolutionDir)src/Common/VersionInfo.cs"</PostBuildEvent>
   </PropertyGroup>
 </Project>
