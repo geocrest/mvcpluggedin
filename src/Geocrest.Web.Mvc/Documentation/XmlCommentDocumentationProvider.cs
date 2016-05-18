@@ -119,6 +119,20 @@
             return GetNode(actionDescriptor, "summary");
         }
 
+        //
+        // WebApi2 Upgrade:
+        // 
+        /// <summary>
+        /// Throws NotImplementedException.
+        /// </summary>
+        /// <param name="controllerDescriptor">The controller descriptor.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public string GetDocumentation(HttpControllerDescriptor controllerDescriptor)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region IResponseDocumentationProvider Members

@@ -28,6 +28,7 @@ namespace Geocrest.Web.Mvc
     using System.Web;
     using System.Web.Configuration;
     using System.Web.Http;
+    using System.Web.Http.Hosting;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
@@ -104,7 +105,7 @@ namespace Geocrest.Web.Mvc
         /// The admin role.
         /// </value>
         public static string AdminRole { get { return adminRole; } }
-
+        
         /// <summary>
         /// Provides the environments that should be considered debugging environments.
         /// Requires a "DebugVersions" AppSetting in the web.config
@@ -256,7 +257,7 @@ namespace Geocrest.Web.Mvc
                 {
                     ErrorSignal.FromCurrentContext().Raise(exception);
                 }
-                else
+                else 
                 {
                     ErrorSignal.FromCurrentContext().Raise(new System.ApplicationException(@"A request to 
 log an error has been made but no error was given."));
@@ -474,7 +475,7 @@ log an error has been made but no error was given."));
                     bool includeDetail = GlobalConfiguration.Configuration.ShouldIncludeErrorDetail(Request);
                     Response.StatusCode = (exception is HttpException) ? (exception as HttpException).GetHttpCode() : 500;
                     Response.Write(JsonConvert.SerializeObject(includeDetail ||
-                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) :
+                        User.IsInRole(BaseApplication.AdminRole) ? new HttpError(exception, includeDetail) : 
                         new HttpError(exception.Message)));
                     return;
                 }
@@ -559,8 +560,13 @@ log an error has been made but no error was given."));
                 try
                 {
                     module.RegisterArea(context);
-                    module.RegisterHttpRoutes(GlobalConfiguration.Configuration);
-                    module.RegisterSamples(GlobalConfiguration.Configuration);
+                    // 
+                    // WebApi2 Upgrade:
+                    GlobalConfiguration.Configure(module.RegisterHttpRoutes);
+                    GlobalConfiguration.Configure(module.RegisterSamples);
+                    //module.RegisterHttpRoutes(GlobalConfiguration.Configuration);
+                    //module.RegisterSamples(GlobalConfiguration.Configuration);
+                    //
                 }
                 catch (Exception ex)
                 {
@@ -656,11 +662,12 @@ log an error has been made but no error was given."));
 
             // Initialize the assemblies
             GetAssemblies();
-
-            // Create the kernel and set resolvers for MVC and WebAPI
-            BaseApplication._kernel = new StandardKernel();
-            NinjectDependencyResolver res = new NinjectDependencyResolver(BaseApplication.Kernel);
-            GlobalConfiguration.Configuration.DependencyResolver = res;
+            BaseApplication._kernel = new StandardKernel(new INinjectModule[] { new WebApiNinjectionModule() });
+            //
+            // WebApi2 Upgrade: (let Ninject set API resolver)
+            //NinjectDependencyResolver res = new NinjectDependencyResolver(BaseApplication.Kernel);
+            //GlobalConfiguration.Configuration.DependencyResolver = res;
+            //
 
             // Register interfaces bound to classes
             BaseApplication.Kernel.Bind(scanner =>

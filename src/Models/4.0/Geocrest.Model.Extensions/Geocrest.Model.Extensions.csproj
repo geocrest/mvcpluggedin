@@ -59,13 +59,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Geocrest.Model.Representations\Geocrest.Model.Representations.csproj">
       <Project>{fb20cf55-7635-49c1-9842-3e861c99a687}</Project>
-      <Name>Geocrest.Model.Representations %28src\Models\4.0\Geocrest.Model.Representations%29</Name>
+      <Name>Geocrest.Model.Representations</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
