@@ -1,8 +1,11 @@
 ﻿
 namespace Geocrest.Web.Mvc.Formatting
 {
+    using Microsoft.OData.Edm;
     using System.Net.Http;
     using System.Web.Http;
+    using System.Web.OData;
+    using System.Web.OData.Extensions;
 
     /// <summary>
     /// This class defines an attribute that can be applied to an action to enable 
@@ -12,7 +15,7 @@ namespace Geocrest.Web.Mvc.Formatting
     /// on System.Web.Http.QueryableAttribute to validate incoming queries. 
     /// For more information, visit <see href="http://go.microsoft.com/fwlink/?LinkId=279712"/>.
     /// </summary>
-    public class CorQueryableAttribute : QueryableAttribute
+    public class CorQueryableAttribute : EnableQueryAttribute //QueryableAttribute (WebApi2 Upgrade)
     {
         /// <summary>
         /// Gets the EDM model for the given type and request.
@@ -27,10 +30,19 @@ namespace Geocrest.Web.Mvc.Formatting
         /// <see cref="T:System.Web.Http.OData.ODataController"/> to set the <see cref="T:Microsoft.Data.Edm.IEdmModel"/>
         /// associated with an OData request as a property on the request. Ultimately, this allows
         /// us to call <see cref="M:System.Net.Http.ODataHttpRequestMessageExtensions.GetNextPageLink(System.Net.Http.HttpRequestMessage)"/></remarks>
-        public override Microsoft.Data.Edm.IEdmModel GetModel(System.Type elementClrType, HttpRequestMessage request, System.Web.Http.Controllers.HttpActionDescriptor actionDescriptor)
+        public override IEdmModel GetModel(System.Type elementClrType, HttpRequestMessage request, System.Web.Http.Controllers.HttpActionDescriptor actionDescriptor)
         {
             var model = base.GetModel(elementClrType, request, actionDescriptor);
-            request.SetEdmModel(model);
+
+            //
+            // WebApi2 Upgrade: 
+            //
+            //original: request.SetEdmModel(model);
+            //updated might be something like: request.ODataProperties().Model....
+            //
+            // TODO: Evaluate if the above or any of this override is really needed.
+            //
+
             return model;
         }                
     }

@@ -28,7 +28,7 @@
         /// The default value is true.
         /// </value>
         bool ProxyCreationEnabled { get; set; }
-        
+
         /// <summary>
         /// Gets the schema associated with this repository.
         /// </summary>

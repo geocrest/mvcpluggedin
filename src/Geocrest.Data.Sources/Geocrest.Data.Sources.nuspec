@@ -11,21 +11,21 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <summary>$description$</summary>
-    <copyright>Geocrest Mapping, LLC 2014</copyright>
+    <copyright>Geocrest Mapping, LLC 2014-2016</copyright>
     <tags>EntityFramework CodeFirst generic repository</tags>
     <dependencies>
-      <dependency id="Geocrest.Web.Infrastructure" version="1.0.0" />
-      <dependency id="EntityFramework" version="6.1.1" />
+      <dependency id="Geocrest.Web.Infrastructure" version="2.0.0" />
+      <dependency id="EntityFramework" version="6.1.3" />
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
-      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5" />
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework=".NETFramework4.5" />
     </frameworkAssemblies>
   </metadata>
   <files>
     <file src="Context.cs.pp" target="content\Models" />
     <file src="Repository.cs.pp" target="content\Models" />
-    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.dll" target="lib\net40\"/>
-    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.xml" target="lib\net40\"/>
+    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.dll" target="lib\net45\"/>
+    <file src="..\Geocrest.Data.Contracts\bin\release\Geocrest.Data.Contracts.xml" target="lib\net45\"/>
   </files>
 </package>

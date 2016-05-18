@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2D2F8F71-D510-40E1-9F52-BBE2C2390FA6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Geocrest.Model</RootNamespace>
+    <AssemblyName>Geocrest.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Geocrest.Model.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Geocrest.Model.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Common\Resource.cs">
+      <Link>Resource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\XmlNamespaceInfo.cs">
+      <Link>Properties\XmlNamespaceInfo.cs</Link>
+    </Compile>
+    <Compile Include="ArcGIS\ArcGISServiceInfo.cs" />
+    <Compile Include="ArcGIS\DocumentInfo.cs" />
+    <Compile Include="ArcGIS\DrawingInfo.cs" />
+    <Compile Include="ArcGIS\Error.cs" />
+    <Compile Include="ArcGIS\Geometry\esriGeometryType.cs" />
+    <Compile Include="ArcGIS\Geometry\Geometry.cs" />
+    <Compile Include="ArcGIS\Geometry\GeometryCollection.cs" />
+    <Compile Include="ArcGIS\Geometry\SpatialReference.cs" />
+    <Compile Include="ArcGIS\Geometry\WKID.cs" />
+    <Compile Include="ArcGIS\LayerTable.cs" />
+    <Compile Include="ArcGIS\LayerTableBase.cs" />
+    <Compile Include="ArcGIS\LayerTableInfo.cs" />
+    <Compile Include="ArcGIS\LOD.cs" />
+    <Compile Include="ArcGIS\MapImage.cs" />
+    <Compile Include="ArcGIS\MobileLayer.cs" />
+    <Compile Include="ArcGIS\Schema\CodedValue.cs" />
+    <Compile Include="ArcGIS\Schema\Domain.cs" />
+    <Compile Include="ArcGIS\Schema\Field.cs" />
+    <Compile Include="ArcGIS\Schema\Relationship.cs" />
+    <Compile Include="ArcGIS\Schema\Subtype.cs" />
+    <Compile Include="ArcGIS\serviceType.cs" />
+    <Compile Include="ArcGIS\Tasks\AddressCandidate.cs" />
+    <Compile Include="ArcGIS\Tasks\AddressCandidateCollection.cs" />
+    <Compile Include="ArcGIS\Tasks\AddressMatchCollection.cs" />
+    <Compile Include="ArcGIS\Tasks\esriDataType.cs" />
+    <Compile Include="ArcGIS\Tasks\esriDirection.cs" />
+    <Compile Include="ArcGIS\Tasks\esriExecutionType.cs" />
+    <Compile Include="ArcGIS\Tasks\esriJobStatus.cs" />
+    <Compile Include="ArcGIS\Tasks\esriParameterType.cs" />
+    <Compile Include="ArcGIS\Tasks\esriSpatialRelationship.cs" />
+    <Compile Include="ArcGIS\Tasks\esriUnits.cs" />
+    <Compile Include="ArcGIS\Tasks\ExecuteCompletedEventArgs.cs" />
+    <Compile Include="ArcGIS\Tasks\Feature.cs" />
+    <Compile Include="ArcGIS\Tasks\FeatureSet.cs" />
+    <Compile Include="ArcGIS\Tasks\FeatureSetArrayEventArgs.cs" />
+    <Compile Include="ArcGIS\Tasks\FeatureSetQuery.cs" />
+    <Compile Include="ArcGIS\Tasks\GetResultImageEventArgs.cs" />
+    <Compile Include="ArcGIS\Tasks\GPBoolean.cs" />
+    <Compile Include="ArcGIS\Tasks\GPDataFile.cs" />
+    <Compile Include="ArcGIS\Tasks\GPDate.cs" />
+    <Compile Include="ArcGIS\Tasks\GPDouble.cs" />
+    <Compile Include="ArcGIS\Tasks\GPFeatureRecordSetLayer.cs" />
+    <Compile Include="ArcGIS\Tasks\GPLinearUnit.cs" />
+    <Compile Include="ArcGIS\Tasks\GPLong.cs" />
+    <Compile Include="ArcGIS\Tasks\GPMapValue.cs" />
+    <Compile Include="ArcGIS\Tasks\GPMessage.cs" />
+    <Compile Include="ArcGIS\Tasks\GPMultiValue.cs" />
+    <Compile Include="ArcGIS\Tasks\GPParameter.cs" />
+    <Compile Include="ArcGIS\Tasks\GPParameterEventArgs.cs" />
+    <Compile Include="ArcGIS\Tasks\GPParameterInfo.cs" />
+    <Compile Include="ArcGIS\Tasks\GPRasterData.cs" />
+    <Compile Include="ArcGIS\Tasks\GPRecordSet.cs" />
+    <Compile Include="ArcGIS\Tasks\GPResult.cs" />
+    <Compile Include="ArcGIS\Tasks\GPResultSet.cs" />
+    <Compile Include="ArcGIS\Tasks\GPString.cs" />
+    <Compile Include="ArcGIS\Tasks\identifyLayersOption.cs" />
+    <Compile Include="ArcGIS\Tasks\IdentifyResult.cs" />
+    <Compile Include="ArcGIS\Tasks\IdentifyResultCollection.cs" />
+    <Compile Include="ArcGIS\Tasks\ImageDisplayParameters.cs" />
+    <Compile Include="ArcGIS\Tasks\JobCompletedEventArgs.cs" />
+    <Compile Include="ArcGIS\Tasks\JobInfo.cs" />
+    <Compile Include="ArcGIS\Tasks\LocatorProperties.cs" />
+    <Compile Include="ArcGIS\Tasks\ParcelPrintParameters.cs" />
+    <Compile Include="ArcGIS\Tasks\PrintLayers.cs" />
+    <Compile Include="ArcGIS\Tasks\Record.cs" />
+    <Compile Include="ArcGIS\Tasks\RecordSet.cs" />
+    <Compile Include="ArcGIS\Tasks\ReverseGeocodedAddress.cs" />
+    <Compile Include="ArcGIS\Tasks\TaskFailedEventArgs.cs" />
+    <Compile Include="ArcGIS\TileInfo.cs" />
+    <Compile Include="ArcGIS\WebMap\Basemap.cs" />
+    <Compile Include="ArcGIS\WebMap\BasemapLayer.cs" />
+    <Compile Include="ArcGIS\WebMap\ExportOptions.cs" />
+    <Compile Include="ArcGIS\WebMap\ExportWebMap.cs" />
+    <Compile Include="ArcGIS\WebMap\FeatureCollection.cs" />
+    <Compile Include="ArcGIS\WebMap\FeatureLayer.cs" />
+    <Compile Include="ArcGIS\WebMap\GraphicsLayer.cs" />
+    <Compile Include="ArcGIS\WebMap\LayerDefinition.cs" />
+    <Compile Include="ArcGIS\WebMap\LayoutOptions.cs" />
+    <Compile Include="ArcGIS\WebMap\MapOptions.cs" />
+    <Compile Include="ArcGIS\WebMap\MapServiceLayer.cs" />
+    <Compile Include="ArcGIS\WebMap\OperationalLayer.cs" />
+    <Compile Include="Attributes.cs" />
+    <Compile Include="FeatureClass.cs" />
+    <Compile Include="ObjectClass.cs" />
+    <Compile Include="PointFeatureClass.cs" />
+    <Compile Include="ResourceCollection.cs" />
+    <Compile Include="GenericEventArgs.cs" />
+    <Compile Include="HydrateCompletedEventArgs.cs" />
+    <Compile Include="HydrateCompletedEventArgsOfTModel.cs" />
+    <Compile Include="IPointFeatureClass.cs" />
+    <Compile Include="IRestHelper.cs" />
+    <Compile Include="IWebHelper.cs" />
+    <Compile Include="OptionalPropertiesContractResolver.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestHelper.cs" />
+    <Compile Include="WrappedAsyncCompletedEventArgs.cs" />
+    <Compile Include="WrappedDownloadStringCompletedEventArgs.cs" />
+    <Compile Include="WrappedUploadStringCompletedEventArgs.cs" />
+    <Compile Include="WrappedUploadValuesCompletedEventArgs.cs" />
+    <Compile Include="WrappedWebClient.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Geocrest.Model.nuspec" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
