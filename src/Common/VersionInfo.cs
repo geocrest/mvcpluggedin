@@ -62,7 +62,7 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalProductVersion = "2.0.0";
+        internal const string GlobalProductVersion = "2.0.1";
         /// <summary>
         /// Specifies the product version for Silverlight
         /// </summary>
