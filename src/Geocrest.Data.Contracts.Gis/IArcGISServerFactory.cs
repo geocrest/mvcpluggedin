@@ -1,7 +1,5 @@
 ﻿namespace Geocrest.Data.Contracts.Gis
 {
-    using System;
-
     /// <summary>
     /// Provides methods for instantiating new instances of ArcGIS Services.
     /// </summary>
@@ -22,6 +20,16 @@
         /// </returns>
         IArcGISServerCatalog CreateCatalog(string url);
         /// <summary>
+        /// Creates a representation of the catalog object located at the input service endpoint.
+        /// </summary>
+        /// <param name="url">The url to the REST endpoint.</param>
+        /// <param name="username">The username used to access secure services.</param>
+        /// <param name="password">The password used to access secure services.</param>
+        /// <returns>
+        /// Returns an instance of <see cref="T:Geocrest.Data.Contracts.Gis.IArcGISServerCatalog">IArcGISServerCatalog</see>.
+        /// </returns>
+        IArcGISServerCatalog CreateCatalog(string url, string username, string password);
+        /// <summary>
         /// Creates a representation of the service object located at the input service endpoint.
         /// </summary>
         /// <param name="url">The url to the REST endpoint.</param>
@@ -33,11 +41,21 @@
         /// Creates a representation of the service object located at the input service endpoint.
         /// </summary>
         /// <param name="url">The url to the REST endpoint.</param>
+        /// <param name="username">The username used to access secure services.</param>
+        /// <param name="password">The password used to access secure services.</param>
+        /// <returns>
+        /// Returns an instance of <see cref="IArcGISService"/>.
+        /// </returns>
+        IArcGISService CreateService(string url, string username, string password);
+        /// <summary>
+        /// Creates a representation of the service object located at the input service endpoint.
+        /// </summary>
+        /// <param name="url">The url to the REST endpoint.</param>
         /// <param name="currentVersion">The current version of ArcGIS Server.</param>
         /// <returns>
         /// Returns an instance of <see cref="IArcGISService"/>.
         /// </returns>
-        IArcGISService CreateService(string url, double? currentVersion);
+        IArcGISService CreateService(string url, double? currentVersion);       
         ///// <summary>
         ///// Creates a representation of the service object located at the input service endpoint.
         ///// </summary>

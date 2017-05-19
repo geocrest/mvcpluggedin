@@ -1,11 +1,14 @@
 ﻿namespace Geocrest.Data.Sources.Gis
 {
-    using System;
-    using System.Collections.Generic;
     using Geocrest.Data.Contracts.Gis;
-    using Geocrest.Web.Infrastructure;
     using Geocrest.Model;
     using Geocrest.Model.ArcGIS;
+    using Geocrest.Web.Infrastructure;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Text.RegularExpressions;
+    using System.Web;
 
     /// <summary>
     /// Provides a method for instantiating a new instance of an 
@@ -18,6 +21,7 @@
 
         //private int svcloaded = 0, totalcount = 0;
         private IRestHelper rest;
+        private static IRestHelper staticRest;
         private serviceType[] supportedtypes = new serviceType[] 
         { 
             serviceType.GeocodeServer,serviceType.GeometryServer,
@@ -32,7 +36,7 @@
         public ArcGISServerFactory(IRestHelper resthelper)
         {
             Throw.IfArgumentNull(resthelper, "resthelper");
-            this.rest = resthelper;
+            this.rest = staticRest = resthelper;
         }
 
         #region Properties
@@ -120,15 +124,19 @@
             Throw.IfArgumentNullOrEmpty(url, "url");
             Uri uri = new Uri(url);
             string rooturl = uri.GetLeftPart(UriPartial.Path);
-            if (rooturl.EndsWith("/")) rooturl = rooturl.Substring(0, rooturl.Length - 1);                
+            if (rooturl.EndsWith("/")) rooturl = rooturl.Substring(0, rooturl.Length - 1);
+            var query = HttpUtility.ParseQueryString(uri.Query);
+            var token = query["token"];
 
             // get root catalog
             List<IArcGISService> services = new List<IArcGISService>();
             ArcGISServerCatalog catalog = this.rest.Hydrate<ArcGISServerCatalog>(
-                !string.IsNullOrEmpty(this.ProxyUrl) ? this.ProxyUrl + "?" + url + "?" : url);            
+                !string.IsNullOrEmpty(this.ProxyUrl) ? this.ProxyUrl + "?" + url : url);            
             if (catalog != null)
             {
-                (catalog as ArcGISServerCatalog).RootUrl = rooturl;
+                catalog.RootUrl = rooturl;
+                catalog.RestHelper = this.rest;
+                catalog.Token = token;
                 string template = catalog.RootUrl + "/{0}/{1}";
                 List<IArcGISServerCatalog> folders = new List<IArcGISServerCatalog>();
                 foreach (var f in catalog.Folders)
@@ -138,7 +146,7 @@
                     IArcGISServerCatalog folder = null;
                     try
                     {
-                        folder = CreateCatalog(rooturl + "/" + f);
+                        folder = CreateCatalog(rooturl + "/" + f + (!string.IsNullOrEmpty(token) ? "?token=" + token : ""));
                         //folder = this.rest.Hydrate<ArcGISServerCatalog>(url + f + "?" + JSON);
                     }
                     catch { }
@@ -149,7 +157,8 @@
                         foreach (var service in folder.ServiceInfos)
                         {
                             services.AddIfNotNull<IArcGISService>(this.CreateService(string.Format(template,
-                                service.Name, service.Type.ToString()) + "?" + JSON, folder.CurrentVersion));
+                                service.Name, service.Type.ToString()) + "?" + JSON + (!string.IsNullOrEmpty(token) ? 
+                                "&token=" + token : ""), folder.CurrentVersion));
                         }
                     }
                 }               
@@ -157,7 +166,8 @@
                 {
                     services.Add(this.CreateService(string.Format(template,
                         service.Name.Contains("/") ? service.Name.Substring(service.Name.IndexOf("/") + 1) 
-                        : service.Name,service.Type.ToString()) + "?" + JSON, catalog.CurrentVersion));
+                        : service.Name, service.Type.ToString()) + "?" + JSON + (!string.IsNullOrEmpty(token) ?
+                                "&token=" + token : ""), catalog.CurrentVersion));
                 }
                 catalog.Services = services.ToArray();     
             }
@@ -234,6 +244,88 @@
         {
             return this.CreateService(url, null);
         }
+
+        /// <summary>
+        /// Creates a representation of the catalog object located at the input service endpoint.
+        /// </summary>
+        /// <param name="url">The url to the REST endpoint.</param>
+        /// <param name="username">The username used to access secure services.</param>
+        /// <param name="password">The password used to access secure services.</param>
+        /// <returns>
+        /// Returns an instance of <see cref="T:Geocrest.Data.Contracts.Gis.IArcGISServerCatalog">IArcGISServerCatalog</see>.
+        /// </returns>
+        public IArcGISServerCatalog CreateCatalog(string url, string username, string password)
+        {
+            Throw.IfArgumentNullOrEmpty(url, "url");
+            Throw.IfArgumentNullOrEmpty(username, "username");
+            Throw.IfArgumentNullOrEmpty(password, "password");
+            string token = CreateToken(url, username, password);
+            Throw.If<string>(token, x => string.IsNullOrEmpty(x), string.Format("Unable to generate a token for '{0}'", url));
+            Uri uri = new Uri(url);
+            var regex = new Regex("\\/$");
+            string root = regex.Replace(uri.GetLeftPart(UriPartial.Path), "");
+            return this.CreateCatalog(string.Format(root + "?token={0}", token));
+        }
+
+        /// <summary>
+        /// Creates a representation of the service object located at the input service endpoint.
+        /// </summary>
+        /// <param name="url">The url to the REST endpoint.</param>
+        /// <param name="username">The username used to access secure services.</param>
+        /// <param name="password">The password used to access secure services.</param>
+        /// <returns>
+        /// Returns an instance of <see cref="T:Geocrest.Data.Contracts.Gis.IArcGISService" />.
+        /// </returns>
+        public IArcGISService CreateService(string url, string username, string password)
+        {
+            Throw.IfArgumentNullOrEmpty(url, "url");
+            Throw.IfArgumentNullOrEmpty(username, "username");
+            Throw.IfArgumentNullOrEmpty(password, "password");
+            string token = CreateToken(url, username, password);
+            Throw.If<string>(token, x => string.IsNullOrEmpty(x), string.Format("Unable to generate a token for '{0}'", url));
+            Uri uri = new Uri(url);
+            var regex = new Regex("\\/$");
+            string root = regex.Replace(uri.GetLeftPart(UriPartial.Path), "");
+            return this.CreateService(string.Format(root + "?token={0}", token));
+        }
+        /// <summary>
+        /// Creates a token for accessing the resource at the specified URL using the provided username and password.
+        /// </summary>
+        /// <param name="url">The URL to the secure ArcGIS REST endpoint.</param>
+        /// <param name="username">The username with privileges to access this resource.</param>
+        /// <param name="password">The password for the username.</param>
+        /// <returns></returns>
+        public static string CreateToken(string url, string username, string password)
+        {
+            // get info url
+            var infoUrl = url.ToLower().Contains("/rest/") ? url.Substring(0, url.IndexOf("/rest/", StringComparison.OrdinalIgnoreCase)) + 
+                "/rest/info": "";
+            Throw.If<string>(infoUrl, x => string.IsNullOrEmpty(x), string.Format("Unable to parse server info URL from '{0}'", url));
+
+            // get token service url
+            var info = staticRest.Hydrate<ServerInfo>(infoUrl);
+            Throw.If<ServerInfo>(info, x => x == null, string.Format("Unable to retrieve server info from '{0}'", infoUrl));
+            var tokenUrl = info.AuthInfo.TokenServicesUrl;
+            Throw.If<string>(tokenUrl, x => string.IsNullOrEmpty(x), string.Format("Unable to retrieve token service URL from '{0}'", infoUrl));
+
+            // get token
+            var nvc = new NameValueCollection();
+            nvc["f"] = "json";
+            nvc["username"] = username;
+            nvc["password"] = password;
+            var response = System.Text.Encoding.Default.GetString(staticRest.WebHelper.UploadValues(tokenUrl + 
+                "?request=getToken&client=requestip&expiration=1", "POST", nvc));
+            dynamic token = staticRest.HydrateFromJson(response, new { token = "", expires = "" }.GetType());
+            return token.token;
+        }
+        private string ParseTokenFromUrl(string url)
+        {
+            var token = "";
+            Uri uri = new Uri(url);
+            var query = HttpUtility.ParseQueryString(uri.Query);
+            token = query["token"];
+            return token;
+        }
         //private void GetServices(IArcGISServerCatalog catalog, Action<IArcGISService[]> callback)
         //{
         //    Throw.IfArgumentNull(catalog, "catalog");
@@ -291,7 +383,8 @@
         /// </returns>
         private IArcGISService ReturnService(ArcGISService service, string url, serviceType type, double? version)
         {
-            Throw.IfArgumentNull(service, "service");            
+            Throw.IfArgumentNull(service, "service");
+            var token = this.ParseTokenFromUrl(url);
             url = url.Contains("?") ? url.Substring(0, url.IndexOf("?")) : url;
             if (url.EndsWith("/")) url = url.Substring(0, url.LastIndexOf("/"));
             string name = url.Substring(0, url.LastIndexOf("/"));
@@ -302,6 +395,7 @@
             service.CurrentVersion = version;
             service.ProxyUrl = this.ProxyUrl;
             service.ServiceType = type;
+            service.Token = token;
             if (type == serviceType.GPServer) PopuplateGPTasks(service);
             return (IArcGISService)service;
         }
@@ -321,7 +415,7 @@
                 string taskurl = string.Format(url, Uri.EscapeDataString(task));
                 string proxyurl = !string.IsNullOrEmpty(this.ProxyUrl)
                     ? this.ProxyUrl + "?" + taskurl + "?" + JSON : taskurl + "?" + JSON;
-                GeoprocessingTask gptask = this.rest.Hydrate<GeoprocessingTask>(proxyurl);
+                GeoprocessingTask gptask = this.rest.Hydrate<GeoprocessingTask>(proxyurl + "&token=" + service.Token);
                 if (gptask != null)
                 {
                     gptask.Url = taskurl;
@@ -354,7 +448,7 @@
         //    if (svcloaded == totalcount) callback(services.ToArray());
         //}
         //delegate void ReturnServicesToAction(ArcGISService service, string unformattedurl, ArcGISServiceInfo info, Action<IArcGISService[]> callback);
-   
+
         delegate IArcGISService ReturnServiceToCaller(ArcGISService service, string url, serviceType type, double? version);
     }
 }

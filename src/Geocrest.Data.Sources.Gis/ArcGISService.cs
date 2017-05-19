@@ -1,18 +1,20 @@
 ﻿namespace Geocrest.Data.Sources.Gis
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using Geocrest.Data.Contracts.Gis;
-    using Geocrest.Web.Infrastructure;
     using Geocrest.Model;
     using Geocrest.Model.ArcGIS;
     using Geocrest.Model.ArcGIS.Geometry;
+    using Geocrest.Web.Infrastructure;
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
+    using System.Web;
 
     /// <summary>
     /// Represents a generic ArcGIS Server service.
     /// </summary>
     [DataContract(Namespace = Geocrest.XmlNamespaces.InfrastructureVersion1)]
+    [KnownType(typeof(FeatureServer))]
     [KnownType(typeof(MapServer))]
     [KnownType(typeof(GeocodeServer))]
     [KnownType(typeof(GeoprocessingServer))]
@@ -35,7 +37,7 @@
             if (baseurl.EndsWith("/")) baseurl = baseurl.Substring(0, baseurl.Length - 1);
             baseurl = !string.IsNullOrEmpty(operation) ? (baseurl + "/" + operation).ForceJsonFormat()
                 : baseurl.ForceJsonFormat();
-            
+
             string query = string.Empty;
             string pair = "&{0}={1}";
             foreach (var kvp in parameters)
@@ -44,12 +46,45 @@
                     : kvp.Value.ToString() : string.Empty;
                 query += string.Format(pair, kvp.Key, Uri.EscapeUriString(value));
             }
-
+            if (!string.IsNullOrEmpty(this.Token))
+            {
+                query += string.Format(pair, "token", this.Token);
+            }
             return new Uri(!string.IsNullOrEmpty(this.ProxyUrl)
                 ? this.ProxyUrl + "?" + baseurl + query : baseurl + query);
         }
 
         #region IArcGISService Members
+
+        /// <summary>
+        /// Determines whether the service's existing token is valid. If no token exists the method will return
+        /// true to indicate that the service can be accessed as-is.
+        /// </summary>
+        /// <returns>
+        /// Whether the existing token is still valid or not.
+        /// </returns>
+        public bool IsTokenValid()
+        {
+            if (string.IsNullOrEmpty(this.Token))
+            {
+                return true;
+            }
+            else
+            {
+                Throw.If<IRestHelper>(this.RestHelper, x => x == null, "Unable to validate token because there is no rest helper defined.");
+                try
+                {
+                    ArcGISService catalog = this.RestHelper.Hydrate<ArcGISService>(string.Format("{0}?token={1}", this.Url, this.Token));
+                    return catalog != null;
+                }
+                catch (HttpException ex)
+                {
+                    int code = ex.GetHttpCode();
+                    return !(code == 498 || code == 499);
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the current version of the ArcGIS Server instance.
         /// </summary>
@@ -72,7 +107,7 @@
         /// The service description.
         /// </value>
         [DataMember]
-        public string ServiceDescription{get;set;}
+        public string ServiceDescription { get; set; }
 
         /// <summary>
         /// Gets the REST endpoint where the service can be found.
@@ -104,6 +139,14 @@
         /// The type of the service.
         /// </value>
         public serviceType ServiceType { get; internal set; }
+
+        /// <summary>
+        /// Gets or sets the token used to access secure services.
+        /// </summary>
+        /// <value>
+        /// The token.
+        /// </value>
+        public string Token { get; set; }
         #endregion
     }
 }

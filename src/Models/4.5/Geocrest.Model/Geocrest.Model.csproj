@@ -59,6 +59,7 @@
       <Link>Properties\XmlNamespaceInfo.cs</Link>
     </Compile>
     <Compile Include="ArcGIS\ArcGISServiceInfo.cs" />
+    <Compile Include="ArcGIS\AuthInfo.cs" />
     <Compile Include="ArcGIS\DocumentInfo.cs" />
     <Compile Include="ArcGIS\DrawingInfo.cs" />
     <Compile Include="ArcGIS\Error.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="ArcGIS\Schema\Field.cs" />
     <Compile Include="ArcGIS\Schema\Relationship.cs" />
     <Compile Include="ArcGIS\Schema\Subtype.cs" />
+    <Compile Include="ArcGIS\ServerInfo.cs" />
     <Compile Include="ArcGIS\serviceType.cs" />
     <Compile Include="ArcGIS\Tasks\AddressCandidate.cs" />
     <Compile Include="ArcGIS\Tasks\AddressCandidateCollection.cs" />
