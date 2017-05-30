@@ -53,7 +53,23 @@
             return new Uri(!string.IsNullOrEmpty(this.ProxyUrl)
                 ? this.ProxyUrl + "?" + baseurl + query : baseurl + query);
         }
-
+        /// <summary>
+        /// Gets the parameterized URL to submit to the server.
+        /// </summary>
+        /// <param name="operation">The operation to perform.</param>
+        /// <param name="parameters">A collection of input parameters to submit to the server.</param>
+        /// <param name="layer">The layer on which to perform the operation.</param>
+        /// <returns>
+        /// Returns an instance of <see cref="T:System.String" />.
+        /// </returns>
+        protected internal Uri GetUrl(string operation, IDictionary<string, object> parameters, LayerTableBase layer)
+        {
+            Throw.IfArgumentNull(layer, "layer");
+            var endpoint = GetUrl(operation, parameters);
+            var uri = new UriBuilder(endpoint);
+            uri.Path = uri.Path.Replace("/" + operation, string.Format("/{0}/{1}", layer.ID, operation);
+            return uri.Uri;
+        }
         #region IArcGISService Members
 
         /// <summary>
@@ -74,8 +90,21 @@
                 Throw.If<IRestHelper>(this.RestHelper, x => x == null, "Unable to validate token because there is no rest helper defined.");
                 try
                 {
-                    ArcGISService catalog = this.RestHelper.Hydrate<ArcGISService>(string.Format("{0}?token={1}", this.Url, this.Token));
-                    return catalog != null;
+                    ArcGISService service = null;
+                    var url = string.Format("{0}?token={1}", Url, this.Token);
+                    if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.MapServer)))
+                        service = RestHelper.Hydrate<MapServer>(url);
+                    if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.GeocodeServer)))
+                        service = RestHelper.Hydrate<GeocodeServer>(url);
+                    if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.GPServer)))
+                        service = RestHelper.Hydrate<GeoprocessingServer>(url);
+                    if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.GeometryServer)))
+                        service = RestHelper.Hydrate<GeometryServer>(url);
+                    if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.FeatureServer)))
+                        service = RestHelper.Hydrate<FeatureServer>(url);
+                    if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.MobileServer)))
+                        service = RestHelper.Hydrate<MobileServer>(url);
+                    return service != null;
                 }
                 catch (HttpException ex)
                 {
