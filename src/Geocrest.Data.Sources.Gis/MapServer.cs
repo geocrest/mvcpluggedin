@@ -217,7 +217,7 @@
                 { "tolerance", tolerance}
             };
             Uri endpoint = GetUrl("identify", inputs);
-            return RestHelper.Hydrate<IdentifyResultCollection>(endpoint.ToString());
+            return Geocrest.Model.RestHelper.HydrateObject<IdentifyResultCollection>(endpoint.ToString());
         }
 
         /// <summary>
@@ -302,7 +302,7 @@
             }
                        
             Uri endpoint = GetUrl(string.Format("{0}/query",layer.ID ), inputs);
-            return RestHelper.Hydrate<FeatureSetQuery>(endpoint.ToString());
+            return Geocrest.Model.RestHelper.HydrateObject<FeatureSetQuery>(endpoint.ToString());
         }
 
         /// <summary>

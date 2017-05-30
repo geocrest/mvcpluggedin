@@ -390,7 +390,7 @@
             string name = url.Substring(0, url.LastIndexOf("/"));
             name = name.Substring(name.LastIndexOf("/")+1);
             service.Name = name;            
-            service.RestHelper = rest;
+            service.RestHelper = new RestHelper();
             service.Url = url;
             service.CurrentVersion = version;
             service.ProxyUrl = this.ProxyUrl;

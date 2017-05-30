@@ -3,6 +3,7 @@ namespace Geocrest.Data.Contracts.Gis
 {
     using Geocrest.Model.ArcGIS;
     using Model;
+    using System;
 
     /// <summary>
     /// Provides access to an ArcGIS Server's services.
@@ -43,6 +44,7 @@ namespace Geocrest.Data.Contracts.Gis
         /// <value>
         /// The rest helper.
         /// </value>
+        [Obsolete("The instance property of RestHelper will be removed at version 3. Instead, use the static methods on RestHelper to avoid concurrent I/O errors.", false)]
         IRestHelper RestHelper { get; set; }
         /// <summary>
         /// Gets the root URL to the ArcGIS Service instance.

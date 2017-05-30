@@ -13,6 +13,7 @@
     /// <summary>
     /// Represents a generic ArcGIS Server service.
     /// </summary>
+    /// <seealso cref="Geocrest.Data.Contracts.Gis.IArcGISService" />
     [DataContract(Namespace = Geocrest.XmlNamespaces.InfrastructureVersion1)]
     [KnownType(typeof(FeatureServer))]
     [KnownType(typeof(MapServer))]
@@ -67,7 +68,7 @@
             Throw.IfArgumentNull(layer, "layer");
             var endpoint = GetUrl(operation, parameters);
             var uri = new UriBuilder(endpoint);
-            uri.Path = uri.Path.Replace("/" + operation, string.Format("/{0}/{1}", layer.ID, operation);
+            uri.Path = uri.Path.Replace("/" + operation, string.Format("/{0}/{1}", layer.ID, operation));
             return uri.Uri;
         }
         #region IArcGISService Members
@@ -87,23 +88,22 @@
             }
             else
             {
-                Throw.If<IRestHelper>(this.RestHelper, x => x == null, "Unable to validate token because there is no rest helper defined.");
                 try
                 {
                     ArcGISService service = null;
                     var url = string.Format("{0}?token={1}", Url, this.Token);
                     if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.MapServer)))
-                        service = RestHelper.Hydrate<MapServer>(url);
+                        service = Geocrest.Model.RestHelper.HydrateObject<MapServer>(url);
                     if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.GeocodeServer)))
-                        service = RestHelper.Hydrate<GeocodeServer>(url);
+                        service = Geocrest.Model.RestHelper.HydrateObject<GeocodeServer>(url);
                     if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.GPServer)))
-                        service = RestHelper.Hydrate<GeoprocessingServer>(url);
+                        service = Geocrest.Model.RestHelper.HydrateObject<GeoprocessingServer>(url);
                     if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.GeometryServer)))
-                        service = RestHelper.Hydrate<GeometryServer>(url);
+                        service = Geocrest.Model.RestHelper.HydrateObject<GeometryServer>(url);
                     if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.FeatureServer)))
-                        service = RestHelper.Hydrate<FeatureServer>(url);
+                        service = Geocrest.Model.RestHelper.HydrateObject<FeatureServer>(url);
                     if (Url.Contains(Enum.GetName(typeof(serviceType), serviceType.MobileServer)))
-                        service = RestHelper.Hydrate<MobileServer>(url);
+                        service = Geocrest.Model.RestHelper.HydrateObject<MobileServer>(url);
                     return service != null;
                 }
                 catch (HttpException ex)
@@ -159,6 +159,7 @@
         /// <value>
         /// The rest helper.
         /// </value>
+        [Obsolete("The instance property of RestHelper will be removed at version 3. Instead, use the static methods on RestHelper to avoid concurrent I/O errors.", false)]
         public IRestHelper RestHelper { get; set; }
 
         /// <summary>

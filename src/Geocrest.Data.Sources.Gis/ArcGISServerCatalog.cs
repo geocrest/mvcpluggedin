@@ -3,6 +3,7 @@
     using Geocrest.Data.Contracts.Gis;
     using Geocrest.Model.ArcGIS;
     using Model;
+    using System;
     using System.Runtime.Serialization;
     using System.Web;
     using Web.Infrastructure;
@@ -10,6 +11,7 @@
     /// <summary>
     /// Represents a container for ArcGIS Server services.
     /// </summary>
+    /// <seealso cref="Geocrest.Data.Contracts.Gis.IArcGISServerCatalog" />
     [DataContract(Namespace = Geocrest.XmlNamespaces.InfrastructureVersion1)]
     public class ArcGISServerCatalog : IArcGISServerCatalog
     {
@@ -66,6 +68,7 @@
         /// <value>
         /// The rest helper.
         /// </value>
+        [Obsolete("The instance property of RestHelper will be removed at version 3. Instead, use the static methods on RestHelper to avoid concurrent I/O errors.", false)]
         public IRestHelper RestHelper { get; set; }
 
         /// <summary>
@@ -83,10 +86,9 @@
             }
             else
             {
-                Throw.If<IRestHelper>(this.RestHelper, x => x == null, "Unable to validate token because there is no rest helper defined.");
                 try
                 {
-                    ArcGISServerCatalog catalog = this.RestHelper.Hydrate<ArcGISServerCatalog>(string.Format("{0}?token={1}", this.RootUrl, this.Token));
+                    ArcGISServerCatalog catalog = Geocrest.Model.RestHelper.HydrateObject<ArcGISServerCatalog>(string.Format("{0}?token={1}", this.RootUrl, this.Token));
                     return catalog != null;                    
                 }
                 catch (HttpException ex)
