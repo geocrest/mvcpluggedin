@@ -26,19 +26,19 @@
         /// <summary>
         /// Executes a query on the specified layer and returns a featureset result.
         /// </summary>
-        /// <param name="layer">The layer on which to perform the query.</param>
-        /// <param name="where">The where clause used to query.</param>
+        /// <param name="layerId">The ID of the layer to query.</param>
+        /// <param name="where">The where clause used to query. Any legal SQL where clause operating on the fields in the layer is allowed.</param>
         /// <param name="geometry">The geometry to apply as the spatial filter.</param>
         /// <param name="spatialRel">The spatial relationship to be applied on the input geometry while performing the query.</param>
         /// <param name="outSR">The spatial reference of the returned geometry.</param>
-        /// <param name="outFields">The fields to include in the results.</param>
-        /// <param name="objectIds">The specific object IDs to return.</param>
+        /// <param name="outFields">The list of fields to be included in the returned result set.</param>
+        /// <param name="objectIds">The object IDs of this layer/table to be queried.</param>
         /// <param name="orderByFields">The fields by which to order the results.</param>
-        /// <param name="returnGeometry">If set to <c>true</c> the results will contain geometry.</param>
-        /// <param name="returnDistinctValues">If set to <c>true</c> the results will contain distinct values.</param>
+        /// <param name="returnGeometry">If set to <c>true</c> the result includes the geometry associated with each feature returned.</param>
+        /// <param name="returnDistinctValues">If set to <c>true</c> it returns distinct values based on the fields specified in outFields.</param>
         /// <returns></returns>
         FeatureSet Query (
-            LayerTableBase layer,
+            int layerId,
             string where,
             Geometry geometry = null,
             esriSpatialRelationship spatialRel = esriSpatialRelationship.esriSpatialRelIntersects,
@@ -52,8 +52,8 @@
         /// <summary>
         /// Executes a query on the specified layer and returns the count of features that match.
         /// </summary>
-        /// <param name="layer">The layer on which to perform the query.</param>
-        /// <param name="where">The where clause used to query.</param>
+        /// <param name="layerId">The ID of the layer to query.</param>
+        /// <param name="where">The where clause used to query. Any legal SQL where clause operating on the fields in the layer is allowed.</param>
         /// <param name="geometry">The geometry to apply as the spatial filter.</param>
         /// <param name="spatialRel">The spatial relationship to be applied on the input geometry while performing the query.</param>
         /// <param name="outSR">The spatial reference of the returned geometry.</param>
@@ -61,7 +61,7 @@
         /// The count of features that match the query.
         /// </returns>
         int QueryForCount (
-            LayerTableBase layer,
+            int layerId,
             string where,
             Geometry geometry = null,
             esriSpatialRelationship spatialRel = esriSpatialRelationship.esriSpatialRelIntersects,
@@ -70,18 +70,32 @@
         /// <summary>
         /// Executes a query on the specified layer and returns the IDs of features that match.
         /// </summary>
-        /// <param name="layer">The layer on which to perform the query.</param>
-        /// <param name="where">The where clause used to query.</param>
+        /// <param name="layerId">The ID of the layer to query.</param>
+        /// <param name="where">The where clause used to query. Any legal SQL where clause operating on the fields in the layer is allowed.</param>
         /// <param name="geometry">The geometry to apply as the spatial filter.</param>
         /// <param name="spatialRel">The spatial relationship to be applied on the input geometry while performing the query.</param>
         /// <param name="outSR">The spatial reference of the returned geometry.</param>
         /// <returns></returns>
         FeatureSetQuery QueryForIds(
-            LayerTableBase layer,
+            int layerId,
             string where,
             Geometry geometry = null,
             esriSpatialRelationship spatialRel = esriSpatialRelationship.esriSpatialRelIntersects,
             SpatialReference outSR = null
             );
+        /// <summary>
+        /// This operation adds, updates, and deletes features to the specified feature layer.
+        /// </summary>
+        /// <param name="layerId">The ID of the layer to query.</param>
+        /// <param name="adds"> The array of features to be added.</param>
+        /// <param name="updates">The array of features to be updated. The attributes property of 
+        /// each feature should include the object ID of the feature.</param>
+        /// <param name="deletes">The array of object IDs to be deleted.</param>
+        /// <returns></returns>
+        ApplyEditsResult ApplyEdits(
+            int layerId,
+            Feature[] adds = null,
+            Feature[] updates = null,
+            long[] deletes = null);
     }
 }

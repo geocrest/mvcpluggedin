@@ -84,6 +84,8 @@
     <Compile Include="ArcGIS\Tasks\AddressCandidate.cs" />
     <Compile Include="ArcGIS\Tasks\AddressCandidateCollection.cs" />
     <Compile Include="ArcGIS\Tasks\AddressMatchCollection.cs" />
+    <Compile Include="ArcGIS\Tasks\ApplyEditsResult.cs" />
+    <Compile Include="ArcGIS\Tasks\EditResult.cs" />
     <Compile Include="ArcGIS\Tasks\esriDataType.cs" />
     <Compile Include="ArcGIS\Tasks\esriDirection.cs" />
     <Compile Include="ArcGIS\Tasks\esriExecutionType.cs" />
