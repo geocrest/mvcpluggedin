@@ -11,18 +11,21 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Web framework that extends ASP.NET MVC with a plug-in architecture and default implementations of commonly used features.</description>
 		<summary>Web framework that extends ASP.NET MVC with a plug-in architecture and default implementations of commonly used features.</summary>
-		<copyright>Geocrest Mapping, LLC 2014</copyright>
+		<copyright>Geocrest Mapping, LLC 2014-2017</copyright>
 		<tags>ASP.NET MVC WebAPI Ninject EntityFramework</tags>
 		<dependencies>
 			<dependency id="elmah" version="1.2.2" />
       <dependency id="Castle.Core" version="3.3.3" />
       <dependency id="Geocrest.Web.Infrastructure" version="2.0.0" />
+      <dependency id="EntityFramework" version="6.1.3" />
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
       <dependency id="Microsoft.AspNet.OData" version="5.9.0" />
       <dependency id="Microsoft.AspNet.Razor" version="3.2.3" />
       <dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.3" />
       <dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
       <dependency id="Microsoft.AspNet.WebPages" version="3.2.3" />
+      <dependency id="Microsoft.AspNet.WebPages.Data" version="3.2.3" />
+      <dependency id="Microsoft.AspNet.WebPages.WebData" version="3.2.3" />
       <dependency id="Newtonsoft.Json" version="8.0.3"/>
       <dependency id="Ninject.Extensions.Conventions" version="3.2.0.0" />
       <dependency id="Ninject.Extensions.Factory" version="3.2.1.0" />

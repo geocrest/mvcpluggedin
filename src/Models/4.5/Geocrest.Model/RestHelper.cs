@@ -321,6 +321,20 @@
             RestHelper helper = new RestHelper();
             return helper.Hydrate<T>(ForceJsonFormat(url));
         }
+        /// Helper method to hydrate an object using the string response from the specified URL resource
+        /// and without requiring a <see cref="T:Geocrest.Model.RestHelper"/>.
+        /// <typeparam name="T">The type of object to hydrate.</typeparam>
+        /// <param name="url">The web service URL.</param>
+        /// <param name="nvc">The data to upload as name/value pairs.</param>
+        /// <param name="method">The method to use for uploading. Defaults to <c>POST</c>.</param>
+        /// <returns></returns>
+        public static T HydrateObject<T>(string url, NameValueCollection nvc, string method = "POST")
+        {
+            RestHelper helper = new RestHelper();
+            var response = helper.WebHelper.UploadValues(url, method, nvc);
+            var respString = System.Text.Encoding.Default.GetString(response);
+            return helper.HydrateFromJson<T>(respString);
+        }
         /// <summary>
         /// Forces the json format using the query string 'f' parameter.
         /// </summary>

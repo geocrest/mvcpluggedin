@@ -3,6 +3,8 @@ namespace Geocrest.Data.Contracts.Gis
 {
     using Geocrest.Model;
     using Geocrest.Model.ArcGIS;
+    using System;
+
     /// <summary>
     /// Provides access to common ArcGIS service properties
     /// </summary>    
@@ -32,6 +34,7 @@ namespace Geocrest.Data.Contracts.Gis
         /// <value>
         /// The rest helper.
         /// </value>
+        [Obsolete("The instance property of RestHelper will be removed at version 3. Instead, use the static methods on RestHelper to avoid concurrent I/O errors.", false)]
         IRestHelper RestHelper { get; set; }
         /// <summary>
         /// Gets the type of the service.
@@ -48,11 +51,24 @@ namespace Geocrest.Data.Contracts.Gis
         /// </value>
         string ProxyUrl { get; set; }
         /// <summary>
+        /// Gets or sets the token used to access secure services.
+        /// </summary>
+        /// <value>
+        /// The token.
+        /// </value>
+        string Token { get; set; }
+        /// <summary>
         /// Gets or sets the current version of the ArcGIS Server instance.
         /// </summary>
         /// <value>
         /// The current version.
         /// </value>
-        double? CurrentVersion { get; set; }
+        double? CurrentVersion { get; set; }      
+        /// <summary>
+        /// Determines whether the service's existing token is valid. If no token exists the method will return 
+        /// true to indicate that the service can be accessed as-is.
+        /// </summary>
+        /// <returns>Whether the existing token is still valid or not.</returns>
+        bool IsTokenValid();
     }
 }

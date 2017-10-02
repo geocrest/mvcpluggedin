@@ -120,7 +120,7 @@
             addressFields.Add(this.SingleLineAddressField.Name, singleLineInput);
             addressFields.Add(GEOCODE.FindAddressCandidatesParam.outFields, outFields);
             Uri endpoint = GetUrl(GEOCODE.FindAddressCandidates, addressFields);
-            return this.RestHelper.Hydrate<AddressCandidateCollection>(endpoint.ToString());
+            return Geocrest.Model.RestHelper.HydrateObject<AddressCandidateCollection>(endpoint.ToString());
         }
 
         ///// <summary>
@@ -164,7 +164,7 @@
                 };
             if (outSR != WKID.NotSpecified) inputs.Add("outSR",(int) outSR);
             Uri endpoint = GetUrl("reverseGeocode", inputs);
-            return this.RestHelper.Hydrate<ReverseGeocodedAddress>(endpoint.ToString());
+            return Geocrest.Model.RestHelper.HydrateObject<ReverseGeocodedAddress>(endpoint.ToString());
         }
         #endregion
     }

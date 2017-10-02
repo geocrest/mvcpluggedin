@@ -41,7 +41,7 @@
                     { "outSR", outSR }
                 };
             Uri endpoint = GetUrl(GEOMETRY.Project, inputs);
-            return RestHelper.Hydrate<GeometryCollection>(endpoint.ToString());
+            return Geocrest.Model.RestHelper.HydrateObject<GeometryCollection>(endpoint.ToString());
         }
 
         /// <summary>
