@@ -11,10 +11,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <summary>$description$</summary>
-    <copyright>Geocrest Mapping, LLC 2014-2016</copyright>
+    <copyright>Geocrest Mapping, LLC 2014-2017</copyright>
     <tags>ArcGIS REST Catalog generic repository</tags>
     <dependencies>
-      <dependency id="Geocrest.Model" version="2.0.0" />
+      <dependency id="Geocrest.Model" version="2.1.0" />
       <dependency id="Geocrest.Web.Infrastructure" version="2.0.0" />
       <dependency id="Ninject" version="[3.2.2.0]" />
       <dependency id="Newtonsoft.Json" version="8.0.3"/>

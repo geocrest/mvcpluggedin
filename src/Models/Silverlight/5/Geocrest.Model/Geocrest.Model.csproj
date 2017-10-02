@@ -192,6 +192,12 @@
     <Compile Include="..\..\..\4.0\Geocrest.Model\ResourceCollection.cs">
       <Link>ResourceCollection.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\4.5\Geocrest.Model\ArcGIS\AuthInfo.cs">
+      <Link>ArcGIS\AuthInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\4.5\Geocrest.Model\ArcGIS\ServerInfo.cs">
+      <Link>ArcGIS\ServerInfo.cs</Link>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="IRestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

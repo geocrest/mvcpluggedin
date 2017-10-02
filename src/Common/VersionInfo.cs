@@ -26,18 +26,18 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the enterprise model framework libraries.
         /// </remarks>
-        internal const string ModelFileVersion = "2.0.5982.18685";
+        internal const string ModelFileVersion = "2.1.6484.17005";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>
         /// <remarks>
         /// Use this for the enterprise model framework libraries.
         /// </remarks>
-        internal const string ModelProductVersion = "2.0.0";
+        internal const string ModelProductVersion = "2.1.0";
         /// <summary>
         /// Specifies the product version for Silverlight enterprise model.
         /// </summary>
-        internal const string ModelSilverlightProductVersion = "2.0.0 for Silverlight";
+        internal const string ModelSilverlightProductVersion = "2.1.0 for Silverlight";
 
         /// <summary>
         /// Specifies the assembly version for use when the .NET runtime loads an assembly. Use a
@@ -55,18 +55,18 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalFileVersion = "2.0.5982.18685";
+        internal const string GlobalFileVersion = "2.1.6484.17005";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalProductVersion = "2.0.1";
+        internal const string GlobalProductVersion = "2.1.0";
         /// <summary>
         /// Specifies the product version for Silverlight
         /// </summary>
-        internal const string GlobalSilverlightProductVersion = "2.0.0 for Silverlight";
+        internal const string GlobalSilverlightProductVersion = "2.1.0 for Silverlight";
         /// <summary>
         /// Use this for all assemblies throughout the solution.
         /// </summary>
@@ -74,6 +74,6 @@ namespace Geocrest
         /// <summary>
         /// Use this for all assemblies throughout the solution.
         /// </summary>
-        internal const string Copyright = "Copyright � 2014-2016 Geocrest Mapping, LLC";
+        internal const string Copyright = "Copyright � 2014-2017 Geocrest Mapping, LLC";
     }
 }
