@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package >
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>$id$</id>
     <version>0.0.0</version>
@@ -10,24 +10,19 @@
     <iconUrl>http://www.geocrest.co/content/themes/geocrest/img/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-	<summary>$description$</summary>
-    <releaseNotes>This package includes support for .NET 4.5 and Silverlight 5.</releaseNotes>
+    <summary>$description$</summary>
     <copyright>Geocrest Mapping, LLC 2014-2017</copyright>
-    <tags>cor gis data model resthelper</tags>
-	<dependencies>
-		<group>
-			<dependency id="NewtonSoft.Json" version="8.0.3"/>
-		</group>
-	</dependencies>
-	<frameworkAssemblies>
-		<frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations"/>
-		<frameworkAssembly assemblyName="System.Runtime.Serialization"/>
-	</frameworkAssemblies>
+    <tags>gis data model resthelper</tags>
+    <releaseNotes>This package includes support for .NET 4.6.2.</releaseNotes>
+	  <frameworkAssemblies>
+		  <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations"/>
+		  <frameworkAssembly assemblyName="System.Runtime.Serialization"/>
+	  </frameworkAssemblies>
   </metadata>
   <files>
     <!--<file src="..\..\3.5\Geocrest.Model\bin\Release\Geocrest.Model.dll" target="lib\net35\Geocrest.Model.dll" />
     <file src="..\..\3.5\Geocrest.Model\bin\Release\Geocrest.Model.xml" target="lib\net35\Geocrest.Model.xml" />-->    
-    <file src="..\..\Silverlight\5\Geocrest.Model\Bin\Release\Geocrest.Model.dll" target="lib\sl50\Geocrest.Model.dll" />
-    <file src="..\..\Silverlight\5\Geocrest.Model\Bin\Release\Geocrest.Model.xml" target="lib\sl50\Geocrest.Model.xml" />
+    <!--<file src="..\..\Silverlight\5\Geocrest.Model\Bin\Release\Geocrest.Model.dll" target="lib\sl50\Geocrest.Model.dll" />
+    <file src="..\..\Silverlight\5\Geocrest.Model\Bin\Release\Geocrest.Model.xml" target="lib\sl50\Geocrest.Model.xml" />-->
   </files>
 </package>

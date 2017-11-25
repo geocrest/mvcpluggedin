@@ -26,14 +26,14 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the enterprise model framework libraries.
         /// </remarks>
-        internal const string ModelFileVersion = "2.1.6484.17005";
+        internal const string ModelFileVersion = "2.2.6538.17867";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>
         /// <remarks>
         /// Use this for the enterprise model framework libraries.
         /// </remarks>
-        internal const string ModelProductVersion = "2.1.0";
+        internal const string ModelProductVersion = "2.2.0";
         /// <summary>
         /// Specifies the product version for Silverlight enterprise model.
         /// </summary>
@@ -55,14 +55,14 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalFileVersion = "2.1.6484.17005";
+        internal const string GlobalFileVersion = "2.2.6538.17867";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalProductVersion = "2.1.0";
+        internal const string GlobalProductVersion = "2.2.0";
         /// <summary>
         /// Specifies the product version for Silverlight
         /// </summary>
@@ -74,6 +74,6 @@ namespace Geocrest
         /// <summary>
         /// Use this for all assemblies throughout the solution.
         /// </summary>
-        internal const string Copyright = "Copyright � 2014-2017 Geocrest Mapping, LLC";
+        internal const string Copyright = "Copyright © 2014-2017 Geocrest Mapping, LLC";
     }
 }
