@@ -18,6 +18,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name = "url")]
         public string Url { get; set; }
+        
         /// <summary>
         /// Gets or sets the layer definition.
         /// </summary>
@@ -26,6 +27,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name="layerDefinition")]
         public LayerDefinition LayerDefinition { get; set; }
+        
         /// <summary>
         /// Gets or sets the feature set.
         /// </summary>
@@ -34,6 +36,16 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name="featureSet")]
         public FeatureSet FeatureSet { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the mode used with ArcGIS feature services and individual layers in ArcGIS map services.
+        /// </summary>
+        /// <value>
+        /// 0 is snapshot mode. 1 is on-demand mode. 2 is selection-only mode. 
+        /// </value>
+        [DataMember(Name = "mode")]
+        public int Mode { get; set; }
+
         /// <summary>
         /// Gets or sets the selection object ids.
         /// </summary>
@@ -42,6 +54,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name="selectionObjectIds")]
         public int[] SelectionObjectIds { get; set; }
+        
         /// <summary>
         /// Gets or sets the selection symbol.
         /// </summary>
@@ -50,6 +63,5 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name="selectionSymbol")]
         public Symbol SelectionSymbol { get; set; }
-
     }
 }
