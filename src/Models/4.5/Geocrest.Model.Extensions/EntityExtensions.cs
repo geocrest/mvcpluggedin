@@ -8,9 +8,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Runtime.Serialization;
-#if NET45 || SILVERLIGHT
     using Microsoft.CSharp.RuntimeBinder;
-#endif
     using Newtonsoft.Json;
     using Geocrest.Model.ArcGIS.Tasks;
     /// <summary>
@@ -22,7 +20,6 @@
         /// The maximum items in object graph. This is set to 1,000,000.
         /// </summary>
         private const int MAX_ITEMS_IN_OBJECT_GRAPH = 1000000;
-#if NET45 || SILVERLIGHT
         /// <summary>
         /// Determines whether the specified entity is a proxy.
         /// </summary>
@@ -34,7 +31,6 @@
         {
             return entity != null && ObjectContext.GetObjectType(entity.GetType()) != entity.GetType();
         }
-#endif
 
         private static Dictionary<Type, IEnumerable<Type>> allTypes = new Dictionary<Type, IEnumerable<Type>>();
 
@@ -124,7 +120,6 @@
             if (resource == null) throw new ArgumentNullException("resource");
             return JsonConvert.SerializeObject(resource, settings);
         }
-#if NET45 || SILVERLIGHT
         /// <summary>
         /// Converts a dynamic proxy representing an entity to the actual entity.
         /// </summary>
@@ -325,7 +320,7 @@
             }
             return resource == referencedObjects[0] ? resource.ToObject() : resource;
         }
-#endif
+
         /// <summary>
         /// Creates a generic object with the specified inner generic set as the object's type parameter.
         /// Use this method when you need to create a generic from a <see cref="T:System.Type"/>.

@@ -7,7 +7,7 @@
 # 2. Caller must update $Version to desired package version.
 
 
-$Version = "2.2.0"
+$Version = "3.0.0"
 $Verbosity = "detailed"
 $OutputFolder = "output"
 

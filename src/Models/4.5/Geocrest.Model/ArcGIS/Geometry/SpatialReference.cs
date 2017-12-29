@@ -26,10 +26,8 @@
         public SpatialReference(int WKID) 
         {
             WKID parsed;
-#if NET45 || SILVERLIGHT
             if (!Enum.TryParse<WKID>(WKID.ToString(), true, out parsed))
                 throw new ArgumentException(string.Format("Could not parse the following well-known ID: {0}", WKID));
-#else
             try
             {
                 parsed = (WKID)Enum.Parse(typeof(WKID), WKID.ToString());
@@ -39,7 +37,6 @@
                 throw new ArgumentException(string.Format("Could not parse the following well-known ID: {0}", WKID));
 
             }
-#endif
             this.WKID = parsed;
         }
         /// <summary>

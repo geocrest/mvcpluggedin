@@ -14,7 +14,7 @@
     <copyright>Geocrest Mapping, LLC 2014-2017</copyright>
     <tags>EntityFramework CodeFirst generic repository</tags>
     <dependencies>
-      <dependency id="Geocrest.Web.Infrastructure" version="2.2.0" />
+      <dependency id="Geocrest.Web.Infrastructure" version="3.0.0" />
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />

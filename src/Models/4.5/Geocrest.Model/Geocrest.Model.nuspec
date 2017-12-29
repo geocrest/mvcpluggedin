@@ -20,9 +20,5 @@
 	  </frameworkAssemblies>
   </metadata>
   <files>
-    <!--<file src="..\..\3.5\Geocrest.Model\bin\Release\Geocrest.Model.dll" target="lib\net35\Geocrest.Model.dll" />
-    <file src="..\..\3.5\Geocrest.Model\bin\Release\Geocrest.Model.xml" target="lib\net35\Geocrest.Model.xml" />-->    
-    <!--<file src="..\..\Silverlight\5\Geocrest.Model\Bin\Release\Geocrest.Model.dll" target="lib\sl50\Geocrest.Model.dll" />
-    <file src="..\..\Silverlight\5\Geocrest.Model\Bin\Release\Geocrest.Model.xml" target="lib\sl50\Geocrest.Model.xml" />-->
   </files>
 </package>
