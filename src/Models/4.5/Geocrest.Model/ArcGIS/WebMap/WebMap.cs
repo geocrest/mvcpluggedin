@@ -60,7 +60,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// <value>
         /// The spatial reference.
         /// </value>
-        [DataMember(Name = "spatialreference")]
+        [DataMember(Name = "spatialReference")]
         public SpatialReference SpatialReference { get; set; }
 
         /// <summary>
