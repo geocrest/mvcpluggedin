@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Geocrest.Web.Infrastructure")]
-[assembly: AssemblyDescription("Provides common functionality for generic web applications.")]
+[assembly: AssemblyDescription("Provides common functionality for ASP.NET web applications.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany(Geocrest.VersionInfo.CompanyName)]
 [assembly: AssemblyProduct("Geocrest Web Infrastructure")]

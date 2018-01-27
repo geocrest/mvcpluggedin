@@ -36,9 +36,7 @@
         /// </remarks>
         [DataMember(Order = 60)]
         [StringLength(15)]
-#if NET45 || SILVERLIGHT
         [Display(Name = "Last Edited By")]
-#endif
         public string EditBy { get; set; }
 
         /// <summary>
@@ -51,9 +49,7 @@
         /// This property is typically mapped to an <c>EditDate</c> column.
         /// </remarks>
         [DataMember(Order = 61)]
-#if NET45 || SILVERLIGHT
         [Display(Name = "Last Edit Date")]
-#endif
         [DataType(DataType.DateTime)]
         public DateTime? EditDate { get; set; }
     }

@@ -1,32 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-    <metadata>
-        <id>$id$</id>
-        <version>0.0.0</version>
-        <title>$title$</title>
-        <authors>$author$</authors>
-        <owners>$author$</owners>
-        <projectUrl>https://github.com/geocrest/mvcpluggedin</projectUrl>
-        <iconUrl>http://www.geocrest.co/content/themes/geocrest/img/icon.png</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>$description$</description>
-        <summary>$description$</summary>
-        <copyright>Geocrest Mapping, LLC 2014-2017</copyright>
-        <tags>web infrastructure</tags>
-        <dependencies>
-            <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
-            <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
-            <dependency id="Newtonsoft.Json" />
-            <dependency id="Ninject" version="[3.2.2.0]" />
-        </dependencies>
-        <frameworkAssemblies>
-            <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5" />
-            <frameworkAssembly assemblyName="System.Configuration" targetFramework=".NETFramework4.5" />
-            <frameworkAssembly assemblyName="System.Drawing" targetFramework=".NETFramework4.5" />
-            <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.5" />
-            <frameworkAssembly assemblyName="System.ServiceModel" targetFramework=".NETFramework4.5" />
-            <frameworkAssembly assemblyName="System.ServiceModel.Web" targetFramework=".NETFramework4.5" />
-            <frameworkAssembly assemblyName="System.Web.ApplicationServices" targetFramework=".NETFramework4.5" />
-        </frameworkAssemblies>
-    </metadata>
+  <metadata>
+    <id>$id$</id>
+    <version>0.0.0</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/geocrest/mvcpluggedin</projectUrl>
+    <iconUrl>http://www.geocrest.co/content/themes/geocrest/img/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <summary>$description$</summary>
+    <copyright>Geocrest Mapping, LLC 2014-2017</copyright>
+    <tags>web infrastructure</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Drawing" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.ServiceModel" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.ServiceModel.Web" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Web.ApplicationServices" targetFramework="net462" />
+    </frameworkAssemblies>
+  </metadata>
 </package>

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Geocrest.Model")]
-[assembly: AssemblyDescription("Provides the core data model for working with the framework data. Included with this package are helper classes for working with the RESTful Web APIs.")]
+[assembly: AssemblyDescription("Provides the core data model for working with the framework data. Included with this package are helper classes for working with RESTful Web APIs.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany(Geocrest.VersionInfo.CompanyName)]
 [assembly: AssemblyProduct("Geocrest Enterprise Data Model")]

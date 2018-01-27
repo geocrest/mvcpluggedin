@@ -1,5 +1,4 @@
 ﻿
-#if NET45 || SILVERLIGHT
 namespace Geocrest.Model.ArcGIS.Tasks
 {
     using System.Runtime.Serialization;
@@ -104,4 +103,3 @@ namespace Geocrest.Model.ArcGIS.Tasks
         }
     }
 }
-#endif

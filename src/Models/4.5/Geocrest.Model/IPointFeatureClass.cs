@@ -19,9 +19,7 @@
         /// This property is typically mapped to a <c>StatePlaneX</c> column.
         /// </remarks>
         [DataMember(Order = 42)]
-#if NET45 || SILVERLIGHT
         [Display(Name = "State Plane X")]
-#endif
         decimal? StatePlaneX { get; set; }
 
         /// <summary>
@@ -35,9 +33,7 @@
         /// This property is typically mapped to a <c>StatePlaneY</c> column.
         /// </remarks>
         [DataMember(Order = 43)]
-#if NET45 || SILVERLIGHT
         [Display(Name = "State Plane Y")]
-#endif
         decimal? StatePlaneY { get; set; }
 
         /// <summary>

@@ -18,6 +18,25 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name="id")]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the item identifier.
+        /// </summary>
+        /// <value>
+        /// The item identifier.
+        /// </value>
+        [DataMember(Name = "itemId")]
+        public string ItemId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the layer.
+        /// </summary>
+        /// <value>
+        /// The type of the layer.
+        /// </value>
+        [DataMember(Name = "layerType")]
+        public string LayerType { get; set; }
+
         /// <summary>
         /// Gets or sets the URL.
         /// </summary>
@@ -26,6 +45,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name = "url")]
         public string Url { get; set; }
+
         /// <summary>
         /// Gets or sets the token.
         /// </summary>
@@ -34,6 +54,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name="token")]
         public string Token { get; set; }
+
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -42,6 +63,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name="title")]
         public string Title { get; set; }
+
         /// <summary>
         /// Gets or sets the opacity.
         /// </summary>
@@ -51,6 +73,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         [DataMember(Name="opacity")]
         [DefaultValue(1)]
         public double Opacity { get; set; }
+
         /// <summary>
         /// Gets or sets the minimum scale.
         /// </summary>
@@ -59,6 +82,7 @@ namespace Geocrest.Model.ArcGIS.WebMap
         /// </value>
         [DataMember(Name = "minScale")]
         public int MinScale { get; set; }
+
         /// <summary>
         /// Gets or sets the maximum scale.
         /// </summary>

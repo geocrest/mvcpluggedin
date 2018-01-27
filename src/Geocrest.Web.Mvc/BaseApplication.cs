@@ -17,6 +17,7 @@ namespace Geocrest.Web.Mvc
     using Ninject.Extensions.Conventions;
     using Ninject.Modules;
     using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
     using System;
     using System.Collections.Generic;
     using System.Configuration;

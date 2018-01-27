@@ -26,9 +26,7 @@
         /// The Ref_ID value.
         /// </value>
         [DataMember]
-#if NET45 || SILVERLIGHT
         [Display(Name = "Reference ID")]
-#endif
         public string ReferenceID { get; set; }
 
         /// <summary>
@@ -39,9 +37,7 @@
         /// The User_fld value.
         /// </value>
         [DataMember]
-#if NET45 || SILVERLIGHT
         [Display(Name = "User Field")]
-#endif
         public string UserField { get; set; }
 
         /// <summary>

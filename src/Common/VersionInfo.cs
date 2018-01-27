@@ -16,7 +16,7 @@ namespace Geocrest
         /// </summary>
         /// <remarks>
         /// Use this for the enterprise model framework libraries.</remarks>
-        internal const string ModelAssemblyVersion = "2.0.0";
+        internal const string ModelAssemblyVersion = "3.0.0";
         /// <summary>
         /// Specifies the file version for use in the file system (e.g. Windows Explorer). Does not
         /// affect the loading of the assembly in the runtime. This version is visible if you hover
@@ -26,26 +26,21 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the enterprise model framework libraries.
         /// </remarks>
-        internal const string ModelFileVersion = "2.1.6484.17005";
+        internal const string ModelFileVersion = "3.0.6573.22612";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>
         /// <remarks>
         /// Use this for the enterprise model framework libraries.
         /// </remarks>
-        internal const string ModelProductVersion = "2.1.0";
-        /// <summary>
-        /// Specifies the product version for Silverlight enterprise model.
-        /// </summary>
-        internal const string ModelSilverlightProductVersion = "2.1.0 for Silverlight";
-
+        internal const string ModelProductVersion = "3.0.0";
         /// <summary>
         /// Specifies the assembly version for use when the .NET runtime loads an assembly. Use a
         /// fixed version for this so developers do not have to rebuild. This is the important one!
         /// </summary>
         /// <remarks>
         /// Use this for the core framework libraries.</remarks>
-        internal const string GlobalAssemblyVersion = "2.0.0";
+        internal const string GlobalAssemblyVersion = "3.0.0";
         /// <summary>
         /// Specifies the file version for use in the file system (e.g. Windows Explorer). Does not
         /// affect the loading of the assembly in the runtime. This version is visible if you hover
@@ -55,18 +50,14 @@ namespace Geocrest
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalFileVersion = "2.1.6484.17005";
+        internal const string GlobalFileVersion = "3.0.6573.22612";
         /// <summary>
         /// Specifies the product version to display in the Details tab of Windows Explorer.
         /// </summary>
         /// <remarks>
         /// Use this for the core framework libraries.
         /// </remarks>
-        internal const string GlobalProductVersion = "2.1.0";
-        /// <summary>
-        /// Specifies the product version for Silverlight
-        /// </summary>
-        internal const string GlobalSilverlightProductVersion = "2.1.0 for Silverlight";
+        internal const string GlobalProductVersion = "3.0.0";
         /// <summary>
         /// Use this for all assemblies throughout the solution.
         /// </summary>
@@ -74,6 +65,6 @@ namespace Geocrest
         /// <summary>
         /// Use this for all assemblies throughout the solution.
         /// </summary>
-        internal const string Copyright = "Copyright � 2014-2017 Geocrest Mapping, LLC";
+        internal const string Copyright = "Copyright © 2014-2017 Geocrest Mapping, LLC";
     }
 }
